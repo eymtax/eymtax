@@ -1,35 +1,112 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
+    <title>دليل شركات سوريا الشامل - Eymta X</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل شركات سوريا - Eymta X</title>
-    <meta name="description" content="منصة موثوقة تضم أبرز الشركات السورية لتسهيل الوصول وتوسيع شبكة علاقاتك التجارية.">
-    <meta name="keywords" content="Eymta X, تسويق إلكتروني, تصوير منتجات, خدمات طباعة, شركات سوريا">
+    <meta name="description" content="اكتشف دليل شركات سوريا الشامل المصنف حسب القطاعات مع معلومات التواصل وتقييمات النجوم.">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f4; color: #222; }
+        .company-card { background: white; padding: 20px; width: 300px; border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: right; }
+        .star { cursor: pointer; font-size: 24px; color: #ccc; }
+        .star.selected { color: #ffc107; }
+    </style>
 </head>
-<body style="font-family: sans-serif; background-color: #f9f9f9; color: #333;">
-    <header style="background-color:#222; color:white; padding: 20px; text-align: center;">
-        <h1>Eymta X</h1>
-        <nav>
-            <a href="index.html" style="color:#fff; margin:0 10px;">الرئيسية</a>
-            <a href="marketing.html" style="color:#fff; margin:0 10px;">التسويق الإلكتروني</a>
-            <a href="product-photography.html" style="color:#fff; margin:0 10px;">تصوير المنتجات</a>
-            <a href="wedding-photography.html" style="color:#fff; margin:0 10px;">تصوير الأعراس</a>
-            <a href="printing.html" style="color:#fff; margin:0 10px;">خدمات الطباعة</a>
-            <a href="syrian-companies.html" style="color:#fff; margin:0 10px;">دليل الشركات</a>
-            <a href="contact-us.html" style="color:#fff; margin:0 10px;">تواصل معنا</a>
-        <a href="blog.html" style="color:#fff; margin:0 10px;">مقالات وأعمال تسويقية</a></nav>
-    </header>
-    <section style="text-align:center; padding:40px;">
-        <img src="img/دليل_الشركات.jpg" alt="دليل شركات سوريا الشامل" style="max-width: 100%; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 30px;">
-        <h2>دليل شركات سوريا الشامل</h2>
-        <p style="font-size:18px; margin: 20px auto; max-width: 700px;">دليل شركات سوريا الشامل هو قاعدة بيانات موثوقة تضم نخبة من الشركات السورية في مختلف القطاعات. يسهّل الوصول إلى مزودين وموردين وخدمات محلية بدقة وسرعة، ويعزز من فرص التعاون التجاري والتسويقي.</p>
-        <a href="tel:+963938029294" style="display:inline-block; padding:12px 20px; background-color:#0077cc; color:white; text-decoration:none; border-radius:8px; font-size:18px;">📞 اتصل الآن</a>
-    </section>
-    <footer style="background-color:#111; color:white; text-align:center; padding:20px; margin-top: 40px;">
-        <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
-    </footer>
+<body>
+
+<header style="background-color: #111; padding: 20px; text-align: center;">
+    <h1 style="color: white;">دليل شركات سوريا الشامل</h1>
+    <input type="text" id="searchInput" placeholder="ابحث عن شركة..." style="padding: 10px; width: 70%; margin-top: 20px;">
+</header>
+
+<section style="padding: 40px; text-align: center;">
+    <div style="margin-bottom: 20px;">
+        <button onclick="filterCompanies('all')">الكل</button>
+        <button onclick="filterCompanies('طباعة')">الطباعة</button>
+        <button onclick="filterCompanies('تسويق')">التسويق</button>
+        <button onclick="filterCompanies('تصوير')">التصوير</button>
+    </div>
+
+    <div id="companiesContainer" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+        <div class="company-card" data-category="طباعة" data-name="شركة النور للطباعة">
+            <h3>شركة النور للطباعة</h3>
+            <p>متخصصة في طباعة البروشورات والفلايرات وبطاقات العمل.</p>
+            <p>📞 0999999999</p>
+            <p>📍 حماة</p>
+            <div>
+                <span class="star" onclick="rate(this, 1)">★</span>
+                <span class="star" onclick="rate(this, 2)">★</span>
+                <span class="star" onclick="rate(this, 3)">★</span>
+                <span class="star" onclick="rate(this, 4)">★</span>
+                <span class="star" onclick="rate(this, 5)">★</span>
+            </div>
+        </div>
+
+        <div class="company-card" data-category="تسويق" data-name="مركز البيان للتسويق">
+            <h3>مركز البيان للتسويق</h3>
+            <p>خبراء في التسويق الإلكتروني والإعلانات الممولة.</p>
+            <p>📞 0933333333</p>
+            <p>📍 دمشق</p>
+            <div>
+                <span class="star" onclick="rate(this, 1)">★</span>
+                <span class="star" onclick="rate(this, 2)">★</span>
+                <span class="star" onclick="rate(this, 3)">★</span>
+                <span class="star" onclick="rate(this, 4)">★</span>
+                <span class="star" onclick="rate(this, 5)">★</span>
+            </div>
+        </div>
+
+        <div class="company-card" data-category="تصوير" data-name="فوتوغرافيا ستوديو">
+            <h3>فوتوغرافيا ستوديو</h3>
+            <p>تصوير احترافي للمنتجات والمناسبات.</p>
+            <p>📞 0911111111</p>
+            <p>📍 اللاذقية</p>
+            <div>
+                <span class="star" onclick="rate(this, 1)">★</span>
+                <span class="star" onclick="rate(this, 2)">★</span>
+                <span class="star" onclick="rate(this, 3)">★</span>
+                <span class="star" onclick="rate(this, 4)">★</span>
+                <span class="star" onclick="rate(this, 5)">★</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function filterCompanies(category) {
+    const cards = document.querySelectorAll('.company-card');
+    cards.forEach(card => {
+        const match = category === 'all' || card.dataset.category === category;
+        card.style.display = match ? 'block' : 'none';
+    });
+}
+
+function rate(el, rating) {
+    const parent = el.parentElement;
+    const stars = parent.querySelectorAll('.star');
+    const card = parent.closest('.company-card');
+    const key = 'rated_' + card.dataset.name;
+    if (localStorage.getItem(key)) {
+        alert("لقد قمت بالتقييم سابقاً.");
+        return;
+    }
+    stars.forEach((s, i) => {
+        s.classList.toggle('selected', i < rating);
+    });
+    localStorage.setItem(key, rating);
+    alert("شكراً لتقييمك!");
+}
+
+document.getElementById("searchInput").addEventListener("input", function () {
+    const query = this.value.toLowerCase();
+    document.querySelectorAll('.company-card').forEach(card => {
+        const name = card.dataset.name.toLowerCase();
+        card.style.display = name.includes(query) ? 'block' : 'none';
+    });
+});
+</script>
+
 </body>
 </html>
