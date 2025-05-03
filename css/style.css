@@ -51,15 +51,19 @@ body {
 }
 
 .main-nav {
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    overflow-x: auto;
-    white-space: nowrap;
-    background: var(--dark-bg);
-    padding: 0 10px;
-    border-radius: 8px;
-    margin-top: 10px;
+    font-size: 13px;
+    gap: 6px;
+    padding: 0 2px;
+    margin-bottom: 0;
+    margin-top: 0;
+    min-height: 38px;
+}
+
+.main-nav .nav-link {
+    padding: 6px 7px;
+    min-width: 70px;
+    font-size: 13px;
+    border-radius: 4px;
 }
 
 .hamburger {
@@ -736,9 +740,9 @@ body {
 
 @media (max-width: 600px) {
     .main-nav .nav-link {
-        font-size: 15px;
-        padding: 8px 6px;
-        min-width: 100px;
+        font-size: 12px;
+        padding: 5px 4px;
+        min-width: 60px;
     }
 }
 
