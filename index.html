@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الرئيسية - Eymta X</title>
-    <meta name="description" content="وكالة Eymta X لخدمات التسويق الإلكتروني، التصوير، الطباعة، ودليل الشركات في سوريا.">
-    <meta name="keywords" content="Eymta X, تسويق إلكتروني, تصوير منتجات, خدمات طباعة, شركات سوريا">
+    <title>Eymta X - نرفع أعمالك إلى مستوى جديد</title>
+    <meta name="description" content="Eymta X - خدمات متكاملة للتسويق الإلكتروني، التصوير، الطباعة، وتطوير الأعمال. نقدم حلولاً مبتكرة لتنمية أعمالك.">
+    <meta name="keywords" content="تسويق إلكتروني, تصوير منتجات, تصوير أعراس, طباعة, تطوير أعمال, Eymta X">
     <meta name="author" content="Eymta X">
     <meta property="og:title" content="Eymta X - وكالة تسويق إلكتروني وإعلامي">
     <meta property="og:description" content="نقدم لك كل ما تحتاجه من خدمات التسويق، التصوير، الطباعة، والدليل التجاري">
@@ -15,13 +15,323 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+            --border-color: #e0e0e0;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('img/pattern.png') repeat;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.2s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: var(--transition);
+            animation: fadeInUp 1s ease 0.4s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .services-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 20px;
+        }
+
+        .service-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .service-content p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .stats-section {
+            background: var(--primary-color);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        .testimonials-section {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .contact-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .contact-info {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .submit-button {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-button:hover {
+            background: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .services-grid,
+            .testimonials-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
-<body style="font-family: sans-serif; margin: 0; background-color: #f4f4f4; color: #222;">
+<body>
 
 <header class="main-header">
     <div class="container">
+        <div class="logo">
+            <h1>Eymta X</h1>
+            <p>نرفع أعمالك إلى مستوى جديد</p>
+        </div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="القائمة الرئيسية">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <nav class="main-nav" id="mainNav">
-            <a href="index.html" class="nav-link">الرئيسية</a>
             <a href="marketing.html" class="nav-link">التسويق الإلكتروني</a>
             <a href="product-photography.html" class="nav-link">تصوير المنتجات</a>
             <a href="wedding-photography.html" class="nav-link">تصوير الأعراس</a>
@@ -30,10 +340,6 @@
             <a href="contact-us.html" class="nav-link">تواصل معنا</a>
             <a href="blog.html" class="nav-link">مقالات وأعمال تسويقية</a>
         </nav>
-        <div class="logo" style="margin-top:10px;">
-            <h1>Eymta X</h1>
-            <p>نرفع أعمالك إلى مستوى جديد</p>
-        </div>
     </div>
 </header>
 
@@ -42,12 +348,9 @@
         <div class="container">
             <img src="img/البنر_الرئيسي.jpg" alt="Eymta X Banner" class="hero-image" loading="lazy">
             <div class="hero-content">
-                <h2>مرحباً بك في Eymta X</h2>
-                <p>وكالة تسويق إلكتروني وإعلامي، نقدم لك كل ما تحتاجه من خدمات التسويق، التصوير، الطباعة، والدليل التجاري.</p>
-                <div class="cta-buttons">
-                    <a href="tel:+963938029294" class="cta-button primary">📞 اتصل بنا الآن</a>
-                    <a href="contact-us.html" class="cta-button secondary">تواصل معنا</a>
-                </div>
+                <h1>نرفع أعمالك إلى مستوى جديد</h1>
+                <p>نقدم حلولاً متكاملة للتسويق الإلكتروني، التصوير، الطباعة، وتطوير الأعمال</p>
+                <a href="contact-us.html" class="cta-button">ابدأ مشروعك الآن</a>
             </div>
         </div>
     </section>
