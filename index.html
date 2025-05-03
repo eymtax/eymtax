@@ -7,35 +7,163 @@
     <title>الرئيسية - Eymta X</title>
     <meta name="description" content="وكالة Eymta X لخدمات التسويق الإلكتروني، التصوير، الطباعة، ودليل الشركات في سوريا.">
     <meta name="keywords" content="Eymta X, تسويق إلكتروني, تصوير منتجات, خدمات طباعة, شركات سوريا">
+    <meta name="author" content="Eymta X">
+    <meta property="og:title" content="Eymta X - وكالة تسويق إلكتروني وإعلامي">
+    <meta property="og:description" content="نقدم لك كل ما تحتاجه من خدمات التسويق، التصوير، الطباعة، والدليل التجاري">
+    <meta property="og:image" content="img/البنر_الرئيسي.jpg">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body style="font-family: sans-serif; margin: 0; background-color: #f4f4f4; color: #222;">
 
-<header style="background-color: #111; padding: 20px; text-align: center;">
-    <h1 style="color: white; margin: 0;">Eymta X</h1>
-    <p style="color: #ccc;">نرفع أعمالك إلى مستوى جديد</p>
-    <nav style="margin-top: 10px;">
-        <a href="marketing.html" style="color: #fff; margin: 0 10px;">التسويق الإلكتروني</a>
-        <a href="product-photography.html" style="color: #fff; margin: 0 10px;">تصوير المنتجات</a>
-        <a href="wedding-photography.html" style="color: #fff; margin: 0 10px;">تصوير الأعراس</a>
-        <a href="printing.html" style="color: #fff; margin: 0 10px;">خدمات الطباعة</a>
-        <a href="syrian-companies.html" style="color: #fff; margin: 0 10px;">دليل الشركات</a>
-        <a href="contact-us.html" style="color: #fff; margin: 0 10px;">تواصل معنا</a>
-    <a href="blog.html" style="color:#fff; margin:0 10px;">مقالات وأعمال تسويقية</a></nav>
+<header class="main-header">
+    <div class="container">
+        <div class="logo">
+            <h1>Eymta X</h1>
+            <p>نرفع أعمالك إلى مستوى جديد</p>
+        </div>
+        <nav class="main-nav">
+            <a href="marketing.html" class="nav-link">التسويق الإلكتروني</a>
+            <a href="product-photography.html" class="nav-link">تصوير المنتجات</a>
+            <a href="wedding-photography.html" class="nav-link">تصوير الأعراس</a>
+            <a href="printing.html" class="nav-link">خدمات الطباعة</a>
+            <a href="syrian-companies.html" class="nav-link">دليل الشركات</a>
+            <a href="contact-us.html" class="nav-link">تواصل معنا</a>
+            <a href="blog.html" class="nav-link">مقالات وأعمال تسويقية</a>
+        </nav>
+    </div>
 </header>
 
-<section style="text-align: center; padding: 40px;">
-    <img src="img/البنر_الرئيسي.jpg" alt="Eymta X Banner" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-bottom: 30px;">
-    <h2>مرحباً بك في Eymta X</h2>
-    <p style="font-size: 18px; max-width: 700px; margin: 20px auto;">
-        وكالة تسويق إلكتروني وإعلامي، نقدم لك كل ما تحتاجه من خدمات التسويق، التصوير، الطباعة، والدليل التجاري.
-    </p>
-    <a href="tel:+963938029294" style="display: inline-block; padding: 12px 24px; background-color: #0077cc; color: white; text-decoration: none; border-radius: 8px; font-size: 18px;">📞 اتصل بنا الآن</a>
-</section>
+<main>
+    <section class="hero-section">
+        <div class="container">
+            <img src="img/البنر_الرئيسي.jpg" alt="Eymta X Banner" class="hero-image" loading="lazy">
+            <div class="hero-content">
+                <h2>مرحباً بك في Eymta X</h2>
+                <p>وكالة تسويق إلكتروني وإعلامي، نقدم لك كل ما تحتاجه من خدمات التسويق، التصوير، الطباعة، والدليل التجاري.</p>
+                <div class="cta-buttons">
+                    <a href="tel:+963938029294" class="cta-button primary">📞 اتصل بنا الآن</a>
+                    <a href="contact-us.html" class="cta-button secondary">تواصل معنا</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<footer style="background-color: #111; color: white; text-align: center; padding: 20px;">
-    <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title">خدماتنا</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>التسويق الإلكتروني</h3>
+                    <p>حملات تسويقية فعالة لزيادة مبيعاتك ووصولك</p>
+                </div>
+                <div class="service-card">
+                    <h3>تصوير المنتجات</h3>
+                    <p>تصوير احترافي لمنتجاتك لعرضها بشكل جذاب</p>
+                </div>
+                <div class="service-card">
+                    <h3>تصوير الأعراس</h3>
+                    <p>توثيق أجمل لحظات مناسباتك</p>
+                </div>
+                <div class="service-card">
+                    <h3>خدمات الطباعة</h3>
+                    <p>طباعة عالية الجودة لجميع احتياجاتك</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">عملاؤنا السابقون</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"خدمات احترافية ومميزة، ساعدتنا في تطوير أعمالنا بشكل كبير"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>شركة التقنية المتطورة</h4>
+                        <p>مدير التسويق</p>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"صور المنتجات كانت احترافية جداً وساعدت في زيادة المبيعات"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>متجر الأزياء الفاخرة</h4>
+                        <p>المدير التنفيذي</p>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"حملات التسويق الإلكتروني حققت نتائج مذهلة"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>مطعم الشرق الأوسط</h4>
+                        <p>مالك المطعم</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 class="stat-number">+500</h3>
+                    <p class="stat-label">عميل راضي</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="stat-number">+1000</h3>
+                    <p class="stat-label">مشروع مكتمل</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="stat-number">+5</h3>
+                    <p class="stat-label">سنوات خبرة</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="stat-number">+50</h3>
+                    <p class="stat-label">فريق متخصص</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>هل أنت مستعد لبدء مشروعك؟</h2>
+            <p>اتصل بنا الآن واحصل على استشارة مجانية</p>
+            <div class="cta-buttons">
+                <a href="tel:+963938029294" class="cta-button primary">📞 اتصل بنا الآن</a>
+                <a href="contact-us.html" class="cta-button secondary">اطلب عرض سعر</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Eymta X</h3>
+                <p>نرفع أعمالك إلى مستوى جديد</p>
+            </div>
+            <div class="footer-links">
+                <a href="about.html">من نحن</a>
+                <a href="contact.html">اتصل بنا</a>
+                <a href="privacy.html">سياسة الخصوصية</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة &copy; 2024 Eymta X</p>
+        </div>
+    </div>
 </footer>
 
+<script src="js/main.js" defer></script>
 </body>
 </html>
