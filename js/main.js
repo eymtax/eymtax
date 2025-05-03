@@ -189,3 +189,18 @@ window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
 
+// Hamburger menu functionality
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mainNav = document.getElementById('mainNav');
+if (hamburgerBtn && mainNav) {
+  hamburgerBtn.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+  });
+  // إغلاق القائمة عند الضغط خارجها
+  document.addEventListener('click', (e) => {
+    if (!mainNav.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+      mainNav.classList.remove('open');
+    }
+  });
+}
+
