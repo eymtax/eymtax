@@ -1,32 +1,148 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل شركات سوريا الشامل - Eymta X</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>دليل شركات سوريا الشامل - Eymta X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: sans-serif; background-color: #f9f9f9; color: #333; margin: 0; padding: 0; }
+    header { background-color: #111; color: white; padding: 20px; text-align: center; }
+    header h1 { margin: 0; }
+    .search { padding: 10px; width: 80%; max-width: 600px; margin: 20px auto; display: block; }
+    .filter-buttons { text-align: center; margin-bottom: 20px; }
+    .filter-buttons button { margin: 5px; padding: 8px 12px; }
+    .container { display: flex; flex-direction: row-reverse; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
+    .company { background: white; width: 280px; padding: 15px; border-radius: 12px;
+               box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: right; position: relative; }
+    .vip { border: 2px solid gold; background-color: #fffbe6; }
+    .vip::before {
+      content: "شركة مميزة";
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      background-color: gold;
+      color: #111;
+      padding: 5px 10px;
+      border-radius: 0 0 10px 0;
+      font-size: 14px;
+    }
+    .company img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+    .stars { color: #ccc; cursor: pointer; }
+    .stars span.selected { color: gold; }
+    .rating-count { font-size: 12px; color: #555; }
+    footer { background-color: #222; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+    .ad-space { background: #ddd; height: 120px; margin: 30px auto; width: 90%; text-align: center;
+                line-height: 120px; font-weight: bold; border: 2px dashed #bbb; border-radius: 8px; }
+    .back-btn { display: block; text-align: center; margin: 20px auto; text-decoration: none; padding: 10px 20px;
+                background: #0077cc; color: white; border-radius: 8px; width: fit-content; }
+  </style>
 </head>
-<body style="font-family: sans-serif; background-color: #f9f9f9; color: #333;">
-    <header style="background-color:#222; color:white; padding: 20px; text-align: center;">
-        <h1>Eymta X</h1>
-        <nav>
-            <a href="index.html" style="color:#fff; margin:0 10px;">الرئيسية</a>
-            <a href="marketing.html" style="color:#fff; margin:0 10px;">التسويق الإلكتروني</a>
-            <a href="product-photography.html" style="color:#fff; margin:0 10px;">تصوير المنتجات</a>
-            <a href="wedding-photography.html" style="color:#fff; margin:0 10px;">تصوير الأعراس</a>
-            <a href="printing.html" style="color:#fff; margin:0 10px;">خدمات الطباعة</a>
-            <a href="syrian-companies.html" style="color:#fff; margin:0 10px;">دليل الشركات</a>
-            <a href="contact-us.html" style="color:#fff; margin:0 10px;">تواصل معنا</a>
-        </nav>
-    </header>
-    <section style="text-align:center; padding:40px;">
-        <img src="img/دليل_الشركات.jpg" alt="دليل شركات سوريا الشامل" style="max-width: 100%; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 30px;">
-        <h2>دليل شركات سوريا الشامل</h2>
-        <p style="font-size:18px; margin: 20px auto; max-width: 700px;">منصة تجمع أهم الشركات السورية بمكان واحد. سهولة في الوصول، وثقة في التعامل.</p>
-        <a href="tel:+963938029294" style="display:inline-block; padding:12px 20px; background-color:#0077cc; color:white; text-decoration:none; border-radius:8px; font-size:18px;">📞 اتصل الآن</a>
-    </section>
-    <footer style="background-color:#111; color:white; text-align:center; padding:20px; margin-top: 40px;">
-        <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
-    </footer>
+<body>
+
+<header>
+  <h1>دليل شركات سوريا الشامل</h1>
+  <input class="search" id="searchInput" type="text" placeholder="ابحث عن شركة...">
+</header>
+
+<div class="filter-buttons">
+  <button onclick="filter('all')">الكل</button>
+  <button onclick="filter('طباعة')">الطباعة</button>
+  <button onclick="filter('تسويق')">التسويق</button>
+  <button onclick="filter('تصوير')">التصوير</button>
+  <button onclick="filter('غذائي')">الغذائي</button>
+  <button onclick="filter('برمجة')">البرمجة</button>
+</div>
+
+<div class="container" id="companyContainer">
+
+  <div class="company vip" data-category="طباعة" data-name="شركة النور للطباعة">
+    <img src="https://via.placeholder.com/280x150?text=نور+للطباعة">
+    <h3>شركة النور للطباعة</h3>
+    <p>متخصصة في طباعة البروشورات والفلايرات وبطاقات العمل.</p>
+    <p>📞 0999999999 | 📍 حماة</p>
+    <div class="stars" data-name="شركة النور للطباعة"></div>
+    <div class="rating-count" id="count-شركة النور للطباعة">0 تقييم</div>
+  </div>
+
+  <div class="company" data-category="تسويق" data-name="مركز البيان للتسويق">
+    <img src="https://via.placeholder.com/280x150?text=البيان+للتسويق">
+    <h3>مركز البيان للتسويق</h3>
+    <p>خبراء في التسويق الإلكتروني والإعلانات الممولة.</p>
+    <p>📞 0933333333 | 📍 دمشق</p>
+    <div class="stars" data-name="مركز البيان للتسويق"></div>
+    <div class="rating-count" id="count-مركز البيان للتسويق">0 تقييم</div>
+  </div>
+
+  <div class="company" data-category="تصوير" data-name="فوتوغرافيا ستوديو">
+    <img src="https://via.placeholder.com/280x150?text=فوتوغرافيا+ستوديو">
+    <h3>فوتوغرافيا ستوديو</h3>
+    <p>تصوير احترافي للمنتجات والمناسبات.</p>
+    <p>📞 0911111111 | 📍 اللاذقية</p>
+    <div class="stars" data-name="فوتوغرافيا ستوديو"></div>
+    <div class="rating-count" id="count-فوتوغرافيا ستوديو">0 تقييم</div>
+  </div>
+
+</div>
+
+<div class="ad-space">مساحة إعلانية متاحة</div>
+
+<a href="index.html" class="back-btn">🔙 العودة إلى الصفحة الرئيسية</a>
+
+<footer>
+  <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
+</footer>
+
+<script>
+const companies = document.querySelectorAll(".company");
+
+function filter(category) {
+  companies.forEach(card => {
+    const match = category === 'all' || card.dataset.category === category;
+    card.style.display = match ? 'block' : 'none';
+  });
+}
+
+document.getElementById("searchInput").addEventListener("input", function () {
+  const q = this.value.toLowerCase();
+  companies.forEach(c => {
+    const name = c.dataset.name.toLowerCase();
+    c.style.display = name.includes(q) ? 'block' : 'none';
+  });
+});
+
+function createStars(container, name) {
+  const saved = localStorage.getItem('rate_' + name);
+  const countKey = 'count_' + name;
+  const count = localStorage.getItem(countKey) || 0;
+  const wrap = container;
+  for (let i = 1; i <= 5; i++) {
+    const s = document.createElement("span");
+    s.textContent = "★";
+    s.classList.add("star");
+    if (saved && i <= saved) s.classList.add("selected");
+    s.onclick = () => {
+      if (!saved) {
+        localStorage.setItem('rate_' + name, i);
+        localStorage.setItem(countKey, +count + 1);
+        document.getElementById('count-' + name).textContent = (+count + 1) + " تقييم";
+        [...wrap.children].forEach((star, idx) => {
+          star.classList.toggle("selected", idx < i);
+        });
+        alert("شكراً لتقييمك!");
+      } else {
+        alert("لقد قمت بالتقييم سابقاً.");
+      }
+    };
+    wrap.appendChild(s);
+  }
+  document.getElementById('count-' + name).textContent = count + " تقييم";
+}
+
+document.querySelectorAll('.stars').forEach(div => {
+  const name = div.dataset.name;
+  createStars(div, name);
+});
+</script>
+
 </body>
 </html>
