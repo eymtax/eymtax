@@ -334,9 +334,49 @@ const companiesData = [
 
 // إضافة الشركات إلى الصفحة
 const container = document.getElementById('companyContainer');
+container.innerHTML = '';
 companiesData.forEach(company => {
   container.innerHTML += createCompanyCard(company);
 });
+
+// نظام التقييم لكل شركة (مرة واحدة لكل زائر)
+function createStars(div, name) {
+  const saved = localStorage.getItem('rate_' + name);
+  const countKey = 'count_' + name;
+  let count = parseInt(localStorage.getItem(countKey) || '0');
+  div.innerHTML = '';
+  for (let i = 1; i <= 5; i++) {
+    const s = document.createElement("span");
+    s.textContent = "★";
+    s.classList.add("star");
+    if (saved && i <= saved) s.classList.add("selected");
+    s.style.cursor = saved ? 'default' : 'pointer';
+    s.onclick = () => {
+      if (!saved) {
+        localStorage.setItem('rate_' + name, i);
+        count++;
+        localStorage.setItem(countKey, count);
+        document.getElementById('count-' + name).textContent = count + " تقييم";
+        [...div.children].forEach((star, idx) => {
+          star.classList.toggle("selected", idx < i);
+        });
+        alert("شكراً لتقييمك!");
+      } else {
+        alert("لقد قمت بالتقييم سابقاً.");
+      }
+    };
+    div.appendChild(s);
+  }
+  document.getElementById('count-' + name).textContent = count + " تقييم";
+}
+
+// تفعيل التقييمات لكل شركة
+setTimeout(() => {
+  document.querySelectorAll('.stars').forEach(div => {
+    const name = div.dataset.name;
+    createStars(div, name);
+  });
+}, 100);
 
 // تصفية الشركات حسب الفئة
 document.querySelectorAll('.category-list a').forEach(link => {
@@ -367,12 +407,6 @@ document.getElementById('searchInput').addEventListener('input', function() {
     const match = name.includes(query);
     company.style.display = match ? 'block' : 'none';
   });
-});
-
-// إنشاء نجوم التقييم
-document.querySelectorAll('.stars').forEach(div => {
-  const name = div.dataset.name;
-  createStars(div, name);
 });
 </script>
 
