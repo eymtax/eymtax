@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="utf-8">
-    <title>HairCut - Hair Salon HTML Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من نحن - Eymta X</title>
+    <meta name="description" content="تعرف على وكالة Eymta X: خبرة في التسويق الإلكتروني، التصوير، الطباعة، ودعم العلامات التجارية.">
+    <meta name="keywords" content="Eymta X, من نحن, تسويق إلكتروني, تصوير, طباعة, وكالة, سوريا">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -14,7 +14,7 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Oswald:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -29,6 +29,186 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+            --border-color: #e0e0e0;
+            --transition: all 0.3s ease;
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--light-bg);
+            color: var(--text-color);
+        }
+        header {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 0 0 0;
+        }
+        .navbar .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .navbar .subtitle {
+            color: #bbb;
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+        }
+        .navbar nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+        .navbar nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.08rem;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .navbar nav a:hover, .navbar nav a.active {
+            background: var(--secondary-color);
+            color: #fff;
+        }
+        .about-hero {
+            position: relative;
+            width: 100%;
+            min-height: 260px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+        .about-hero img {
+            width: 100%;
+            min-height: 260px;
+            max-height: 350px;
+            object-fit: cover;
+            filter: brightness(0.6);
+            display: block;
+        }
+        .about-hero-content {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .about-hero-content h1 {
+            font-size: 2.7rem;
+            margin-bottom: 18px;
+            font-weight: bold;
+        }
+        .about-hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 0;
+            opacity: 0.95;
+        }
+        .about-section {
+            max-width: 800px;
+            margin: 40px auto 0 auto;
+            background: #fff;
+            padding: 32px 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            text-align: right;
+        }
+        .about-section h2 {
+            color: var(--secondary-color);
+            font-size: 2rem;
+            margin-bottom: 18px;
+            text-align: right;
+        }
+        .about-section h3 {
+            color: var(--primary-color);
+            margin-top: 24px;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+        .about-section ul {
+            margin-right: 20px;
+            margin-bottom: 0;
+            padding-right: 0;
+        }
+        .about-section li {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+        .about-section p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+        footer {
+            background: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 30px 0 10px 0;
+            font-size: 1rem;
+        }
+        .footer-links {
+            margin: 10px 0 0 0;
+        }
+        .footer-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: underline;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        @media (max-width: 700px) {
+            .navbar .logo {
+                font-size: 1.5rem;
+            }
+            .about-hero-content h1 {
+                font-size: 1.5rem;
+            }
+            .about-hero-content p {
+                font-size: 1rem;
+            }
+            .about-section h2 {
+                font-size: 1.3rem;
+            }
+            .about-section {
+                padding: 18px 8px;
+            }
+            .navbar nav {
+                gap: 10px;
+                font-size: 1rem;
+                padding-bottom: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -40,42 +220,56 @@
     </div>
     <!-- Spinner End -->
 
-    <header class="main-header">
-        <div class="container">
-            <nav class="main-nav" id="mainNav">
-                <a href="index.html" class="nav-link">الرئيسية</a>
-                <a href="marketing.html" class="nav-link">التسويق الإلكتروني</a>
-                <a href="product-photography.html" class="nav-link">تصوير المنتجات</a>
-                <a href="wedding-photography.html" class="nav-link">تصوير الأعراس</a>
-                <a href="printing.html" class="nav-link">خدمات الطباعة</a>
-                <a href="syrian-companies.html" class="nav-link">دليل الشركات</a>
-                <a href="contact-us.html" class="nav-link">تواصل معنا</a>
-                <a href="blog.html" class="nav-link">مقالات وأعمال تسويقية</a>
+    <header>
+        <div class="navbar">
+            <div class="logo">Eymta X</div>
+            <div class="subtitle">نرفع أعمالك إلى مستوى جديد</div>
+            <nav>
+                <a href="index.html">الرئيسية</a>
+                <a href="marketing.html">التسويق الإلكتروني</a>
+                <a href="product-photography.html">تصوير المنتجات</a>
+                <a href="syrian-companies.html">دليل الشركات</a>
+                <a href="printing.html">خدمات الطباعة</a>
+                <a href="wedding-photography.html">تصوير الأعراس</a>
+                <a href="contact-us.html">تواصل معنا</a>
+                <a href="blog.html">مقالات وأعمال تسويقية</a>
             </nav>
-            <div class="logo" style="margin-top:10px;">
-                <h1>Eymta X</h1>
-                <p>نرفع أعمالك إلى مستوى جديد</p>
-            </div>
         </div>
     </header>
 
-    <!-- من نحن -->
-    <section style="max-width:700px;margin:40px auto 0;background:#fff;padding:32px 24px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.07);text-align:right;">
-        <h2 style="color:#0077cc;">من نحن</h2>
+    <section class="about-hero">
+        <img src="img/about-hero.jpg" alt="عزز علامتك التجارية">
+        <div class="about-hero-content">
+            <h1>عزز علامتك التجارية</h1>
+            <p>ايمتا إكس... نحن معكم</p>
+            <div style="font-size:2.2rem; margin-top:18px; letter-spacing: 6px; font-weight: bold;">EYMTA X</div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <h2>من نحن</h2>
         <p>نحن في <b>Eymta X</b> وكالة سورية متخصصة في التسويق الإلكتروني، التصوير الاحترافي، خدمات الطباعة، وتطوير الأعمال. نؤمن بأن نجاح عملائنا هو نجاحنا، ونعمل بشغف لنرفع أعمالكم إلى مستوى جديد من الاحترافية والانتشار.</p>
-        <h3 style="margin-top:24px;">رسالتنا</h3>
+        <h3>رسالتنا</h3>
         <p>تقديم حلول تسويقية وإبداعية متكاملة تساعد الشركات السورية على النمو والتوسع والوصول إلى جمهورها المستهدف بأفضل صورة.</p>
-        <h3 style="margin-top:24px;">قيمنا</h3>
-        <ul style="margin-right:20px;">
+        <h3>قيمنا</h3>
+        <ul>
             <li>الاحترافية والشفافية في التعامل</li>
             <li>الابتكار في تقديم الحلول</li>
             <li>الالتزام بتحقيق نتائج ملموسة</li>
             <li>دعم ريادة الأعمال السورية</li>
         </ul>
-        <h3 style="margin-top:24px;">لماذا نحن؟</h3>
+        <h3>لماذا نحن؟</h3>
         <p>فريقنا يضم خبراء في التسويق الرقمي، التصميم، التصوير، والطباعة، ونستخدم أحدث الأدوات والتقنيات لنحقق لك أفضل النتائج.</p>
     </section>
-    <!-- يمكنك هنا إضافة الفوتر الخاص بشركتك إذا رغبت -->
+
+    <footer>
+        <div>Eymta X &copy; 2024 - جميع الحقوق محفوظة</div>
+        <div class="footer-links">
+            <a href="about.html" class="active">من نحن</a>
+            <a href="contact.html">اتصل بنا</a>
+            <a href="privacy.html">سياسة الخصوصية</a>
+        </div>
+    </footer>
 </body>
 
 </html>

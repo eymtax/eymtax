@@ -7,56 +7,245 @@
     <title>تواصل معنا - Eymta X</title>
     <meta name="description" content="نموذج تواصل مباشر مع وكالة Eymta X، تواصل معنا لخدمات التسويق والتصوير والطباعة.">
     <meta name="keywords" content="Eymta X, تسويق إلكتروني, تصوير منتجات, خدمات طباعة, شركات سوريا">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+            --border-color: #e0e0e0;
+            --transition: all 0.3s ease;
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--light-bg);
+            color: var(--text-color);
+        }
+        header {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 0 0 0;
+        }
+        .navbar .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .navbar .subtitle {
+            color: #bbb;
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+        }
+        .navbar nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+        .navbar nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.08rem;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .navbar nav a:hover, .navbar nav a.active {
+            background: var(--secondary-color);
+            color: #fff;
+        }
+        .contact-section {
+            background: #fff;
+            padding: 60px 0 40px 0;
+            text-align: center;
+        }
+        .contact-section img {
+            max-width: 100%;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.13);
+            height: 220px;
+            object-fit: cover;
+        }
+        .contact-section h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 18px;
+        }
+        .contact-section p {
+            font-size: 1.15rem;
+            margin-bottom: 18px;
+        }
+        .contact-list {
+            list-style: none;
+            font-size: 1.1rem;
+            text-align: right;
+            display: inline-block;
+            margin: 20px auto 30px auto;
+            padding: 0;
+            color: var(--text-color);
+        }
+        .contact-list li {
+            margin-bottom: 10px;
+        }
+        .contact-list a {
+            color: var(--secondary-color);
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        .contact-list a:hover {
+            color: var(--accent-color);
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 30px auto 0 auto;
+            text-align: right;
+            background: var(--light-bg);
+            padding: 30px 20px;
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(44,62,80,0.07);
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            transition: border 0.2s;
+            font-family: 'Tajawal', sans-serif;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        .send-btn {
+            background: var(--accent-color);
+            color: #fff;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .send-btn:hover {
+            background: var(--secondary-color);
+        }
+        footer {
+            background: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 30px 0 10px 0;
+            font-size: 1rem;
+        }
+        .footer-links {
+            margin: 10px 0 0 0;
+        }
+        .footer-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: underline;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        @media (max-width: 700px) {
+            .navbar .logo {
+                font-size: 1.5rem;
+            }
+            .contact-section img {
+                height: 120px;
+            }
+            .contact-section h2 {
+                font-size: 1.3rem;
+            }
+            .contact-section p, .contact-list {
+                font-size: 1rem;
+            }
+            .navbar nav {
+                gap: 10px;
+                font-size: 1rem;
+                padding-bottom: 0;
+            }
+        }
+    </style>
 </head>
-<body style="font-family: sans-serif; background-color: #f9f9f9; color: #333;">
-
-<header style="background-color:#222; color:white; padding: 20px; text-align: center;">
-    <h1>Eymta X</h1>
-    <nav>
-        <a href="index.html" style="color:#fff; margin:0 10px;">الرئيسية</a>
-        <a href="marketing.html" style="color:#fff; margin:0 10px;">التسويق الإلكتروني</a>
-        <a href="product-photography.html" style="color:#fff; margin:0 10px;">تصوير المنتجات</a>
-        <a href="wedding-photography.html" style="color:#fff; margin:0 10px;">تصوير الأعراس</a>
-        <a href="printing.html" style="color:#fff; margin:0 10px;">خدمات الطباعة</a>
-        <a href="syrian-companies.html" style="color:#fff; margin:0 10px;">دليل الشركات</a>
-        <a href="contact-us.html" style="color:#fff; margin:0 10px;">تواصل معنا</a>
-    <a href="blog.html" style="color:#fff; margin:0 10px;">مقالات وأعمال تسويقية</a></nav>
-</header>
-
-<section style="text-align:center; padding:40px;">
-    <img src="img/تواصل_معنا.jpg" alt="تواصل معنا" style="max-width: 100%; border-radius: 16px; margin-bottom: 30px;">
-    <h2>تواصل معنا</h2>
-    <p style="font-size:18px;">يسعدنا تواصلك معنا في أي وقت! اختر الوسيلة المناسبة لك:</p>
-    <ul style="list-style:none; font-size:18px; text-align:right; display: inline-block; margin-top: 20px;">
-        <li>📞 الهاتف: <a href="tel:+963938029294">00963938029294</a></li>
-        <li>📧 الإيميل: <a href="mailto:eymtax@gmail.com">eymtax@gmail.com</a></li>
-        <li>📸 إنستغرام: <a href="https://www.instagram.com/eymtax/" target="_blank">instagram.com/eymtax</a></li>
-        <li>📘 فيسبوك: <a href="https://www.facebook.com/profile.php?id=61575282365448" target="_blank">facebook.com</a></li>
-        <li>💼 لينكد إن: <a href="https://www.linkedin.com/in/eymtax-syria-63021a361" target="_blank">linkedin.com</a></li>
-        <li>🎵 تيك توك: <a href="https://www.tiktok.com/@eymtax" target="_blank">tiktok.com/@eymtax</a></li>
-        <li>🐦 X (تويتر): <a href="https://x.com/eymtax" target="_blank">x.com/eymtax</a></li>
-        <li>▶️ يوتيوب: <a href="https://www.youtube.com/@eymtax" target="_blank">youtube.com/@eymtax</a></li>
-    </ul>
-
-<form style="max-width: 600px; margin: 30px auto; text-align: right;">
-    <label for="name">الاسم الكامل:</label><br>
-    <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
-    
-    <label for="email">البريد الإلكتروني:</label><br>
-    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
-    
-    <label for="message">الرسالة:</label><br>
-    <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 10px; margin-bottom: 15px;"></textarea><br>
-    
-    <button type="submit" style="padding: 10px 20px; background-color: #0077cc; color: white; border: none; border-radius: 5px;">إرسال</button>
-</form>
-
-</section>
-
-<footer style="background-color:#111; color:white; text-align:center; padding:20px; margin-top: 40px;">
-    <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
-</footer>
-
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Eymta X</div>
+            <div class="subtitle">نرفع أعمالك إلى مستوى جديد</div>
+            <nav>
+                <a href="index.html">الرئيسية</a>
+                <a href="marketing.html">التسويق الإلكتروني</a>
+                <a href="product-photography.html">تصوير المنتجات</a>
+                <a href="syrian-companies.html">دليل الشركات</a>
+                <a href="printing.html">خدمات الطباعة</a>
+                <a href="wedding-photography.html">تصوير الأعراس</a>
+                <a href="contact-us.html" class="active">تواصل معنا</a>
+                <a href="blog.html">مقالات وأعمال تسويقية</a>
+            </nav>
+        </div>
+    </header>
+    <section class="contact-section">
+        <img src="img/تواصل_معنا.jpg" alt="تواصل معنا">
+        <h2>تواصل معنا</h2>
+        <p>يسعدنا تواصلك معنا في أي وقت! اختر الوسيلة المناسبة لك:</p>
+        <ul class="contact-list">
+            <li>📞 الهاتف: <a href="tel:+963938029294">00963938029294</a></li>
+            <li>📧 الإيميل: <a href="mailto:eymtax@gmail.com">eymtax@gmail.com</a></li>
+            <li>📸 إنستغرام: <a href="https://www.instagram.com/eymtax/" target="_blank">instagram.com/eymtax</a></li>
+            <li>📘 فيسبوك: <a href="https://www.facebook.com/profile.php?id=61575282365448" target="_blank">facebook.com</a></li>
+            <li>💼 لينكد إن: <a href="https://www.linkedin.com/in/eymtax-syria-63021a361" target="_blank">linkedin.com</a></li>
+            <li>🎵 تيك توك: <a href="https://www.tiktok.com/@eymtax" target="_blank">tiktok.com/@eymtax</a></li>
+            <li>🐦 X (تويتر): <a href="https://x.com/eymtax" target="_blank">x.com/eymtax</a></li>
+            <li>▶️ يوتيوب: <a href="https://www.youtube.com/@eymtax" target="_blank">youtube.com/@eymtax</a></li>
+        </ul>
+        <form class="contact-form">
+            <label for="name">الاسم الكامل:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">الرسالة:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <button type="submit" class="send-btn">إرسال</button>
+        </form>
+    </section>
+    <footer>
+        <div>Eymta X &copy; 2024 - جميع الحقوق محفوظة</div>
+        <div class="footer-links">
+            <a href="about.html">من نحن</a>
+            <a href="contact.html">اتصل بنا</a>
+            <a href="privacy.html">سياسة الخصوصية</a>
+        </div>
+    </footer>
 </body>
 </html>

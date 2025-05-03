@@ -83,39 +83,67 @@
             color: #fff;
         }
 
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: #fff;
-            text-align: center;
-            padding: 70px 20px 60px 20px;
+        .hero-main-banner {
+            position: relative;
+            width: 100%;
+            min-height: 320px;
+            max-height: 420px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
         }
-
-        .hero h1 {
-            font-size: 2.5rem;
+        .hero-main-img {
+            width: 100%;
+            min-height: 320px;
+            max-height: 420px;
+            object-fit: cover;
+            filter: brightness(0.6);
+            display: block;
+        }
+        .hero-main-content {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .hero-main-content h1 {
+            font-size: 2.7rem;
             margin-bottom: 18px;
             font-weight: bold;
         }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+        .hero-main-content p {
+            font-size: 1.3rem;
+            margin-bottom: 0;
+            opacity: 0.95;
         }
-
-        .hero .cta-btn {
-            background: var(--accent-color);
-            color: #fff;
-            padding: 14px 38px;
-            border-radius: 30px;
-            font-size: 1.1rem;
+        .hero-main-logo {
+            font-size: 2.2rem;
+            margin-top: 18px;
+            letter-spacing: 6px;
             font-weight: bold;
-            text-decoration: none;
-            transition: background 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 8px rgba(44,62,80,0.08);
-            display: inline-block;
         }
-
-        .hero .cta-btn:hover {
-            background: var(--secondary-color);
+        @media (max-width: 700px) {
+            .hero-main-content h1 {
+                font-size: 1.5rem;
+            }
+            .hero-main-content p {
+                font-size: 1rem;
+            }
+            .hero-main-logo {
+                font-size: 1.2rem;
+            }
+            .hero-main-banner, .hero-main-img {
+                min-height: 180px;
+                max-height: 220px;
+            }
         }
 
         .services-section {
@@ -334,6 +362,15 @@
         </nav>
     </div>
 </header>
+
+<section class="hero-main-banner">
+    <img src="img/hero-main.jpg" alt="عزز علامتك التجارية" class="hero-main-img">
+    <div class="hero-main-content">
+        <h1>عزز علامتك التجارية</h1>
+        <p>ايمتا إكس... نحن معكم</p>
+        <div class="hero-main-logo">EYMTA X</div>
+    </div>
+</section>
 
 <section class="hero">
     <h1>حلول تسويقية وابتكارية متكاملة لنجاح أعمالك</h1>

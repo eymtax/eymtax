@@ -13,10 +13,10 @@
   <meta property="og:image" content="https://yourdomain.com/img/ad-banner.png">
   <meta property="og:locale" content="ar_AR">
   <meta property="og:url" content="https://yourdomain.com/syrian-companies.html">
-  <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
   <style>
     :root {
       --primary-color: #2c3e50;
@@ -27,402 +27,157 @@
       --border-color: #e0e0e0;
       --transition: all 0.3s ease;
     }
-
-    .companies-page {
-      display: grid;
-      grid-template-columns: 250px 1fr;
-      gap: 20px;
-      padding: 20px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .sidebar {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      height: fit-content;
-      position: sticky;
-      top: 20px;
-    }
-
-    .sidebar h3 {
-      color: var(--primary-color);
-      margin-bottom: 15px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--primary-color);
-    }
-
-    .category-list {
-      list-style: none;
+    body {
+      font-family: 'Tajawal', sans-serif;
+      margin: 0;
       padding: 0;
-      margin: 0;
-    }
-
-    .category-list li {
-      margin-bottom: 8px;
-    }
-
-    .category-list a {
-      color: var(--text-color);
-      text-decoration: none;
-      display: block;
-      padding: 10px 15px;
-      border-radius: 8px;
-      transition: var(--transition);
-      font-size: 15px;
-    }
-
-    .category-list a:hover {
       background: var(--light-bg);
-      color: var(--primary-color);
-      transform: translateX(-5px);
+      color: var(--text-color);
     }
-
-    .category-list a.active {
+    header {
       background: var(--primary-color);
-      color: white;
+      color: #fff;
+      padding: 0;
     }
-
-    .main-content {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 20px;
-    }
-
-    .companies-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .ad-sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .ad-space {
-      background: #f5f5f5;
-      border: 2px dashed #ddd;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      min-height: 250px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #666;
-      font-weight: 500;
-      position: relative;
-      overflow: hidden;
-      transition: var(--transition);
-    }
-
-    .ad-space:hover {
-      border-color: var(--primary-color);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .ad-space img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 8px;
-    }
-
-    .ad-space .ad-label {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-    }
-
-    .ad-space .ad-placeholder {
+    .navbar {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      padding: 30px 0 0 0;
     }
-
-    .ad-space .ad-placeholder i {
-      font-size: 24px;
-      color: #999;
-    }
-
-    .ad-space .ad-placeholder span {
-      font-size: 14px;
-      color: #666;
-    }
-
-    .search-container {
-      position: relative;
-      margin-bottom: 25px;
-    }
-
-    .search-container input {
-      width: 100%;
-      padding: 15px 20px 15px 45px;
-      border: 2px solid var(--border-color);
-      border-radius: 10px;
-      font-size: 16px;
-      transition: var(--transition);
-      background: white;
-    }
-
-    .search-container input:focus {
-      border-color: var(--primary-color);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
-    }
-
-    .search-container::before {
-      content: "🔍";
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-color);
-      opacity: 0.7;
-    }
-
-    .stars {
-      padding: 0 15px 15px;
-      display: flex;
-      gap: 5px;
-    }
-
-    .star {
-      color: #ffd700;
-      font-size: 18px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .star.selected {
-      color: #ffd700;
-    }
-
-    .rating-count {
-      padding: 0 15px 15px;
-      color: var(--text-color);
-      font-size: 14px;
-      opacity: 0.8;
-    }
-
-    .company {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      transition: var(--transition);
-    }
-
-    .company:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    .company img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .company h3 {
-      padding: 15px;
-      margin: 0;
-      color: var(--primary-color);
-      font-size: 18px;
-    }
-
-    .company p {
-      padding: 0 15px 15px;
-      margin: 0;
-      color: var(--text-color);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .company.vip {
-      border: 2px solid var(--accent-color);
-    }
-
-    .company.vip::before {
-      content: "VIP";
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--accent-color);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 12px;
+    .navbar .logo {
+      font-size: 2.5rem;
       font-weight: bold;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
     }
-
-    @media (max-width: 1200px) {
-      .companies-page {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: static;
-        margin-bottom: 20px;
-      }
-
-      .main-content {
-        grid-template-columns: 1fr;
-      }
-
-      .ad-sidebar {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        margin-top: 20px;
-      }
+    .navbar .subtitle {
+      color: #bbb;
+      margin-bottom: 18px;
+      font-size: 1.1rem;
     }
-
-    @media (max-width: 768px) {
-      .companies-page {
-        padding: 15px;
+    .navbar nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .navbar nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.08rem;
+      padding: 6px 12px;
+      border-radius: 5px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .navbar nav a:hover, .navbar nav a.active {
+      background: var(--secondary-color);
+      color: #fff;
+    }
+    footer {
+      background: var(--primary-color);
+      color: #fff;
+      text-align: center;
+      padding: 30px 0 10px 0;
+      font-size: 1rem;
+    }
+    .footer-links {
+      margin: 10px 0 0 0;
+    }
+    .footer-links a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: underline;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--secondary-color);
+    }
+    @media (max-width: 700px) {
+      .navbar .logo {
+        font-size: 1.5rem;
       }
-
-      .companies-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .category-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      .navbar nav {
         gap: 10px;
-      }
-
-      .category-list li {
-        margin-bottom: 0;
-      }
-
-      .category-list a {
-        text-align: center;
-        padding: 8px 12px;
-      }
-
-      .company img {
-        height: 160px;
-      }
-
-      .company h3 {
-        font-size: 16px;
-      }
-
-      .company p {
-        font-size: 13px;
-      }
-
-      .search-container input {
-        padding: 12px 15px 12px 40px;
-        font-size: 15px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .companies-page {
-        padding: 10px;
-      }
-
-      .category-list {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .company img {
-        height: 140px;
+        font-size: 1rem;
+        padding-bottom: 0;
       }
     }
   </style>
 </head>
 <body>
-
-<header class="main-header">
-  <div class="container">
-    <div class="logo">
-      <h1>Eymta X</h1>
-      <p>نرفع أعمالك إلى مستوى جديد</p>
+  <header>
+    <div class="navbar">
+      <div class="logo">Eymta X</div>
+      <div class="subtitle">نرفع أعمالك إلى مستوى جديد</div>
+      <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="marketing.html">التسويق الإلكتروني</a>
+        <a href="product-photography.html">تصوير المنتجات</a>
+        <a href="syrian-companies.html" class="active">دليل الشركات</a>
+        <a href="printing.html">خدمات الطباعة</a>
+        <a href="wedding-photography.html">تصوير الأعراس</a>
+        <a href="contact-us.html">تواصل معنا</a>
+        <a href="blog.html">مقالات وأعمال تسويقية</a>
+      </nav>
     </div>
-    <button class="hamburger" id="hamburgerBtn" aria-label="القائمة الرئيسية">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <nav class="main-nav" id="mainNav">
-      <a href="marketing.html" class="nav-link">التسويق الإلكتروني</a>
-      <a href="product-photography.html" class="nav-link">تصوير المنتجات</a>
-      <a href="wedding-photography.html" class="nav-link">تصوير الأعراس</a>
-      <a href="printing.html" class="nav-link">خدمات الطباعة</a>
-      <a href="syrian-companies.html" class="nav-link active">دليل الشركات</a>
-      <a href="contact-us.html" class="nav-link">تواصل معنا</a>
-      <a href="blog.html" class="nav-link">مقالات وأعمال تسويقية</a>
-    </nav>
-  </div>
-</header>
-<a href="index.html" class="back-home-btn">العودة للصفحة الرئيسية</a>
+  </header>
+  
+  <div class="companies-page">
+    <aside class="sidebar">
+      <h3>المجالات</h3>
+      <ul class="category-list">
+        <li><a href="#" class="active" data-category="all">الكل</a></li>
+        <li><a href="#" data-category="تجاري">الشركات التجارية</a></li>
+        <li><a href="#" data-category="صناعي">الشركات الصناعية</a></li>
+        <li><a href="#" data-category="زراعي">الشركات الزراعية</a></li>
+        <li><a href="#" data-category="خدمي">الشركات الخدمية</a></li>
+        <li><a href="#" data-category="تقني">الشركات التقنية</a></li>
+        <li><a href="#" data-category="طباعة">الطباعة</a></li>
+        <li><a href="#" data-category="تسويق">التسويق</a></li>
+        <li><a href="#" data-category="تصوير">التصوير</a></li>
+        <li><a href="#" data-category="غذائي">الغذائي</a></li>
+        <li><a href="#" data-category="برمجة">البرمجة</a></li>
+      </ul>
+    </aside>
 
-<div class="companies-page">
-  <aside class="sidebar">
-    <h3>المجالات</h3>
-    <ul class="category-list">
-      <li><a href="#" class="active" data-category="all">الكل</a></li>
-      <li><a href="#" data-category="تجاري">الشركات التجارية</a></li>
-      <li><a href="#" data-category="صناعي">الشركات الصناعية</a></li>
-      <li><a href="#" data-category="زراعي">الشركات الزراعية</a></li>
-      <li><a href="#" data-category="خدمي">الشركات الخدمية</a></li>
-      <li><a href="#" data-category="تقني">الشركات التقنية</a></li>
-      <li><a href="#" data-category="طباعة">الطباعة</a></li>
-      <li><a href="#" data-category="تسويق">التسويق</a></li>
-      <li><a href="#" data-category="تصوير">التصوير</a></li>
-      <li><a href="#" data-category="غذائي">الغذائي</a></li>
-      <li><a href="#" data-category="برمجة">البرمجة</a></li>
-    </ul>
-  </aside>
+    <div class="main-content">
+      <div class="companies-container">
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="ابحث عن شركة...">
+        </div>
+        <div class="companies-grid" id="companyContainer">
+          <!-- سيتم إضافة الشركات هنا -->
+        </div>
+      </div>
 
-  <div class="main-content">
-    <div class="companies-container">
-      <div class="search-container">
-        <input type="text" id="searchInput" placeholder="ابحث عن شركة...">
-      </div>
-      <div class="companies-grid" id="companyContainer">
-        <!-- سيتم إضافة الشركات هنا -->
-      </div>
-    </div>
-
-    <div class="ad-sidebar">
-      <div class="ad-space">
-        <a href="tel:00963938029294" title="اتصل بنا">
-          <img src="img/ad-banner.png" alt="إعلانك هنا">
-        </a>
-        <div class="ad-label">مساحة 1</div>
-      </div>
-      <div class="ad-space">
-        <a href="tel:00963938029294" title="اتصل بنا">
-          <img src="img/ad-banner.png" alt="إعلانك هنا">
-        </a>
-        <div class="ad-label">مساحة 2</div>
-      </div>
-      <div class="ad-space">
-        <a href="tel:00963938029294" title="اتصل بنا">
-          <img src="img/ad-banner.png" alt="إعلانك هنا">
-        </a>
-        <div class="ad-label">مساحة 3</div>
+      <div class="ad-sidebar">
+        <div class="ad-space">
+          <a href="tel:00963938029294" title="اتصل بنا">
+            <img src="img/ad-banner.png" alt="إعلانك هنا">
+          </a>
+          <div class="ad-label">مساحة 1</div>
+        </div>
+        <div class="ad-space">
+          <a href="tel:00963938029294" title="اتصل بنا">
+            <img src="img/ad-banner.png" alt="إعلانك هنا">
+          </a>
+          <div class="ad-label">مساحة 2</div>
+        </div>
+        <div class="ad-space">
+          <a href="tel:00963938029294" title="اتصل بنا">
+            <img src="img/ad-banner.png" alt="إعلانك هنا">
+          </a>
+          <div class="ad-label">مساحة 3</div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<footer class="main-footer">
-  <div class="container">
+  <footer>
     <div class="footer-content">
       <div class="footer-info">
         <h3>Eymta X</h3>
@@ -437,124 +192,122 @@
     <div class="copyright">
       <p>جميع الحقوق محفوظة &copy; 2024 Eymta X</p>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<script src="js/main.js"></script>
-<script>
-// دالة لإنشاء بطاقة شركة
-function createCompanyCard(company) {
-  return `
-    <div class="company ${company.vip ? 'vip' : ''}" data-category="${company.category}" data-name="${company.name}">
-      <img src="${company.image}" alt="${company.name}">
-      <h3>${company.name}</h3>
-      <p>${company.description}</p>
-      <p>📞 ${company.phone} | 📍 ${company.location}</p>
-      <div class="stars" data-name="${company.name}"></div>
-      <div class="rating-count" id="count-${company.name}">0 تقييم</div>
-    </div>
-  `;
-}
-
-// بيانات الشركات (يمكن استبدالها ببيانات حقيقية)
-const companiesData = [
-  {
-    name: "شركة النور للطباعة",
-    category: "طباعة",
-    description: "متخصصة في طباعة البروشورات والفلايرات وبطاقات العمل.",
-    phone: "0999999999",
-    location: "حماة",
-    image: "https://via.placeholder.com/280x150?text=نور+للطباعة",
-    vip: true
-  },
-  {
-    name: "مركز البيان للتسويق",
-    category: "تسويق",
-    description: "خبراء في التسويق الإلكتروني والإعلانات الممولة.",
-    phone: "0933333333",
-    location: "دمشق",
-    image: "https://via.placeholder.com/280x150?text=البيان+للتسويق"
-  },
-  // يمكن إضافة المزيد من الشركات هنا
-];
-
-// إضافة الشركات إلى الصفحة
-const container = document.getElementById('companyContainer');
-container.innerHTML = '';
-companiesData.forEach(company => {
-  container.innerHTML += createCompanyCard(company);
-});
-
-// نظام التقييم لكل شركة (مرة واحدة لكل زائر)
-function createStars(div, name) {
-  const saved = localStorage.getItem('rate_' + name);
-  const countKey = 'count_' + name;
-  let count = parseInt(localStorage.getItem(countKey) || '0');
-  div.innerHTML = '';
-  for (let i = 1; i <= 5; i++) {
-    const s = document.createElement("span");
-    s.textContent = "★";
-    s.classList.add("star");
-    if (saved && i <= saved) s.classList.add("selected");
-    s.style.cursor = saved ? 'default' : 'pointer';
-    s.onclick = () => {
-      if (!saved) {
-        localStorage.setItem('rate_' + name, i);
-        count++;
-        localStorage.setItem(countKey, count);
-        document.getElementById('count-' + name).textContent = count + " تقييم";
-        [...div.children].forEach((star, idx) => {
-          star.classList.toggle("selected", idx < i);
-        });
-        alert("شكراً لتقييمك!");
-      } else {
-        alert("لقد قمت بالتقييم سابقاً.");
-      }
-    };
-    div.appendChild(s);
+  <script src="js/main.js"></script>
+  <script>
+  // دالة لإنشاء بطاقة شركة
+  function createCompanyCard(company) {
+    return `
+      <div class="company ${company.vip ? 'vip' : ''}" data-category="${company.category}" data-name="${company.name}">
+        <img src="${company.image}" alt="${company.name}">
+        <h3>${company.name}</h3>
+        <p>${company.description}</p>
+        <p>�� ${company.phone} | 📍 ${company.location}</p>
+        <div class="stars" data-name="${company.name}"></div>
+        <div class="rating-count" id="count-${company.name}">0 تقييم</div>
+      </div>
+    `;
   }
-  document.getElementById('count-' + name).textContent = count + " تقييم";
-}
 
-// تفعيل التقييمات لكل شركة
-setTimeout(() => {
-  document.querySelectorAll('.stars').forEach(div => {
-    const name = div.dataset.name;
-    createStars(div, name);
+  // بيانات الشركات (يمكن استبدالها ببيانات حقيقية)
+  const companiesData = [
+    {
+      name: "شركة النور للطباعة",
+      category: "طباعة",
+      description: "متخصصة في طباعة البروشورات والفلايرات وبطاقات العمل.",
+      phone: "0999999999",
+      location: "حماة",
+      image: "https://via.placeholder.com/280x150?text=نور+للطباعة",
+      vip: true
+    },
+    {
+      name: "مركز البيان للتسويق",
+      category: "تسويق",
+      description: "خبراء في التسويق الإلكتروني والإعلانات الممولة.",
+      phone: "0933333333",
+      location: "دمشق",
+      image: "https://via.placeholder.com/280x150?text=البيان+للتسويق"
+    },
+    // يمكن إضافة المزيد من الشركات هنا
+  ];
+
+  // إضافة الشركات إلى الصفحة
+  const container = document.getElementById('companyContainer');
+  container.innerHTML = '';
+  companiesData.forEach(company => {
+    container.innerHTML += createCompanyCard(company);
   });
-}, 100);
 
-// تصفية الشركات حسب الفئة
-document.querySelectorAll('.category-list a').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const category = link.dataset.category;
-    
-    // تحديث الروابط النشطة
-    document.querySelectorAll('.category-list a').forEach(a => a.classList.remove('active'));
-    link.classList.add('active');
-    
-    // تصفية الشركات
+  // نظام التقييم لكل شركة (مرة واحدة لكل زائر)
+  function createStars(div, name) {
+    const saved = localStorage.getItem('rate_' + name);
+    const countKey = 'count_' + name;
+    let count = parseInt(localStorage.getItem(countKey) || '0');
+    div.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      const s = document.createElement("span");
+      s.textContent = "★";
+      s.classList.add("star");
+      if (saved && i <= saved) s.classList.add("selected");
+      s.style.cursor = saved ? 'default' : 'pointer';
+      s.onclick = () => {
+        if (!saved) {
+          localStorage.setItem('rate_' + name, i);
+          count++;
+          localStorage.setItem(countKey, count);
+          document.getElementById('count-' + name).textContent = count + " تقييم";
+          [...div.children].forEach((star, idx) => {
+            star.classList.toggle("selected", idx < i);
+          });
+          alert("شكراً لتقييمك!");
+        } else {
+          alert("لقد قمت بالتقييم سابقاً.");
+        }
+      };
+      div.appendChild(s);
+    }
+    document.getElementById('count-' + name).textContent = count + " تقييم";
+  }
+
+  // تفعيل التقييمات لكل شركة
+  setTimeout(() => {
+    document.querySelectorAll('.stars').forEach(div => {
+      const name = div.dataset.name;
+      createStars(div, name);
+    });
+  }, 100);
+
+  // تصفية الشركات حسب الفئة
+  document.querySelectorAll('.category-list a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const category = link.dataset.category;
+      
+      // تحديث الروابط النشطة
+      document.querySelectorAll('.category-list a').forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+      
+      // تصفية الشركات
+      const companies = document.querySelectorAll('.company');
+      companies.forEach(company => {
+        const match = category === 'all' || company.dataset.category === category;
+        company.style.display = match ? 'block' : 'none';
+      });
+    });
+  });
+
+  // البحث عن الشركات
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const query = this.value.toLowerCase();
     const companies = document.querySelectorAll('.company');
+    
     companies.forEach(company => {
-      const match = category === 'all' || company.dataset.category === category;
+      const name = company.dataset.name.toLowerCase();
+      const match = name.includes(query);
       company.style.display = match ? 'block' : 'none';
     });
   });
-});
-
-// البحث عن الشركات
-document.getElementById('searchInput').addEventListener('input', function() {
-  const query = this.value.toLowerCase();
-  const companies = document.querySelectorAll('.company');
-  
-  companies.forEach(company => {
-    const name = company.dataset.name.toLowerCase();
-    const match = name.includes(query);
-    company.style.display = match ? 'block' : 'none';
-  });
-});
-</script>
-
+  </script>
 </body>
 </html>
