@@ -34,286 +34,127 @@
             color: var(--text-color);
         }
 
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 100px 0;
+        .main-header {
+            background: #222;
+            color: #fff;
+            padding: 0 0 20px 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('img/pattern.png') repeat;
-            opacity: 0.1;
+        .main-header .logo {
+            padding: 30px 0 10px 0;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease 0.2s;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
+        .main-header .logo h1 {
+            font-size: 2.8rem;
+            margin: 0;
             font-weight: bold;
-            transition: var(--transition);
-            animation: fadeInUp 1s ease 0.4s;
+            letter-spacing: 1px;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        .main-header .logo p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #bbb;
         }
 
-        .services-section {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
+        .main-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 0 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .main-nav a {
+            color: #fff;
+            text-decoration: underline;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .main-nav a:hover, .main-nav a.active {
+            color: var(--secondary-color);
+            background: #fff2;
         }
 
         .service-card {
-            background: white;
-            border-radius: 15px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(44,62,80,0.08);
+            max-width: 500px;
+            margin: 40px auto 0 auto;
+            padding: 0 0 30px 0;
+            text-align: center;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: var(--transition);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
         }
 
         .service-card img {
             width: 100%;
-            height: 200px;
+            max-width: 100%;
+            height: 220px;
             object-fit: cover;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
         }
 
-        .service-content {
-            padding: 20px;
-        }
-
-        .service-content h3 {
+        .service-card h2 {
+            font-size: 2rem;
+            margin: 25px 0 10px 0;
             color: var(--primary-color);
-            margin-bottom: 10px;
         }
 
-        .service-content p {
+        .service-card p {
+            font-size: 1.1rem;
+            margin: 0 30px 20px 30px;
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.8;
         }
 
-        .stats-section {
+        .cta-button {
+            display: inline-block;
             background: var(--primary-color);
-            color: white;
-            padding: 60px 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: var(--accent-color);
-        }
-
-        .testimonials-section {
-            padding: 80px 0;
-            background: var(--light-bg);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .testimonial-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .testimonial-content {
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .testimonial-author img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .contact-section {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .contact-info {
-            background: var(--light-bg);
-            padding: 30px;
-            border-radius: 15px;
-        }
-
-        .contact-info h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .contact-info p {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .contact-form {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--primary-color);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid var(--border-color);
+            color: #fff;
+            padding: 14px 38px;
             border-radius: 8px;
-            transition: var(--transition);
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.08);
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-
-        .submit-button {
-            background: var(--primary-color);
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .submit-button:hover {
+        .cta-button:hover {
             background: var(--secondary-color);
         }
 
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content p {
-                font-size: 1rem;
-            }
-
-            .services-grid,
-            .testimonials-grid,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-content h1 {
+        @media (max-width: 600px) {
+            .main-header .logo h1 {
                 font-size: 2rem;
             }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
+            .service-card {
+                margin: 25px 8px 0 8px;
+                padding-bottom: 20px;
             }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+            .service-card img {
+                height: 150px;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .service-card h2 {
+                font-size: 1.3rem;
+            }
+            .service-card p {
+                font-size: 1rem;
+                margin: 0 10px 15px 10px;
+            }
+            .main-nav {
+                gap: 10px;
+                font-size: 1rem;
+                padding-bottom: 0;
             }
         }
     </style>
@@ -321,132 +162,29 @@
 <body>
 
 <header class="main-header">
-    <div class="container">
-        <div class="logo">
-            <h1>Eymta X</h1>
-            <p>نرفع أعمالك إلى مستوى جديد</p>
-        </div>
-        <button class="hamburger" id="hamburgerBtn" aria-label="القائمة الرئيسية">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <nav class="main-nav" id="mainNav">
-            <a href="marketing.html" class="nav-link">التسويق الإلكتروني</a>
-            <a href="product-photography.html" class="nav-link">تصوير المنتجات</a>
-            <a href="wedding-photography.html" class="nav-link">تصوير الأعراس</a>
-            <a href="printing.html" class="nav-link">خدمات الطباعة</a>
-            <a href="syrian-companies.html" class="nav-link">دليل الشركات</a>
-            <a href="contact-us.html" class="nav-link">تواصل معنا</a>
-            <a href="blog.html" class="nav-link">مقالات وأعمال تسويقية</a>
-        </nav>
+    <div class="logo">
+        <h1>Eymta X</h1>
+        <p>نرفع أعمالك إلى مستوى جديد</p>
     </div>
+    <nav class="main-nav">
+        <a href="index.html" class="active">الرئيسية</a>
+        <a href="marketing.html">التسويق الإلكتروني</a>
+        <a href="product-photography.html">تصوير المنتجات</a>
+        <a href="wedding-photography.html">تصوير الأعراس</a>
+        <a href="printing.html">خدمات الطباعة</a>
+        <a href="syrian-companies.html">دليل الشركات</a>
+        <a href="contact-us.html">تواصل معنا</a>
+        <a href="blog.html">مقالات وأعمال تسويقية</a>
+    </nav>
 </header>
 
 <main>
-    <section class="hero-section">
-        <div class="container">
-            <img src="img/البنر_الرئيسي.jpg" alt="Eymta X Banner" class="hero-image" loading="lazy">
-            <div class="hero-content">
-                <h1>نرفع أعمالك إلى مستوى جديد</h1>
-                <p>نقدم حلولاً متكاملة للتسويق الإلكتروني، التصوير، الطباعة، وتطوير الأعمال</p>
-                <a href="contact-us.html" class="cta-button">ابدأ مشروعك الآن</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="services-section">
-        <div class="container">
-            <h2 class="section-title">خدماتنا</h2>
-            <div class="services-grid">
-                <a href="marketing.html" class="service-card" style="text-decoration:none;">
-                    <h3>التسويق الإلكتروني</h3>
-                    <p>حملات تسويقية فعالة لزيادة مبيعاتك ووصولك</p>
-                </a>
-                <a href="product-photography.html" class="service-card" style="text-decoration:none;">
-                    <h3>تصوير المنتجات</h3>
-                    <p>تصوير احترافي لمنتجاتك لعرضها بشكل جذاب</p>
-                </a>
-                <a href="wedding-photography.html" class="service-card" style="text-decoration:none;">
-                    <h3>تصوير الأعراس</h3>
-                    <p>توثيق أجمل لحظات مناسباتك</p>
-                </a>
-                <a href="printing.html" class="service-card" style="text-decoration:none;">
-                    <h3>خدمات الطباعة</h3>
-                    <p>طباعة عالية الجودة لجميع احتياجاتك</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials-section">
-        <div class="container">
-            <h2 class="section-title">عملاؤنا السابقون</h2>
-            <div class="testimonials-slider">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"خدمات احترافية ومميزة، ساعدتنا في تطوير أعمالنا بشكل كبير"</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <h4>شركة التقنية المتطورة</h4>
-                        <p>مدير التسويق</p>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"صور المنتجات كانت احترافية جداً وساعدت في زيادة المبيعات"</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <h4>متجر الأزياء الفاخرة</h4>
-                        <p>المدير التنفيذي</p>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"حملات التسويق الإلكتروني حققت نتائج مذهلة"</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <h4>مطعم الشرق الأوسط</h4>
-                        <p>مالك المطعم</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3 class="stat-number">+500</h3>
-                    <p class="stat-label">عميل راضي</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-number">+1000</h3>
-                    <p class="stat-label">مشروع مكتمل</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-number">+5</h3>
-                    <p class="stat-label">سنوات خبرة</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-number">+50</h3>
-                    <p class="stat-label">فريق متخصص</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <div class="container">
-            <h2>هل أنت مستعد لبدء مشروعك؟</h2>
-            <p>اتصل بنا الآن واحصل على استشارة مجانية</p>
-            <div class="cta-buttons">
-                <a href="tel:+963938029294" class="cta-button primary">📞 اتصل بنا الآن</a>
-                <a href="contact-us.html" class="cta-button secondary">اطلب عرض سعر</a>
-            </div>
-        </div>
-    </section>
+    <div class="service-card">
+        <img src="img/marketing.jpg" alt="التسويق الإلكتروني">
+        <h2>التسويق الإلكتروني</h2>
+        <p>نقدم في <b>Eymta X</b> خدمات التسويق الإلكتروني بدءاً من إدارة الحملات الإعلانية على منصات التواصل الاجتماعي، إلى تحسين الظهور بمحركات البحث (SEO)، والتسويق بالمحتوى والبريد الإلكتروني. نعزز من حضور علامتك التجارية ونزيد من تفاعل جمهورك وتحقيق أهدافك البيعية.</p>
+        <a href="tel:+963938029294" class="cta-button">اتصل الآن 📞</a>
+    </div>
 </main>
 
 <footer class="main-footer">
