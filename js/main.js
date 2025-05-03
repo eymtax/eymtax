@@ -92,15 +92,26 @@ navLinks.forEach(link => {
     }
 });
 
-// Mobile menu toggle (if needed in the future)
-const menuToggle = document.createElement('button');
-menuToggle.className = 'menu-toggle';
-menuToggle.innerHTML = '☰';
-document.querySelector('.main-header .container').prepend(menuToggle);
+// === إصلاح القائمة الجانبية للهيدر على الجوال ===
+// إزالة أي كود قديم أو متعارض
+const oldMenuToggle = document.querySelector('.menu-toggle');
+if (oldMenuToggle) oldMenuToggle.remove();
 
-menuToggle.addEventListener('click', () => {
-    document.querySelector('.main-nav').classList.toggle('active');
-});
+// تفعيل زر الهامبرغر فقط
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mainNav = document.getElementById('mainNav');
+if (hamburgerBtn && mainNav) {
+  hamburgerBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mainNav.classList.toggle('open');
+  });
+  // إغلاق القائمة عند الضغط خارجها
+  document.addEventListener('click', (e) => {
+    if (!mainNav.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+      mainNav.classList.remove('open');
+    }
+  });
+}
 
 // Animate stats numbers
 const statsSection = document.querySelector('.stats-section');
@@ -188,19 +199,4 @@ serviceCards.forEach(card => {
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
-
-// Hamburger menu functionality
-const hamburgerBtn = document.getElementById('hamburgerBtn');
-const mainNav = document.getElementById('mainNav');
-if (hamburgerBtn && mainNav) {
-  hamburgerBtn.addEventListener('click', () => {
-    mainNav.classList.toggle('open');
-  });
-  // إغلاق القائمة عند الضغط خارجها
-  document.addEventListener('click', (e) => {
-    if (!mainNav.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-      mainNav.classList.remove('open');
-    }
-  });
-}
 
