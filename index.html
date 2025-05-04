@@ -3,224 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الرئيسية - Eymta X</title>
+    <title>Eymta X - خبراء التسويق الرقمي والتصوير والطباعة في سوريا</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        body { font-family: sans-serif; margin: 0; background-color: #f4f4f4; color: #222; }
-        header { background-color: #111; padding: 20px; text-align: center; }
-        header h1 { color: white; margin: 0; }
-        header p { color: #ccc; }
-        nav { margin-top: 10px; }
-        nav a { color: #fff; margin: 0 10px; text-decoration: none; }
-        
-        .main-section { text-align: center; padding: 40px; }
-        .banner { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-bottom: 30px; }
-        
-        .services-section {
-            padding: 40px 0;
-            background: white;
-            margin: 40px 0;
+        :root {
+            --primary-color: #0077cc;
+            --secondary-color: #111;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #fff;
         }
-        
-        .services-title {
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-color);
+            padding: 1.5rem;
             text-align: center;
-            margin-bottom: 40px;
-            color: #0077cc;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
-        .swiper {
-            width: 100%;
-            padding: 20px;
+
+        header h1 {
+            color: var(--white);
+            margin: 0;
+            font-size: 2rem;
         }
-        
+
+        header p {
+            color: #ccc;
+            margin: 0.5rem 0;
+        }
+
+        nav {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('img/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            margin: 1rem;
+        }
+
+        .cta-button:hover {
+            background-color: #005fa3;
+            transform: translateY(-2px);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services h2 {
+            text-align: center;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
         .service-card {
-            background: white;
+            background: var(--white);
             border-radius: 12px;
-            overflow: hidden;
+            padding: 2rem;
+            text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: transform 0.3s;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
         }
-        
+
         .service-card:hover {
             transform: translateY(-5px);
         }
-        
-        .service-image {
+
+        .service-card img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .service-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .service-title {
-            color: #0077cc;
-            margin-bottom: 10px;
-        }
-        
-        .service-description {
-            color: #666;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-        
-        .service-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #0077cc;
-            color: white;
-            text-decoration: none;
+            max-width: 300px;
+            height: auto;
             border-radius: 8px;
-            transition: background-color 0.3s;
+            margin-bottom: 1rem;
         }
-        
-        .service-link:hover {
-            background-color: #005fa3;
+
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
-        
-        .swiper-button-next,
-        .swiper-button-prev {
-            color: #0077cc;
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
         }
-        
-        .swiper-pagination-bullet-active {
-            background: #0077cc;
-        }
-        
-        footer {
-            background-color: #111;
-            color: white;
+
+        /* Features Section */
+        .features {
+            background-color: var(--white);
+            padding: 3rem 1rem;
             text-align: center;
-            padding: 20px;
+        }
+
+        .features h2 {
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            padding: 1.5rem;
+        }
+
+        .feature-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1><a href="index.html" style="color: white; text-decoration: none;">Eymta X</a></h1>
+        <p>نرفع أعمالك إلى مستوى جديد</p>
+        <nav>
+            <a href="index.html">الرئيسية</a>
+            <a href="marketing.html">التسويق الإلكتروني</a>
+            <a href="product-photography.html">تصوير المنتجات</a>
+            <a href="wedding-photography.html">تصوير الأعراس</a>
+            <a href="printing.html">خدمات الطباعة</a>
+            <a href="syrian-companies.html">دليل الشركات</a>
+            <a href="contact-us.html">تواصل معنا</a>
+        </nav>
+    </header>
 
-<header>
-    <h1>Eymta X</h1>
-    <p>نرفع أعمالك إلى مستوى جديد</p>
-    <nav>
-        <a href="marketing.html">التسويق الإلكتروني</a>
-        <a href="product-photography.html">تصوير المنتجات</a>
-        <a href="wedding-photography.html">تصوير الأعراس</a>
-        <a href="printing.html">خدمات الطباعة</a>
-        <a href="syrian-companies.html">دليل الشركات</a>
-        <a href="contact-us.html">تواصل معنا</a>
-    </nav>
-</header>
+    <section class="hero">
+        <h2>مرحباً بكم في Eymta X</h2>
+        <p>نقدم حلولاً متكاملة في التسويق الرقمي، التصوير الاحترافي، وخدمات الطباعة المتميزة</p>
+        <a href="tel:+963938029294" class="cta-button">📞 اطلب خدمتك الآن</a>
+    </section>
 
-<section class="main-section">
-    <img src="img/البنر_الرئيسي.jpg" alt="Eymta X Banner" class="banner">
-    <h2>مرحباً بك في Eymta X</h2>
-    <p style="font-size: 18px; max-width: 700px; margin: 20px auto;">
-        وكالة تسويق إلكتروني وإعلامي، نقدم لك كل ما تحتاجه من خدمات التسويق، التصوير، الطباعة، والدليل التجاري.
-    </p>
-    <p style="font-size: 20px; color: #0077cc; font-weight: bold; margin: 20px auto; max-width: 800px;">
-        نغطي كل مناطق سورية، أين ما كنت نحن معك لنجاح أعمالك
-    </p>
-    <a href="tel:+963938029294" style="display: inline-block; padding: 12px 24px; background-color: #0077cc; color: white; text-decoration: none; border-radius: 8px; font-size: 18px;">📞 اتصل بنا الآن</a>
-</section>
-
-<section class="services-section">
-    <h2 class="services-title">خدماتنا</h2>
-    <div class="swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <div class="service-card">
-                    <img src="img/التسويق_الإلكتروني.jpg" alt="التسويق الإلكتروني" class="service-image">
-                    <div class="service-content">
-                        <h3 class="service-title">التسويق الإلكتروني</h3>
-                        <p class="service-description">حملات تسويق ذكية تضمن نتائج فعلية، إدارة حسابات التواصل الاجتماعي، وتحسين محركات البحث.</p>
-                        <a href="marketing.html" class="service-link">اعرف المزيد</a>
-                    </div>
-                </div>
+    <section class="services">
+        <h2>خدماتنا</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="img/التسويق_الإلكتروني.jpg" alt="التسويق الإلكتروني">
+                <h3>التسويق الإلكتروني</h3>
+                <p>حلول تسويقية متكاملة لتعزيز حضورك الرقمي وزيادة مبيعاتك</p>
+                <a href="marketing.html" class="cta-button">اكتشف المزيد</a>
             </div>
-            <div class="swiper-slide">
-                <div class="service-card">
-                    <img src="img/تصوير_المنتجات.jpg" alt="تصوير المنتجات" class="service-image">
-                    <div class="service-content">
-                        <h3 class="service-title">تصوير المنتجات</h3>
-                        <p class="service-description">صور منتجاتك بطريقة تبيع نفسها. تصوير احترافي يُبرز كل تفصيل ويزيد من جاذبية العرض.</p>
-                        <a href="product-photography.html" class="service-link">اعرف المزيد</a>
-                    </div>
-                </div>
+            
+            <div class="service-card">
+                <img src="img/تصوير_المنتجات.jpg" alt="تصوير المنتجات">
+                <h3>تصوير المنتجات</h3>
+                <p>تصوير احترافي للمنتجات بجميع أنواعها مع التركيز على إبراز التفاصيل</p>
+                <a href="product-photography.html" class="cta-button">اكتشف المزيد</a>
             </div>
-            <div class="swiper-slide">
-                <div class="service-card">
-                    <img src="img/تصوير_الأعراس.jpg" alt="تصوير الأعراس" class="service-image">
-                    <div class="service-content">
-                        <h3 class="service-title">تصوير الأعراس</h3>
-                        <p class="service-description">لأن لحظات الفرح تستحق أن تُخلّد... تصوير أعراس يخلد أجمل أيام العمر بأناقة واحتراف.</p>
-                        <a href="wedding-photography.html" class="service-link">اعرف المزيد</a>
-                    </div>
-                </div>
+            
+            <div class="service-card">
+                <img src="img/تصوير_الأعراس.jpg" alt="تصوير الأعراس">
+                <h3>تصوير الأعراس</h3>
+                <p>نحوّل يومك الكبير إلى قصة لا تُنسى مع خدمات تصوير وتنسيق متكاملة</p>
+                <a href="wedding-photography.html" class="cta-button">اكتشف المزيد</a>
             </div>
-            <div class="swiper-slide">
-                <div class="service-card">
-                    <img src="img/خدمات_الطباعة.jpg" alt="خدمات الطباعة" class="service-image">
-                    <div class="service-content">
-                        <h3 class="service-title">خدمات الطباعة</h3>
-                        <p class="service-description">من بطاقات العمل إلى البروشورات – خدمات طباعة متكاملة بجودة عالية وسرعة تنفيذ.</p>
-                        <a href="printing.html" class="service-link">اعرف المزيد</a>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="service-card">
-                    <img src="img/دليل_الشركات.jpg" alt="دليل الشركات" class="service-image">
-                    <div class="service-content">
-                        <h3 class="service-title">دليل الشركات</h3>
-                        <p class="service-description">دليل شامل للشركات السورية، يسهل عليك العثور على الخدمات التي تحتاجها في أي مجال.</p>
-                        <a href="syrian-companies.html" class="service-link">اعرف المزيد</a>
-                    </div>
-                </div>
+            
+            <div class="service-card">
+                <img src="img/خدمات_الطباعة.jpg" alt="خدمات الطباعة">
+                <h3>خدمات الطباعة</h3>
+                <p>خدمات طباعة متكاملة لجميع احتياجاتك الشخصية والتجارية</p>
+                <a href="printing.html" class="cta-button">اكتشف المزيد</a>
             </div>
         </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-</section>
+    </section>
 
-<footer>
-    <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
-</footer>
+    <section class="features">
+        <h2>لماذا تختار Eymta X؟</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <h3>خبرة طويلة</h3>
+                <p>سنوات من الخبرة في تقديم خدمات عالية الجودة</p>
+            </div>
+            <div class="feature-item">
+                <h3>فريق احترافي</h3>
+                <p>فريق عمل متخصص في جميع المجالات</p>
+            </div>
+            <div class="feature-item">
+                <h3>أسعار تنافسية</h3>
+                <p>عروض وباقات متنوعة تناسب جميع الميزانيات</p>
+            </div>
+            <div class="feature-item">
+                <h3>خدمة عملاء متميزة</h3>
+                <p>دعم فني متواصل وخدمة عملاء على مدار الساعة</p>
+            </div>
+        </div>
+    </section>
 
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-    const swiper = new Swiper('.swiper', {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-            640: {
-                slidesPerView: 2,
+    <footer>
+        <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
             },
-            1024: {
-                slidesPerView: 3,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
             },
-        },
-    });
-</script>
-
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+    </script>
 </body>
 </html>
