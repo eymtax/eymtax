@@ -205,6 +205,124 @@
             margin-top: 3rem;
         }
 
+        /* Chat Bot Interface */
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0077cc;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-icon {
+            font-size: 24px;
+            color: white;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background-color: #0077cc;
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.bot {
+            background-color: #f0f0f0;
+            margin-right: auto;
+        }
+
+        .message.user {
+            background-color: #0077cc;
+            color: white;
+            margin-left: auto;
+        }
+
+        .chat-input {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .chat-input button {
+            padding: 10px 15px;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background-color: #005fa3;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             header {
@@ -242,6 +360,14 @@
 
             .features-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .chat-window {
+                width: 100%;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
             }
         }
     </style>
@@ -333,6 +459,29 @@
         <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
     </footer>
 
+    <!-- Chat Bot Interface -->
+    <div class="chat-container">
+        <button class="chat-button" onclick="toggleChat()">
+            <span class="chat-icon">💬</span>
+        </button>
+        
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h3>مرحباً بك في Eymta X</h3>
+                <button class="close-chat" onclick="toggleChat()">×</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <p>مرحباً! كيف يمكنني مساعدتك اليوم؟</p>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="اكتب رسالتك هنا...">
+                <button onclick="sendMessage()">إرسال</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
@@ -355,6 +504,63 @@
                     slidesPerView: 3,
                 },
             },
+        });
+
+        const chatWindow = document.getElementById('chatWindow');
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+
+        function toggleChat() {
+            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (message) {
+                // Add user message
+                addMessage(message, 'user');
+                userInput.value = '';
+
+                // Simulate bot response
+                setTimeout(() => {
+                    const response = getBotResponse(message);
+                    addMessage(response, 'bot');
+                }, 1000);
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = `<p>${text}</p>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Basic responses based on keywords
+            if (lowerMessage.includes('مرحبا') || lowerMessage.includes('اهلا')) {
+                return 'مرحباً بك! كيف يمكنني مساعدتك اليوم؟';
+            } else if (lowerMessage.includes('خدمات') || lowerMessage.includes('ماذا تقدم')) {
+                return 'نقدم خدمات متعددة تشمل: التسويق الإلكتروني، تصوير المنتجات، تصوير الأعراس، خدمات الطباعة، ودليل الشركات السورية. هل تريد معرفة المزيد عن خدمة معينة؟';
+            } else if (lowerMessage.includes('سعر') || lowerMessage.includes('تكلفة')) {
+                return 'تختلف الأسعار حسب نوع الخدمة وحجم العمل. يمكنك التواصل معنا على الرقم 0938029294 للحصول على عرض سعر دقيق.';
+            } else if (lowerMessage.includes('تواصل') || lowerMessage.includes('اتصال')) {
+                return 'يمكنك التواصل معنا عبر: الهاتف: 0938029294 أو زيارة صفحة "تواصل معنا" في الموقع.';
+            } else if (lowerMessage.includes('شكرا') || lowerMessage.includes('مشكور')) {
+                return 'شكراً لكم! هل هناك أي شيء آخر يمكنني مساعدتك به؟';
+            } else {
+                return 'عذراً، لم أفهم سؤالك بشكل كامل. هل يمكنك إعادة صياغة سؤالك بطريقة أخرى؟';
+            }
+        }
+
+        // Handle Enter key press
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
         });
     </script>
 </body>
