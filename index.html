@@ -2,7 +2,15 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://eymtax.com/">
     <title>Eymta X - خبراء التسويق الرقمي والتصوير والطباعة في سوريا</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Swiper CSS -->
@@ -14,12 +22,14 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            -webkit-text-size-adjust: 100%;
         }
 
         html {
             font-size: 14px;
             -webkit-text-size-adjust: 100%;
             scroll-behavior: smooth;
+            height: 100%;
         }
 
         body {
@@ -32,6 +42,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         /* Header Styles */
@@ -45,12 +56,16 @@
             right: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
         }
 
         header h1 {
             color: white;
             margin: 0;
             font-size: 1.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         header p {
@@ -65,6 +80,7 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 0.3rem;
+            width: 100%;
         }
 
         nav a {
@@ -75,14 +91,16 @@
             font-size: 0.8rem;
             white-space: nowrap;
             background-color: rgba(255,255,255,0.1);
+            display: inline-block;
         }
 
         /* Main Content */
         main {
             flex: 1;
-            margin-top: 70px; /* Space for fixed header */
+            margin-top: 70px;
             width: 100%;
             padding: 0.5rem;
+            overflow-x: hidden;
         }
 
         /* Hero Section */
@@ -95,11 +113,13 @@
             padding: 1.5rem 0.8rem;
             margin-bottom: 0.8rem;
             border-radius: 8px;
+            width: 100%;
         }
 
         .hero h2 {
             font-size: 1.5rem;
             margin-bottom: 0.8rem;
+            word-wrap: break-word;
         }
 
         .hero p {
@@ -107,6 +127,7 @@
             margin: 0 auto 1rem;
             max-width: 100%;
             padding: 0 0.8rem;
+            word-wrap: break-word;
         }
 
         .cta-button {
@@ -119,12 +140,16 @@
             font-size: 0.9rem;
             margin: 0.3rem;
             width: auto;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
         /* Services Section */
         .services {
             padding: 0.8rem;
             width: 100%;
+            overflow-x: hidden;
         }
 
         .services h2 {
@@ -132,6 +157,7 @@
             color: #111;
             margin-bottom: 1rem;
             font-size: 1.5rem;
+            word-wrap: break-word;
         }
 
         .services-grid {
@@ -139,6 +165,7 @@
             grid-template-columns: 1fr;
             gap: 0.8rem;
             margin-bottom: 1rem;
+            width: 100%;
         }
 
         .service-card {
@@ -147,6 +174,8 @@
             padding: 0.8rem;
             text-align: center;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            overflow: hidden;
         }
 
         .service-card img {
@@ -154,18 +183,21 @@
             height: auto;
             border-radius: 6px;
             margin-bottom: 0.8rem;
+            max-width: 100%;
         }
 
         .service-card h3 {
             color: #0077cc;
             margin-bottom: 0.4rem;
             font-size: 1.1rem;
+            word-wrap: break-word;
         }
 
         .service-card p {
             color: #666;
             margin-bottom: 0.8rem;
             font-size: 0.8rem;
+            word-wrap: break-word;
         }
 
         /* Features Section */
@@ -175,28 +207,34 @@
             text-align: center;
             border-radius: 8px;
             margin: 0.8rem 0;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         .features h2 {
             color: #111;
             margin-bottom: 1rem;
             font-size: 1.5rem;
+            word-wrap: break-word;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 0.8rem;
+            width: 100%;
         }
 
         .feature-item {
             padding: 0.8rem;
+            width: 100%;
         }
 
         .feature-item h3 {
             color: #0077cc;
             margin-bottom: 0.4rem;
             font-size: 1.1rem;
+            word-wrap: break-word;
         }
 
         /* Footer */
@@ -207,6 +245,7 @@
             padding: 0.8rem;
             margin-top: auto;
             font-size: 0.8rem;
+            width: 100%;
         }
 
         /* Chat Bot */
@@ -227,6 +266,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
         .chat-window {
@@ -238,6 +280,7 @@
             background-color: white;
             display: none;
             flex-direction: column;
+            z-index: 1001;
         }
 
         .chat-header {
@@ -253,6 +296,7 @@
             flex: 1;
             padding: 0.8rem;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .chat-input {
@@ -260,6 +304,7 @@
             border-top: 1px solid #eee;
             display: flex;
             gap: 0.4rem;
+            background-color: white;
         }
 
         .chat-input input {
@@ -268,6 +313,9 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 16px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
         .chat-input button {
@@ -276,30 +324,56 @@
             color: white;
             border: none;
             border-radius: 4px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
-        /* Responsive Design */
-        @media (min-width: 360px) {
+        /* Mobile Specific Fixes */
+        @media (max-width: 480px) {
             html {
-                font-size: 15px;
+                font-size: 13px;
+            }
+
+            header {
+                padding: 0.6rem;
+            }
+
+            nav {
+                gap: 0.2rem;
+            }
+
+            nav a {
+                padding: 0.2rem 0.4rem;
+                font-size: 0.7rem;
+            }
+
+            .hero {
+                padding: 1rem 0.6rem;
+            }
+
+            .service-card {
+                padding: 0.6rem;
+            }
+
+            .chat-button {
+                width: 40px;
+                height: 40px;
             }
         }
 
-        @media (min-width: 480px) {
+        /* Tablet and Desktop Styles */
+        @media (min-width: 481px) {
             html {
-                font-size: 16px;
-            }
-
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
+                font-size: 14px;
             }
         }
 
         @media (min-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+
             header {
                 padding: 1rem;
             }
@@ -326,11 +400,11 @@
             }
 
             .services-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .features-grid {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .chat-window {
@@ -343,14 +417,19 @@
         }
 
         @media (min-width: 1024px) {
-            .services {
-                max-width: 1200px;
-                margin: 0 auto;
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
 
-            .features {
-                max-width: 1200px;
-                margin: 0 auto;
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* iOS Specific Fixes */
+        @supports (-webkit-touch-callout: none) {
+            .chat-input input {
+                font-size: 16px !important;
             }
         }
     </style>
