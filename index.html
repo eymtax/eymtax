@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Eymta X - خبراء التسويق الرقمي والتصوير والطباعة في سوريا</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Swiper CSS -->
@@ -20,6 +20,12 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
@@ -27,6 +33,8 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--light-bg);
+            overflow-x: hidden;
+            width: 100%;
         }
 
         /* Header Styles */
@@ -38,6 +46,7 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
         }
 
         header h1 {
@@ -58,6 +67,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 0.5rem;
+            width: 100%;
         }
 
         nav a {
@@ -67,6 +77,7 @@
             border-radius: 4px;
             transition: background-color 0.3s;
             font-size: 0.9rem;
+            white-space: nowrap;
         }
 
         nav a:hover {
@@ -80,31 +91,34 @@
             background-position: center;
             color: var(--white);
             text-align: center;
-            padding: 4rem 1rem;
+            padding: 3rem 1rem;
             margin-bottom: 2rem;
+            width: 100%;
         }
 
         .hero h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
+            font-size: 1rem;
+            max-width: 100%;
             margin: 0 auto 2rem;
+            padding: 0 1rem;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.5rem;
             background-color: var(--primary-color);
             color: var(--white);
             text-decoration: none;
             border-radius: 8px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             transition: all 0.3s;
             margin: 1rem;
+            width: auto;
         }
 
         .cta-button:hover {
@@ -114,32 +128,36 @@
 
         /* Services Section */
         .services {
-            padding: 2rem 1rem;
-            max-width: 1200px;
+            padding: 1rem;
+            max-width: 100%;
             margin: 0 auto;
+            width: 100%;
         }
 
         .services h2 {
             text-align: center;
             color: var(--secondary-color);
-            margin-bottom: 2rem;
-            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            width: 100%;
         }
 
         .service-card {
             background: var(--white);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: transform 0.3s;
+            width: 100%;
+            max-width: 100%;
         }
 
         .service-card:hover {
@@ -148,52 +166,54 @@
 
         .service-card img {
             width: 100%;
-            max-width: 300px;
             height: auto;
             border-radius: 8px;
             margin-bottom: 1rem;
+            max-width: 100%;
         }
 
         .service-card h3 {
             color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
         }
 
         .service-card p {
             color: #666;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
         }
 
         /* Features Section */
         .features {
             background-color: var(--white);
-            padding: 3rem 1rem;
+            padding: 2rem 1rem;
             text-align: center;
+            width: 100%;
         }
 
         .features h2 {
             color: var(--secondary-color);
-            margin-bottom: 2rem;
-            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 100%;
             margin: 0 auto;
         }
 
         .feature-item {
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .feature-item h3 {
             color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
         }
 
         /* Footer */
@@ -201,8 +221,9 @@
             background-color: var(--secondary-color);
             color: var(--white);
             text-align: center;
-            padding: 2rem 1rem;
-            margin-top: 3rem;
+            padding: 1.5rem 1rem;
+            margin-top: 2rem;
+            width: 100%;
         }
 
         /* Chat Bot Interface */
@@ -323,51 +344,44 @@
             background-color: #005fa3;
         }
 
-        /* Responsive Design */
+        /* Chat Bot Mobile Styles */
         @media (max-width: 768px) {
-            header {
-                padding: 0.8rem;
-            }
-
-            header h1 {
-                font-size: 1.3rem;
-            }
-
-            header p {
-                font-size: 0.8rem;
-            }
-
-            nav {
-                gap: 0.3rem;
-            }
-
-            nav a {
-                padding: 0.2rem 0.6rem;
-                font-size: 0.8rem;
-            }
-
-            .hero h2 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
             .chat-window {
                 width: 100%;
                 height: 100%;
                 bottom: 0;
                 right: 0;
                 border-radius: 0;
+                position: fixed;
+            }
+
+            .chat-input {
+                padding: 10px;
+            }
+
+            .chat-input input {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
     </style>
