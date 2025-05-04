@@ -5,28 +5,314 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>خدمات الطباعة - Eymta X</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { font-family: sans-serif; margin: 0; background-color: #f4f4f4; color: #222; }
+        header { background-color: #111; padding: 20px; text-align: center; }
+        header h1 { color: white; margin: 0; }
+        header p { color: #ccc; }
+        nav { margin-top: 10px; }
+        nav a { color: #fff; margin: 0 10px; text-decoration: none; }
+        
+        .main-section { 
+            text-align: center; 
+            padding: 40px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('img/خدمات_الطباعة.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-title {
+            color: #0077cc;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .service-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .contact-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0077cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        
+        .contact-button:hover {
+            background-color: #005fa3;
+        }
+        
+        .category-section {
+            margin-bottom: 40px;
+        }
+        
+        .category-title {
+            color: #0077cc;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
 </head>
-<body style="font-family: sans-serif; background-color: #f9f9f9; color: #333;">
-    <header style="background-color:#222; color:white; padding: 20px; text-align: center;">
-        <h1>Eymta X</h1>
-        <nav>
-            <a href="index.html" style="color:#fff; margin:0 10px;">الرئيسية</a>
-            <a href="marketing.html" style="color:#fff; margin:0 10px;">التسويق الإلكتروني</a>
-            <a href="product-photography.html" style="color:#fff; margin:0 10px;">تصوير المنتجات</a>
-            <a href="wedding-photography.html" style="color:#fff; margin:0 10px;">تصوير الأعراس</a>
-            <a href="printing.html" style="color:#fff; margin:0 10px;">خدمات الطباعة</a>
-            <a href="syrian-companies.html" style="color:#fff; margin:0 10px;">دليل الشركات</a>
-            <a href="contact-us.html" style="color:#fff; margin:0 10px;">تواصل معنا</a>
-        </nav>
-    </header>
-    <section style="text-align:center; padding:40px;">
-        <img src="img/خدمات_الطباعة.jpg" alt="خدمات الطباعة" style="max-width: 100%; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 30px;">
-        <h2>خدمات الطباعة</h2>
-        <p style="font-size:18px; margin: 20px auto; max-width: 700px;">من بطاقات العمل إلى البروشورات – خدمات طباعة متكاملة بجودة عالية وسرعة تنفيذ.</p>
-        <a href="tel:+963938029294" style="display:inline-block; padding:12px 20px; background-color:#0077cc; color:white; text-decoration:none; border-radius:8px; font-size:18px;">📞 اتصل الآن</a>
-    </section>
-    <footer style="background-color:#111; color:white; text-align:center; padding:20px; margin-top: 40px;">
-        <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
-    </footer>
+<body>
+
+<header>
+    <h1>Eymta X</h1>
+    <p>نرفع أعمالك إلى مستوى جديد</p>
+    <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="marketing.html">التسويق الإلكتروني</a>
+        <a href="product-photography.html">تصوير المنتجات</a>
+        <a href="wedding-photography.html">تصوير الأعراس</a>
+        <a href="printing.html">خدمات الطباعة</a>
+        <a href="syrian-companies.html">دليل الشركات</a>
+        <a href="contact-us.html">تواصل معنا</a>
+    </nav>
+</header>
+
+<section class="main-section">
+    <h2>خدمات الطباعة</h2>
+    <p style="font-size: 18px; max-width: 700px; margin: 20px auto;">
+        في Eymta X، أطلب خدمتك ونحنا نوصلها لك. نقدم خدمات طباعة متكاملة لجميع احتياجاتك الشخصية والتجارية.
+    </p>
+    <a href="tel:+963938029294" class="contact-button">📞 اتصل بنا الآن</a>
+</section>
+
+<section class="services-grid">
+    <div class="category-section">
+        <h3 class="category-title">طباعة للشركات والمؤسسات</h3>
+        <div class="service-card">
+            <h4 class="service-title">بطاقات أعمال</h4>
+            <p class="service-description">طباعة كروت شخصية وبزنس كارد</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">دفاتر فواتير</h4>
+            <p class="service-description">طباعة دفاتر نقدية، ضريبية، سندات قبض وصرف</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">ملفات تعريف الشركات</h4>
+            <p class="service-description">طباعة Company Profile احترافي</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">مظاريف وأوراق رسمية</h4>
+            <p class="service-description">طباعة Letterhead ومظاريف رسمية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">بنرات</h4>
+            <p class="service-description">طباعة بنرات داخلية وخارجية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">رول أب</h4>
+            <p class="service-description">طباعة Roll-up للمعارض والمناسبات</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">ستاندات</h4>
+            <p class="service-description">طباعة ستاندات للمعارض والمناسبات</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تغليفات مخصصة</h4>
+            <p class="service-description">طباعة تغليفات مخصصة للمنتجات</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">فواتير حرارية</h4>
+            <p class="service-description">طباعة فواتير حرارية للمحلات والمطاعم</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">دفاتر تسليم</h4>
+            <p class="service-description">طباعة دفاتر تسليم وبوالص شحن</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصاميم تسويقية</h4>
+            <p class="service-description">طباعة تصاميم لحملات الإعلانات</p>
+        </div>
+    </div>
+    
+    <div class="category-section">
+        <h3 class="category-title">طباعة للأفراد والخدمات العامة</h3>
+        <div class="service-card">
+            <h4 class="service-title">دعوات مناسبات</h4>
+            <p class="service-description">طباعة دعوات زواج، تخرج، خطوبة، وعزائم</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">صور شخصية</h4>
+            <p class="service-description">طباعة صور شخصية أو عائلية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">أوراق شخصية</h4>
+            <p class="service-description">طباعة أوراق ومستندات شخصية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">كروت تهنئة</h4>
+            <p class="service-description">طباعة كروت تهنئة ومعايدات</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">هدايا مخصصة</h4>
+            <p class="service-description">طباعة على أكواب، تيشيرتات، وأجندات</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">ستيكرات وتغليفات</h4>
+            <p class="service-description">طباعة ستيكرات وتغليفات للمشاريع اليدوية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">لوحات جدارية</h4>
+            <p class="service-description">طباعة لوحات جدارية للزينة والديكور</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تقارير شخصية</h4>
+            <p class="service-description">طباعة تقارير شخصية ومجلدات خاصة</p>
+        </div>
+    </div>
+    
+    <div class="category-section">
+        <h3 class="category-title">خدمات تصميم + طباعة</h3>
+        <div class="service-card">
+            <h4 class="service-title">تصميم جرافيك</h4>
+            <p class="service-description">تصميم جرافيك احترافي قبل الطباعة</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تنسيق ملفات</h4>
+            <p class="service-description">تنسيق ملفات للطباعة الاحترافية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">مراجعة لغوية</h4>
+            <p class="service-description">مراجعة لغوية وتصميمية للمطبوعات</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">قص وتغليف</h4>
+            <p class="service-description">خدمات قص وتغليف بعد الطباعة</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">شحن وتوصيل</h4>
+            <p class="service-description">شحن وتوصيل الطلبات داخل المدن السورية</p>
+        </div>
+    </div>
+    
+    <div class="category-section">
+        <h3 class="category-title">خدمات الطباعة للطلاب والجامعيين</h3>
+        <div class="service-card">
+            <h4 class="service-title">أبحاث وتقارير</h4>
+            <p class="service-description">طباعة أبحاث وتقارير جامعية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">مشاريع تخرج</h4>
+            <p class="service-description">طباعة مشاريع تخرج</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">عروض تقديمية</h4>
+            <p class="service-description">طباعة عروض PowerPoint</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">رسائل علمية</h4>
+            <p class="service-description">تنسيق وطباعة رسائل الماجستير والدكتوراه</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">محاضرات وملازم</h4>
+            <p class="service-description">طباعة محاضرات وملازم دراسية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">كتب مصغّرة</h4>
+            <p class="service-description">طباعة كتب مصغّرة للمراجعة</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">طباعة PDF</h4>
+            <p class="service-description">طباعة ملفات PDF من الجوال أو البريد</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تغليف حراري</h4>
+            <p class="service-description">تغليف حراري أو لولبي للأبحاث</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">بطاقات طلابية</h4>
+            <p class="service-description">طباعة بطاقات طلابية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصميم أغلفة</h4>
+            <p class="service-description">تصميم أغلفة مشاريع تخرج بشكل احترافي</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">توصيل جامعي</h4>
+            <p class="service-description">خدمة التوصيل للجامعات والمدن الجامعية</p>
+        </div>
+    </div>
+</section>
+
+<div style="text-align: center; padding: 40px; background-color: #f8f9fa;">
+    <a href="tel:+963938029294" style="display: inline-block; padding: 15px 30px; background-color: #0077cc; color: white; text-decoration: none; border-radius: 8px; font-size: 18px; transition: background-color 0.3s;">
+        📞 اطلب الخدمة الآن
+    </a>
+</div>
+
+<footer>
+    <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
+</footer>
+
 </body>
 </html>
