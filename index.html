@@ -2,20 +2,13 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eymta X - خبراء التسويق الرقمي والتصوير والطباعة في سوريا</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        :root {
-            --primary-color: #0077cc;
-            --secondary-color: #111;
-            --text-color: #333;
-            --light-bg: #f8f9fa;
-            --white: #fff;
-        }
-
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -26,31 +19,36 @@
         html {
             font-size: 16px;
             -webkit-text-size-adjust: 100%;
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--light-bg);
+            color: #333;
+            background-color: #f8f9fa;
             overflow-x: hidden;
             width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Header Styles */
         header {
-            background-color: var(--secondary-color);
+            background-color: #111;
             padding: 1rem;
             text-align: center;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            width: 100%;
         }
 
         header h1 {
-            color: var(--white);
+            color: white;
             margin: 0;
             font-size: 1.5rem;
         }
@@ -67,21 +65,23 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 0.5rem;
-            width: 100%;
         }
 
         nav a {
-            color: var(--white);
+            color: white;
             text-decoration: none;
             padding: 0.3rem 0.8rem;
             border-radius: 4px;
-            transition: background-color 0.3s;
             font-size: 0.9rem;
             white-space: nowrap;
+            background-color: rgba(255,255,255,0.1);
         }
 
-        nav a:hover {
-            background-color: rgba(255,255,255,0.1);
+        /* Main Content */
+        main {
+            flex: 1;
+            margin-top: 80px; /* Space for fixed header */
+            width: 100%;
         }
 
         /* Hero Section */
@@ -89,54 +89,45 @@
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('img/branding-banner.jpg');
             background-size: cover;
             background-position: center;
-            color: var(--white);
+            color: white;
             text-align: center;
-            padding: 3rem 1rem;
-            margin-bottom: 2rem;
-            width: 100%;
+            padding: 2rem 1rem;
+            margin-bottom: 1rem;
         }
 
         .hero h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
         }
 
         .hero p {
             font-size: 1rem;
+            margin: 0 auto 1.5rem;
             max-width: 100%;
-            margin: 0 auto 2rem;
             padding: 0 1rem;
         }
 
         .cta-button {
             display: inline-block;
             padding: 0.8rem 1.5rem;
-            background-color: var(--primary-color);
-            color: var(--white);
+            background-color: #0077cc;
+            color: white;
             text-decoration: none;
             border-radius: 8px;
             font-size: 1rem;
-            transition: all 0.3s;
-            margin: 1rem;
+            margin: 0.5rem;
             width: auto;
-        }
-
-        .cta-button:hover {
-            background-color: #005fa3;
-            transform: translateY(-2px);
         }
 
         /* Services Section */
         .services {
             padding: 1rem;
-            max-width: 100%;
-            margin: 0 auto;
             width: 100%;
         }
 
         .services h2 {
             text-align: center;
-            color: var(--secondary-color);
+            color: #111;
             margin-bottom: 1.5rem;
             font-size: 1.8rem;
         }
@@ -144,24 +135,16 @@
         .services-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            width: 100%;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .service-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            width: 100%;
-            max-width: 100%;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .service-card img {
@@ -169,13 +152,12 @@
             height: auto;
             border-radius: 8px;
             margin-bottom: 1rem;
-            max-width: 100%;
         }
 
         .service-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.8rem;
-            font-size: 1.3rem;
+            color: #0077cc;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
         }
 
         .service-card p {
@@ -186,14 +168,13 @@
 
         /* Features Section */
         .features {
-            background-color: var(--white);
-            padding: 2rem 1rem;
+            background-color: white;
+            padding: 1.5rem 1rem;
             text-align: center;
-            width: 100%;
         }
 
         .features h2 {
-            color: var(--secondary-color);
+            color: #111;
             margin-bottom: 1.5rem;
             font-size: 1.8rem;
         }
@@ -201,9 +182,7 @@
         .features-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.5rem;
-            max-width: 100%;
-            margin: 0 auto;
+            gap: 1rem;
         }
 
         .feature-item {
@@ -211,61 +190,47 @@
         }
 
         .feature-item h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.8rem;
+            color: #0077cc;
+            margin-bottom: 0.5rem;
             font-size: 1.2rem;
         }
 
         /* Footer */
         footer {
-            background-color: var(--secondary-color);
-            color: var(--white);
+            background-color: #111;
+            color: white;
             text-align: center;
-            padding: 1.5rem 1rem;
-            margin-top: 2rem;
-            width: 100%;
+            padding: 1rem;
+            margin-top: auto;
         }
 
-        /* Chat Bot Interface */
+        /* Chat Bot */
         .chat-container {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 1rem;
+            right: 1rem;
             z-index: 1000;
         }
 
         .chat-button {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background-color: #0077cc;
             border: none;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.3s;
-        }
-
-        .chat-button:hover {
-            transform: scale(1.1);
-        }
-
-        .chat-icon {
-            font-size: 24px;
-            color: white;
         }
 
         .chat-window {
             position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 350px;
-            height: 450px;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             display: none;
             flex-direction: column;
         }
@@ -273,99 +238,43 @@
         .chat-header {
             background-color: #0077cc;
             color: white;
-            padding: 15px;
-            border-radius: 10px 10px 0 0;
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .chat-header h3 {
-            margin: 0;
-            font-size: 16px;
-        }
-
-        .close-chat {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
         .chat-messages {
             flex: 1;
-            padding: 15px;
+            padding: 1rem;
             overflow-y: auto;
         }
 
-        .message {
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 10px;
-            max-width: 80%;
-        }
-
-        .message.bot {
-            background-color: #f0f0f0;
-            margin-right: auto;
-        }
-
-        .message.user {
-            background-color: #0077cc;
-            color: white;
-            margin-left: auto;
-        }
-
         .chat-input {
-            padding: 15px;
+            padding: 1rem;
             border-top: 1px solid #eee;
             display: flex;
-            gap: 10px;
+            gap: 0.5rem;
         }
 
         .chat-input input {
             flex: 1;
-            padding: 10px;
+            padding: 0.8rem;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 4px;
+            font-size: 16px;
         }
 
         .chat-input button {
-            padding: 10px 15px;
+            padding: 0.8rem 1rem;
             background-color: #0077cc;
             color: white;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .chat-input button:hover {
-            background-color: #005fa3;
-        }
-
-        /* Chat Bot Mobile Styles */
-        @media (max-width: 768px) {
-            .chat-window {
-                width: 100%;
-                height: 100%;
-                bottom: 0;
-                right: 0;
-                border-radius: 0;
-                position: fixed;
-            }
-
-            .chat-input {
-                padding: 10px;
-            }
-
-            .chat-input input {
-                font-size: 16px; /* Prevents zoom on iOS */
-            }
+            border-radius: 4px;
         }
 
         /* Responsive Design */
-        @media (min-width: 768px) {
+        @media (min-width: 480px) {
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -375,13 +284,49 @@
             }
         }
 
-        @media (min-width: 1024px) {
+        @media (min-width: 768px) {
+            header {
+                padding: 1.5rem;
+            }
+
+            main {
+                margin-top: 100px;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
             .services-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
 
             .features-grid {
                 grid-template-columns: repeat(4, 1fr);
+            }
+
+            .chat-window {
+                width: 400px;
+                height: 500px;
+                bottom: 70px;
+                right: 20px;
+                border-radius: 10px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .services {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .features {
+                max-width: 1200px;
+                margin: 0 auto;
             }
         }
     </style>
