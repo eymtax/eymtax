@@ -34,7 +34,7 @@
         .service-card {
             background: white;
             border-radius: 12px;
-            overflow: hidden;
+            padding: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
@@ -43,24 +43,10 @@
             transform: translateY(-5px);
         }
         
-        .service-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .service-content {
-            padding: 20px;
-        }
-        
         .service-title {
             color: #0077cc;
             margin-bottom: 10px;
-        }
-        
-        .service-description {
-            color: #666;
-            margin-bottom: 20px;
+            font-size: 18px;
         }
         
         .contact-button {
@@ -86,6 +72,10 @@
             text-align: center;
             margin-bottom: 20px;
             font-size: 24px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         footer {
@@ -124,143 +114,95 @@
     <div class="category-section">
         <h3 class="category-title">تصوير المنتجات الأساسية</h3>
         <div class="service-card">
-            <img src="img/تصوير_المنتجات_ثابتة.jpg" alt="تصوير منتجات ثابتة" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير منتجات ثابتة</h4>
-                <p class="service-description">منتجات فردية بخلفيات بيضاء أو ملوّنة مع إضاءة احترافية</p>
-            </div>
+            <h4 class="service-title">تصوير منتجات ثابتة</h4>
+            <p>منتجات فردية بخلفيات بيضاء أو ملوّنة مع إضاءة احترافية</p>
         </div>
         
         <div class="service-card">
-            <img src="img/تصوير_المنيو.jpg" alt="تصوير منيو المطاعم" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير منيو المطاعم</h4>
-                <p class="service-description">تصوير احترافي لأصناف الطعام والمشروبات</p>
-            </div>
+            <h4 class="service-title">تصوير منيو المطاعم</h4>
+            <p>تصوير احترافي لأصناف الطعام والمشروبات</p>
         </div>
         
         <div class="service-card">
-            <img src="img/تصوير_التجميل.jpg" alt="تصوير منتجات التجميل" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير منتجات التجميل</h4>
-                <p class="service-description">تصوير احترافي لمنتجات التجميل والعناية بالبشرة</p>
-            </div>
+            <h4 class="service-title">تصوير منتجات التجميل</h4>
+            <p>تصوير احترافي لمنتجات التجميل والعناية بالبشرة</p>
         </div>
         
         <div class="service-card">
-            <img src="img/تصوير_المجوهرات.jpg" alt="تصوير المجوهرات" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير المجوهرات</h4>
-                <p class="service-description">تصوير احترافي للمجوهرات والاكسسوارات</p>
-            </div>
+            <h4 class="service-title">تصوير المجوهرات</h4>
+            <p>تصوير احترافي للمجوهرات والاكسسوارات</p>
         </div>
     </div>
     
     <div class="category-section">
         <h3 class="category-title">تصوير الأزياء والمنتجات المنزلية</h3>
         <div class="service-card">
-            <img src="img/تصوير_الملابس.jpg" alt="تصوير الملابس" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير الملابس</h4>
-                <p class="service-description">تصوير احترافي للملابس والأزياء التجارية</p>
-            </div>
+            <h4 class="service-title">تصوير الملابس</h4>
+            <p>تصوير احترافي للملابس والأزياء التجارية</p>
         </div>
         
         <div class="service-card">
-            <img src="img/تصوير_الأثاث.jpg" alt="تصوير الأثاث" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير الأثاث</h4>
-                <p class="service-description">تصوير احترافي للأثاث والمفروشات</p>
-            </div>
+            <h4 class="service-title">تصوير الأثاث</h4>
+            <p>تصوير احترافي للأثاث والمفروشات</p>
         </div>
         
         <div class="service-card">
-            <img src="img/تصوير_الإلكترونيات.jpg" alt="تصوير الإلكترونيات" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير الإلكترونيات</h4>
-                <p class="service-description">تصوير احترافي للأدوات المنزلية والإلكترونيات</p>
-            </div>
+            <h4 class="service-title">تصوير الإلكترونيات</h4>
+            <p>تصوير احترافي للأدوات المنزلية والإلكترونيات</p>
         </div>
     </div>
     
     <div class="category-section">
         <h3 class="category-title">تصوير الشركات والمشاريع</h3>
         <div class="service-card">
-            <img src="img/تصوير_الصناعي.jpg" alt="التصوير الصناعي" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">التصوير الصناعي</h4>
-                <p class="service-description">تصوير خطوط الإنتاج والورشات</p>
-            </div>
+            <h4 class="service-title">التصوير الصناعي</h4>
+            <p>تصوير خطوط الإنتاج والورشات</p>
         </div>
         
         <div class="service-card">
-            <img src="img/تصوير_الشركات.jpg" alt="تصوير الشركات" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير الشركات</h4>
-                <p class="service-description">تصوير المكاتب والشركات</p>
-            </div>
+            <h4 class="service-title">تصوير الشركات</h4>
+            <p>تصوير المكاتب والشركات</p>
         </div>
         
         <div class="service-card">
-            <img src="img/تصوير_الموظفين.jpg" alt="تصوير الموظفين" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير الموظفين</h4>
-                <p class="service-description">تصوير احترافي لفريق العمل</p>
-            </div>
+            <h4 class="service-title">تصوير الموظفين</h4>
+            <p>تصوير احترافي لفريق العمل</p>
         </div>
     </div>
     
     <div class="category-section">
         <h3 class="category-title">تصوير الفيديو والمحتوى الرقمي</h3>
         <div class="service-card">
-            <img src="img/تصوير_الريلز.jpg" alt="تصوير الريلز" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير الريلز</h4>
-                <p class="service-description">تصوير ريلز احترافية للسوشيال ميديا</p>
-            </div>
+            <h4 class="service-title">تصوير الريلز</h4>
+            <p>تصوير ريلز احترافية للسوشيال ميديا</p>
         </div>
         
         <div class="service-card">
-            <img src="img/تصوير_الفيديو.jpg" alt="تصوير الفيديو" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير الفيديو</h4>
-                <p class="service-description">تصوير فيديو دعائي للإعلانات الرقمية</p>
-            </div>
+            <h4 class="service-title">تصوير الفيديو</h4>
+            <p>تصوير فيديو دعائي للإعلانات الرقمية</p>
         </div>
         
         <div class="service-card">
-            <img src="img/تصوير_خلف_الكواليس.jpg" alt="تصوير خلف الكواليس" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير خلف الكواليس</h4>
-                <p class="service-description">تصوير احترافي لخلف الكواليس</p>
-            </div>
+            <h4 class="service-title">تصوير خلف الكواليس</h4>
+            <p>تصوير احترافي لخلف الكواليس</p>
         </div>
     </div>
     
     <div class="category-section">
         <h3 class="category-title">تصوير المواقع والمشاريع الكبيرة</h3>
         <div class="service-card">
-            <img src="img/تصوير_البانوراما.jpg" alt="تصوير البانوراما" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير البانوراما</h4>
-                <p class="service-description">تصوير بانورامي للمشاريع العقارية</p>
-            </div>
+            <h4 class="service-title">تصوير البانوراما</h4>
+            <p>تصوير بانورامي للمشاريع العقارية</p>
         </div>
         
         <div class="service-card">
-            <img src="img/تصوير_المواقع.jpg" alt="تصوير المواقع" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير المواقع</h4>
-                <p class="service-description">تصوير داخلي وخارجي لمواقع الأعمال</p>
-            </div>
+            <h4 class="service-title">تصوير المواقع</h4>
+            <p>تصوير داخلي وخارجي لمواقع الأعمال</p>
         </div>
         
         <div class="service-card">
-            <img src="img/تصوير_الدرون.jpg" alt="تصوير الدرون" class="service-image">
-            <div class="service-content">
-                <h4 class="service-title">تصوير الدرون</h4>
-                <p class="service-description">تصوير جوي للمواقع الكبيرة والمشاريع الخارجية</p>
-            </div>
+            <h4 class="service-title">تصوير الدرون</h4>
+            <p>تصوير جوي للمواقع الكبيرة والمشاريع الخارجية</p>
         </div>
     </div>
 </section>
