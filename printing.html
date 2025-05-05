@@ -43,35 +43,47 @@
             color: #ccc;
         }
 
-        .services-section {
-            background-color: white;
-            padding: 2rem 1rem;
-            margin: 1rem 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .services-section h2 {
-            color: #0077cc;
-            margin-bottom: 1.5rem;
+        .nav-menu {
+            background-color: #0077cc;
+            padding: 1rem;
             text-align: center;
-            font-size: 1.8rem;
         }
 
-        .services-section p {
-            margin-bottom: 1.5rem;
-            text-align: center;
-            color: #666;
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1.1rem;
+            transition: color 0.3s;
         }
 
-        .service-category {
-            margin-bottom: 2rem;
+        .nav-menu a:hover {
+            color: #ffd700;
         }
 
-        .service-category h3 {
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-title {
             color: #0077cc;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-size: 18px;
             border-bottom: 2px solid #0077cc;
             padding-bottom: 0.5rem;
         }
@@ -85,6 +97,7 @@
             margin-bottom: 0.8rem;
             position: relative;
             padding-right: 1.5rem;
+            color: #666;
         }
 
         .service-list li:before {
@@ -114,60 +127,27 @@
             background-color: #005fa3;
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 2rem 0;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .service-title {
-            color: #0077cc;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        .service-description {
-            color: #666;
-            line-height: 1.6;
-        }
-
         @media (max-width: 768px) {
             .container {
                 padding: 0.5rem;
             }
 
-            .services-section {
-                padding: 1.5rem 1rem;
+            .nav-menu {
+                padding: 0.5rem;
             }
 
-            .services-section h2 {
-                font-size: 1.5rem;
+            .nav-menu a {
+                display: block;
+                margin: 0.5rem 0;
             }
 
-            .service-category h3 {
-                font-size: 1.2rem;
+            .services-grid {
+                grid-template-columns: 1fr;
             }
 
             .cta-button {
                 padding: 0.8rem 1.5rem;
                 font-size: 1rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -178,101 +158,102 @@
         <p>نقدم حلولاً متكاملة لجميع احتياجاتك الطباعية</p>
     </div>
 
-    <div class="container">
-        <!-- خدمات اللوحات الإعلانية -->
-        <section class="services-section">
-            <h2>خدمات تنفيذ وتصميم اللوحات الإعلانية ولوحات المحلات</h2>
-            <p>في Eymtax نقدم حلولاً متكاملة لتصميم وتنفيذ اللوحات الإعلانية والتجارية بجودة عالية، تناسب مختلف القطاعات التجارية والصناعية والخدمية.</p>
+    <nav class="nav-menu">
+        <a href="index.html">الرئيسية</a>
+        <a href="printing.html">خدمات الطباعة</a>
+        <a href="design.html">خدمات التصميم</a>
+        <a href="contact.html">اتصل بنا</a>
+    </nav>
 
-            <div class="service-category">
-                <h3>خدمات التصميم</h3>
+    <div class="container">
+        <div class="services-grid">
+            <!-- خدمات اللوحات الإعلانية -->
+            <div class="service-card">
+                <h3 class="service-title">خدمات تنفيذ وتصميم اللوحات الإعلانية</h3>
+                <p style="color: #666; margin-bottom: 1rem;">حلول متكاملة لتصميم وتنفيذ اللوحات الإعلانية والتجارية بجودة عالية</p>
+                
+                <h4 style="color: #0077cc; margin: 1rem 0;">خدمات التصميم</h4>
                 <ul class="service-list">
                     <li>تصميم إبداعي واحترافي يعكس هوية نشاطك التجاري</li>
-                    <li>تصاميم مخصصة لكل نوع من أنواع اللوحات (محلات – إعلانية – داخلية)</li>
-                    <li>معاينة واقعية للتصميم (موك أب) مع تحديد الأبعاد بدقة قبل التنفيذ</li>
+                    <li>تصاميم مخصصة لكل نوع من أنواع اللوحات</li>
+                    <li>معاينة واقعية للتصميم مع تحديد الأبعاد</li>
                 </ul>
-            </div>
 
-            <div class="service-category">
-                <h3>خدمات التنفيذ</h3>
+                <h4 style="color: #0077cc; margin: 1rem 0;">خدمات التنفيذ</h4>
                 <ul class="service-list">
                     <li>لوحات مضيئة (فليكس أو كلادينغ مع إضاءة LED)</li>
                     <li>لوحات أكريليك (Acrylic Signs)</li>
-                    <li>لوحات كلادينغ مع حفر ليزري أو طباعة مباشرة</li>
+                    <li>لوحات كلادينغ مع حفر ليزري</li>
                     <li>لوحات بنر أو فليكس غير مضيئة</li>
-                    <li>لوحات بحروف بارزة (ستانلس، أكريليك، بلاستيك، مضيئة)</li>
-                    <li>لوحات بطباعة UV مباشرة على المواد الصلبة</li>
-                    <li>لوحات توجيهية للمؤسسات والمكاتب</li>
+                    <li>لوحات بحروف بارزة</li>
+                    <li>لوحات بطباعة UV مباشرة</li>
+                    <li>لوحات توجيهية</li>
                     <li>لوحات ثلاثية الأبعاد (3D)</li>
                 </ul>
-            </div>
 
-            <div class="service-category">
-                <h3>خدمات إضافية</h3>
+                <h4 style="color: #0077cc; margin: 1rem 0;">خدمات إضافية</h4>
                 <ul class="service-list">
-                    <li>تقديم استشارات حول أماكن التركيب لتحقيق أفضل رؤية</li>
-                    <li>إمكانية التنفيذ مع أو بدون تركيب حسب موقع العميل</li>
-                    <li>استخدام مواد عالية الجودة مع ضمان</li>
-                    <li>خدمة تجديد أو صيانة اللوحات حسب الحاجة</li>
+                    <li>استشارات حول أماكن التركيب</li>
+                    <li>تنفيذ مع أو بدون تركيب</li>
+                    <li>مواد عالية الجودة مع ضمان</li>
+                    <li>خدمة تجديد وصيانة اللوحات</li>
                 </ul>
             </div>
-        </section>
 
-        <!-- خدمات الطباعة الأخرى -->
-        <section class="services-section">
-            <h2>خدمات الطباعة الأخرى</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3 class="service-title">طباعة للشركات والمؤسسات</h3>
-                    <ul class="service-list">
-                        <li>بطاقات أعمال</li>
-                        <li>دفاتر فواتير</li>
-                        <li>ملفات تعريف الشركات</li>
-                        <li>مظاريف وأوراق رسمية</li>
-                        <li>بنرات ورول أب</li>
-                        <li>ستاندات</li>
-                        <li>تغليفات مخصصة</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <h3 class="service-title">طباعة للأفراد</h3>
-                    <ul class="service-list">
-                        <li>دعوات مناسبات</li>
-                        <li>صور شخصية</li>
-                        <li>أوراق شخصية</li>
-                        <li>كروت تهنئة</li>
-                        <li>هدايا مخصصة</li>
-                        <li>ستيكرات وتغليفات</li>
-                        <li>لوحات جدارية</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <h3 class="service-title">خدمات تصميم + طباعة</h3>
-                    <ul class="service-list">
-                        <li>تصميم جرافيك</li>
-                        <li>تنسيق ملفات</li>
-                        <li>مراجعة لغوية</li>
-                        <li>قص وتغليف</li>
-                        <li>شحن وتوصيل</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <h3 class="service-title">خدمات الطباعة للطلاب</h3>
-                    <ul class="service-list">
-                        <li>أبحاث وتقارير</li>
-                        <li>مشاريع تخرج</li>
-                        <li>عروض تقديمية</li>
-                        <li>رسائل علمية</li>
-                        <li>محاضرات وملازم</li>
-                        <li>كتب مصغّرة</li>
-                        <li>طباعة PDF</li>
-                    </ul>
-                </div>
+            <!-- خدمات الطباعة للشركات -->
+            <div class="service-card">
+                <h3 class="service-title">طباعة للشركات والمؤسسات</h3>
+                <ul class="service-list">
+                    <li>بطاقات أعمال</li>
+                    <li>دفاتر فواتير</li>
+                    <li>ملفات تعريف الشركات</li>
+                    <li>مظاريف وأوراق رسمية</li>
+                    <li>بنرات ورول أب</li>
+                    <li>ستاندات</li>
+                    <li>تغليفات مخصصة</li>
+                </ul>
             </div>
-        </section>
+
+            <!-- خدمات الطباعة للأفراد -->
+            <div class="service-card">
+                <h3 class="service-title">طباعة للأفراد</h3>
+                <ul class="service-list">
+                    <li>دعوات مناسبات</li>
+                    <li>صور شخصية</li>
+                    <li>أوراق شخصية</li>
+                    <li>كروت تهنئة</li>
+                    <li>هدايا مخصصة</li>
+                    <li>ستيكرات وتغليفات</li>
+                    <li>لوحات جدارية</li>
+                </ul>
+            </div>
+
+            <!-- خدمات تصميم + طباعة -->
+            <div class="service-card">
+                <h3 class="service-title">خدمات تصميم + طباعة</h3>
+                <ul class="service-list">
+                    <li>تصميم جرافيك</li>
+                    <li>تنسيق ملفات</li>
+                    <li>مراجعة لغوية</li>
+                    <li>قص وتغليف</li>
+                    <li>شحن وتوصيل</li>
+                </ul>
+            </div>
+
+            <!-- خدمات الطباعة للطلاب -->
+            <div class="service-card">
+                <h3 class="service-title">خدمات الطباعة للطلاب</h3>
+                <ul class="service-list">
+                    <li>أبحاث وتقارير</li>
+                    <li>مشاريع تخرج</li>
+                    <li>عروض تقديمية</li>
+                    <li>رسائل علمية</li>
+                    <li>محاضرات وملازم</li>
+                    <li>كتب مصغّرة</li>
+                    <li>طباعة PDF</li>
+                </ul>
+            </div>
+        </div>
 
         <div class="cta-section">
             <a href="tel:+963938029294" class="cta-button">📞 اطلب خدمتك الآن</a>
