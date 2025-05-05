@@ -114,6 +114,36 @@
             background-color: #005fa3;
         }
 
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-title {
+            color: #0077cc;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .service-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 0.5rem;
@@ -135,6 +165,10 @@
                 padding: 0.8rem 1.5rem;
                 font-size: 1rem;
             }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -145,6 +179,7 @@
     </div>
 
     <div class="container">
+        <!-- خدمات اللوحات الإعلانية -->
         <section class="services-section">
             <h2>خدمات تنفيذ وتصميم اللوحات الإعلانية ولوحات المحلات</h2>
             <p>في Eymtax نقدم حلولاً متكاملة لتصميم وتنفيذ اللوحات الإعلانية والتجارية بجودة عالية، تناسب مختلف القطاعات التجارية والصناعية والخدمية.</p>
@@ -181,11 +216,67 @@
                     <li>خدمة تجديد أو صيانة اللوحات حسب الحاجة</li>
                 </ul>
             </div>
+        </section>
 
-            <div class="cta-section">
-                <a href="tel:+963938029294" class="cta-button">📞 اطلب خدمتك الآن</a>
+        <!-- خدمات الطباعة الأخرى -->
+        <section class="services-section">
+            <h2>خدمات الطباعة الأخرى</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3 class="service-title">طباعة للشركات والمؤسسات</h3>
+                    <ul class="service-list">
+                        <li>بطاقات أعمال</li>
+                        <li>دفاتر فواتير</li>
+                        <li>ملفات تعريف الشركات</li>
+                        <li>مظاريف وأوراق رسمية</li>
+                        <li>بنرات ورول أب</li>
+                        <li>ستاندات</li>
+                        <li>تغليفات مخصصة</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">طباعة للأفراد</h3>
+                    <ul class="service-list">
+                        <li>دعوات مناسبات</li>
+                        <li>صور شخصية</li>
+                        <li>أوراق شخصية</li>
+                        <li>كروت تهنئة</li>
+                        <li>هدايا مخصصة</li>
+                        <li>ستيكرات وتغليفات</li>
+                        <li>لوحات جدارية</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">خدمات تصميم + طباعة</h3>
+                    <ul class="service-list">
+                        <li>تصميم جرافيك</li>
+                        <li>تنسيق ملفات</li>
+                        <li>مراجعة لغوية</li>
+                        <li>قص وتغليف</li>
+                        <li>شحن وتوصيل</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3 class="service-title">خدمات الطباعة للطلاب</h3>
+                    <ul class="service-list">
+                        <li>أبحاث وتقارير</li>
+                        <li>مشاريع تخرج</li>
+                        <li>عروض تقديمية</li>
+                        <li>رسائل علمية</li>
+                        <li>محاضرات وملازم</li>
+                        <li>كتب مصغّرة</li>
+                        <li>طباعة PDF</li>
+                    </ul>
+                </div>
             </div>
         </section>
+
+        <div class="cta-section">
+            <a href="tel:+963938029294" class="cta-button">📞 اطلب خدمتك الآن</a>
+        </div>
     </div>
 </body>
 </html>
