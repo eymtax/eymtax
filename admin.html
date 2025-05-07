@@ -224,6 +224,37 @@
             border-radius: 8px;
             margin-bottom: 20px;
         }
+
+        .service-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .service-card img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .feature-item img {
+            width: 50px;
+            height: 50px;
+            margin-left: 15px;
+        }
     </style>
 </head>
 <body>
@@ -234,12 +265,12 @@
         </div>
         <ul class="sidebar-menu">
             <li class="active" onclick="showSection('dashboard')">الرئيسية</li>
-            <li onclick="showSection('companies')">إدارة الشركات</li>
-            <li onclick="showSection('categories')">إدارة التصنيفات</li>
-            <li onclick="showSection('homepage')">الصفحة الرئيسية</li>
-            <li onclick="showSection('users')">المستخدمين</li>
+            <li onclick="showSection('services')">إدارة الخدمات</li>
+            <li onclick="showSection('companies')">دليل الشركات</li>
+            <li onclick="showSection('blog')">المدونة</li>
+            <li onclick="showSection('about')">من نحن</li>
+            <li onclick="showSection('contact')">اتصل بنا</li>
             <li onclick="showSection('settings')">الإعدادات</li>
-            <li onclick="showSection('reports')">التقارير</li>
             <li onclick="logout()">تسجيل الخروج</li>
         </ul>
     </div>
@@ -250,29 +281,61 @@
             <h2>لوحة المعلومات</h2>
             <div class="dashboard-stats">
                 <div class="stat-card">
-                    <h3>إجمالي الشركات</h3>
+                    <h3>إجمالي الخدمات</h3>
+                    <div class="number" id="totalServices">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>الشركات المسجلة</h3>
                     <div class="number" id="totalCompanies">0</div>
                 </div>
                 <div class="stat-card">
-                    <h3>الشركات المميزة</h3>
-                    <div class="number" id="vipCompanies">0</div>
+                    <h3>مقالات المدونة</h3>
+                    <div class="number" id="totalPosts">0</div>
                 </div>
                 <div class="stat-card">
-                    <h3>التصنيفات</h3>
-                    <div class="number" id="totalCategories">0</div>
+                    <h3>رسائل التواصل</h3>
+                    <div class="number" id="totalMessages">0</div>
                 </div>
-                <div class="stat-card">
-                    <h3>المستخدمين</h3>
-                    <div class="number" id="totalUsers">0</div>
-                </div>
-            </div>
-            <div class="chart-container">
-                <h3>إحصائيات الزيارات</h3>
-                <canvas id="visitsChart"></canvas>
             </div>
         </div>
 
-        <!-- قسم إدارة الشركات -->
+        <!-- قسم إدارة الخدمات -->
+        <div id="services" class="section" style="display: none;">
+            <h2>إدارة الخدمات</h2>
+            <div class="add-company-form">
+                <h3>إضافة خدمة جديدة</h3>
+                <div class="form-group">
+                    <label for="serviceTitle">عنوان الخدمة</label>
+                    <input type="text" id="serviceTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="serviceDescription">وصف الخدمة</label>
+                    <textarea id="serviceDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="serviceImage">صورة الخدمة</label>
+                    <input type="file" id="serviceImage" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="serviceCategory">تصنيف الخدمة</label>
+                    <select id="serviceCategory" required>
+                        <option value="marketing">التسويق الإلكتروني</option>
+                        <option value="product-photography">تصوير المنتجات</option>
+                        <option value="wedding-photography">تصوير الأعراس</option>
+                        <option value="printing">خدمات الطباعة</option>
+                    </select>
+                </div>
+                <button onclick="addService()">إضافة الخدمة</button>
+            </div>
+            <div class="companies-list">
+                <h3>قائمة الخدمات</h3>
+                <div id="servicesList">
+                    <!-- سيتم إضافة الخدمات ديناميكياً -->
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم دليل الشركات -->
         <div id="companies" class="section" style="display: none;">
             <div class="add-company-form">
                 <h2>إضافة شركة جديدة</h2>
@@ -320,76 +383,93 @@
             </div>
         </div>
 
-        <!-- قسم إدارة التصنيفات -->
-        <div id="categories" class="section" style="display: none;">
+        <!-- قسم المدونة -->
+        <div id="blog" class="section" style="display: none;">
+            <h2>إدارة المدونة</h2>
             <div class="add-company-form">
-                <h2>إضافة تصنيف جديد</h2>
+                <h3>إضافة مقال جديد</h3>
                 <div class="form-group">
-                    <label for="categoryName">اسم التصنيف</label>
-                    <input type="text" id="categoryName" required>
+                    <label for="postTitle">عنوان المقال</label>
+                    <input type="text" id="postTitle" required>
                 </div>
                 <div class="form-group">
-                    <label for="parentCategory">التصنيف الأب (اختياري)</label>
-                    <select id="parentCategory">
-                        <option value="">بدون تصنيف أب</option>
-                        <!-- سيتم إضافة التصنيفات ديناميكياً -->
+                    <label for="postContent">محتوى المقال</label>
+                    <textarea id="postContent" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="postImage">صورة المقال</label>
+                    <input type="file" id="postImage" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="postCategory">تصنيف المقال</label>
+                    <select id="postCategory" required>
+                        <option value="marketing">التسويق</option>
+                        <option value="photography">التصوير</option>
+                        <option value="printing">الطباعة</option>
+                        <option value="business">الأعمال</option>
                     </select>
                 </div>
-                <button onclick="addCategory()">إضافة التصنيف</button>
+                <button onclick="addPost()">نشر المقال</button>
             </div>
-
             <div class="companies-list">
-                <h2>قائمة التصنيفات</h2>
-                <div id="categoriesList">
-                    <!-- سيتم إضافة التصنيفات ديناميكياً -->
+                <h3>المقالات المنشورة</h3>
+                <div id="postsList">
+                    <!-- سيتم إضافة المقالات ديناميكياً -->
                 </div>
             </div>
         </div>
 
-        <!-- قسم الصفحة الرئيسية -->
-        <div id="homepage" class="section" style="display: none;">
-            <h2>إدارة الصفحة الرئيسية</h2>
+        <!-- قسم من نحن -->
+        <div id="about" class="section" style="display: none;">
+            <h2>إدارة صفحة من نحن</h2>
             <div class="settings-form">
-                <h3>العنوان الرئيسي</h3>
+                <h3>معلومات الشركة</h3>
                 <div class="form-group">
-                    <label for="mainTitle">العنوان</label>
-                    <input type="text" id="mainTitle" value="دليل شركات سوريا الشامل">
+                    <label for="aboutTitle">العنوان الرئيسي</label>
+                    <input type="text" id="aboutTitle" value="مرحباً بكم في Eymtax">
                 </div>
                 <div class="form-group">
-                    <label for="mainSubtitle">العنوان الفرعي</label>
-                    <input type="text" id="mainSubtitle" value="نرفع أعمالك إلى مستوى جديد">
+                    <label for="aboutDescription">الوصف</label>
+                    <textarea id="aboutDescription">نحن في Eymtax نساعدك على التميز من خلال التسويق الرقمي، التصوير الاحترافي، والتصميم الإعلاني – كل ما تحتاجه لتقوية حضورك ونجاحك</textarea>
                 </div>
-                <button onclick="saveHomepageSettings()">حفظ التغييرات</button>
+                <h3>مميزاتنا</h3>
+                <div id="featuresList">
+                    <div class="feature-item">
+                        <img src="experience.png" alt="خبرة طويلة">
+                        <div>
+                            <h4>خبرة طويلة</h4>
+                            <p>سنوات من الخبرة في تقديم خدمات عالية الجودة</p>
+                        </div>
+                    </div>
+                    <!-- يمكن إضافة المزيد من المميزات -->
+                </div>
+                <button onclick="saveAboutSettings()">حفظ التغييرات</button>
             </div>
         </div>
 
-        <!-- قسم المستخدمين -->
-        <div id="users" class="section" style="display: none;">
-            <h2>إدارة المستخدمين</h2>
-            <div class="add-company-form">
-                <h3>إضافة مستخدم جديد</h3>
+        <!-- قسم اتصل بنا -->
+        <div id="contact" class="section" style="display: none;">
+            <h2>إدارة صفحة اتصل بنا</h2>
+            <div class="settings-form">
+                <h3>معلومات التواصل</h3>
                 <div class="form-group">
-                    <label for="newUsername">اسم المستخدم</label>
-                    <input type="text" id="newUsername" required>
+                    <label for="contactEmail">البريد الإلكتروني</label>
+                    <input type="email" id="contactEmail">
                 </div>
                 <div class="form-group">
-                    <label for="newPassword">كلمة المرور</label>
-                    <input type="password" id="newPassword" required>
+                    <label for="contactPhone">رقم الهاتف</label>
+                    <input type="tel" id="contactPhone">
                 </div>
                 <div class="form-group">
-                    <label for="userRole">الصلاحية</label>
-                    <select id="userRole">
-                        <option value="admin">مدير</option>
-                        <option value="editor">محرر</option>
-                        <option value="viewer">مشاهد</option>
-                    </select>
+                    <label for="contactAddress">العنوان</label>
+                    <input type="text" id="contactAddress">
                 </div>
-                <button onclick="addUser()">إضافة المستخدم</button>
+                <button onclick="saveContactSettings()">حفظ التغييرات</button>
             </div>
-            <div class="users-list">
-                <h3>قائمة المستخدمين</h3>
-                <div id="usersList">
-                    <!-- سيتم إضافة المستخدمين ديناميكياً -->
+            <div class="companies-list">
+                <h3>رسائل التواصل</h3>
+                <div id="messagesList">
+                    <!-- سيتم إضافة الرسائل ديناميكياً -->
                 </div>
             </div>
         </div>
@@ -404,31 +484,18 @@
                     <input type="text" id="siteName" value="Eymta X">
                 </div>
                 <div class="form-group">
-                    <label for="siteDescription">وصف الموقع</label>
-                    <textarea id="siteDescription">دليل شركات سوريا الشامل</textarea>
+                    <label for="siteSlogan">شعار الموقع</label>
+                    <input type="text" id="siteSlogan" value="نرفع أعمالك إلى مستوى جديد">
                 </div>
                 <div class="form-group">
-                    <label for="contactEmail">البريد الإلكتروني للتواصل</label>
-                    <input type="email" id="contactEmail">
+                    <label for="siteLogo">شعار الموقع</label>
+                    <input type="file" id="siteLogo" accept="image/*">
                 </div>
                 <div class="form-group">
-                    <label for="contactPhone">رقم الهاتف للتواصل</label>
-                    <input type="tel" id="contactPhone">
+                    <label for="siteFavicon">أيقونة الموقع</label>
+                    <input type="file" id="siteFavicon" accept="image/*">
                 </div>
                 <button onclick="saveSettings()">حفظ الإعدادات</button>
-            </div>
-        </div>
-
-        <!-- قسم التقارير -->
-        <div id="reports" class="section" style="display: none;">
-            <h2>التقارير والإحصائيات</h2>
-            <div class="chart-container">
-                <h3>إحصائيات الشركات حسب التصنيف</h3>
-                <canvas id="companiesChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <h3>الزيارات الشهرية</h3>
-                <canvas id="monthlyVisitsChart"></canvas>
             </div>
         </div>
     </div>
@@ -640,9 +707,9 @@
         function saveSettings() {
             const settings = {
                 siteName: document.getElementById('siteName').value,
-                siteDescription: document.getElementById('siteDescription').value,
-                contactEmail: document.getElementById('contactEmail').value,
-                contactPhone: document.getElementById('contactPhone').value
+                siteSlogan: document.getElementById('siteSlogan').value,
+                siteLogo: document.getElementById('siteLogo').value,
+                siteFavicon: document.getElementById('siteFavicon').value
             };
             localStorage.setItem('siteSettings', JSON.stringify(settings));
             alert('تم حفظ الإعدادات بنجاح');
@@ -650,14 +717,15 @@
 
         // تحديث الإحصائيات
         function updateStats() {
+            const services = JSON.parse(localStorage.getItem('services') || '[]');
             const companies = JSON.parse(localStorage.getItem('companies') || '[]');
-            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+            const messages = JSON.parse(localStorage.getItem('messages') || '[]');
 
+            document.getElementById('totalServices').textContent = services.length;
             document.getElementById('totalCompanies').textContent = companies.length;
-            document.getElementById('vipCompanies').textContent = companies.filter(c => c.isVip).length;
-            document.getElementById('totalCategories').textContent = categories.length;
-            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('totalPosts').textContent = posts.length;
+            document.getElementById('totalMessages').textContent = messages.length;
         }
 
         // تهيئة الرسوم البيانية
@@ -699,6 +767,108 @@
                 document.getElementById('username').value = '';
                 document.getElementById('password').value = '';
             }
+        }
+
+        // إضافة خدمة جديدة
+        function addService() {
+            const service = {
+                title: document.getElementById('serviceTitle').value,
+                description: document.getElementById('serviceDescription').value,
+                category: document.getElementById('serviceCategory').value,
+                image: document.getElementById('serviceImage').value
+            };
+
+            const services = JSON.parse(localStorage.getItem('services') || '[]');
+            services.push(service);
+            localStorage.setItem('services', JSON.stringify(services));
+
+            loadServices();
+            document.querySelector('#services .add-company-form').reset();
+        }
+
+        // تحميل الخدمات
+        function loadServices() {
+            const services = JSON.parse(localStorage.getItem('services') || '[]');
+            const servicesList = document.getElementById('servicesList');
+            servicesList.innerHTML = '';
+
+            services.forEach((service, index) => {
+                const serviceElement = document.createElement('div');
+                serviceElement.className = 'service-card';
+                serviceElement.innerHTML = `
+                    <img src="${service.image}" alt="${service.title}">
+                    <h3>${service.title}</h3>
+                    <p>${service.description}</p>
+                    <div class="actions">
+                        <button class="edit-btn" onclick="editService(${index})">تعديل</button>
+                        <button class="delete-btn" onclick="deleteService(${index})">حذف</button>
+                    </div>
+                `;
+                servicesList.appendChild(serviceElement);
+            });
+        }
+
+        // إضافة مقال جديد
+        function addPost() {
+            const post = {
+                title: document.getElementById('postTitle').value,
+                content: document.getElementById('postContent').value,
+                category: document.getElementById('postCategory').value,
+                image: document.getElementById('postImage').value,
+                date: new Date().toISOString()
+            };
+
+            const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+            posts.push(post);
+            localStorage.setItem('posts', JSON.stringify(posts));
+
+            loadPosts();
+            document.querySelector('#blog .add-company-form').reset();
+        }
+
+        // تحميل المقالات
+        function loadPosts() {
+            const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+            const postsList = document.getElementById('postsList');
+            postsList.innerHTML = '';
+
+            posts.forEach((post, index) => {
+                const postElement = document.createElement('div');
+                postElement.className = 'company-item';
+                postElement.innerHTML = `
+                    <div>
+                        <h3>${post.title}</h3>
+                        <p>${post.content.substring(0, 100)}...</p>
+                        <small>${new Date(post.date).toLocaleDateString('ar-SA')}</small>
+                    </div>
+                    <div class="actions">
+                        <button class="edit-btn" onclick="editPost(${index})">تعديل</button>
+                        <button class="delete-btn" onclick="deletePost(${index})">حذف</button>
+                    </div>
+                `;
+                postsList.appendChild(postElement);
+            });
+        }
+
+        // حفظ إعدادات صفحة من نحن
+        function saveAboutSettings() {
+            const settings = {
+                title: document.getElementById('aboutTitle').value,
+                description: document.getElementById('aboutDescription').value
+            };
+            localStorage.setItem('aboutSettings', JSON.stringify(settings));
+            alert('تم حفظ الإعدادات بنجاح');
+        }
+
+        // حفظ إعدادات صفحة اتصل بنا
+        function saveContactSettings() {
+            const settings = {
+                email: document.getElementById('contactEmail').value,
+                phone: document.getElementById('contactPhone').value,
+                address: document.getElementById('contactAddress').value
+            };
+            localStorage.setItem('contactSettings', JSON.stringify(settings));
+            alert('تم حفظ الإعدادات بنجاح');
         }
     </script>
 </body>
