@@ -596,7 +596,29 @@
 
         // تحميل التصنيفات
         function loadCategories() {
-            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            // التصنيفات الافتراضية
+            const defaultCategories = [
+                { name: 'التسويق الإلكتروني', id: 'marketing' },
+                { name: 'تصوير المنتجات', id: 'product-photography' },
+                { name: 'تصوير الأعراس', id: 'wedding-photography' },
+                { name: 'خدمات الطباعة', id: 'printing' },
+                { name: 'تصميم المواقع', id: 'web-design' },
+                { name: 'تصميم الهوية البصرية', id: 'branding' },
+                { name: 'إدارة وسائل التواصل الاجتماعي', id: 'social-media' },
+                { name: 'تصميم الإعلانات', id: 'advertising' },
+                { name: 'تصوير الفيديو', id: 'video-production' },
+                { name: 'تطوير تطبيقات الموبايل', id: 'mobile-apps' }
+            ];
+
+            // تحميل التصنيفات المخصصة من localStorage إذا وجدت
+            let categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            
+            // إذا لم تكن هناك تصنيفات مخصصة، استخدم التصنيفات الافتراضية
+            if (categories.length === 0) {
+                categories = defaultCategories;
+                localStorage.setItem('categories', JSON.stringify(categories));
+            }
+
             const categoriesList = document.getElementById('categoriesList');
             const categorySelect = document.getElementById('companyCategory');
             const parentCategorySelect = document.getElementById('parentCategory');
@@ -613,7 +635,7 @@
                 categoryElement.innerHTML = `
                     <div>
                         <h3>${category.name}</h3>
-                        <p>${category.parent ? 'تصنيف فرعي' : 'تصنيف رئيسي'}</p>
+                        <p>ID: ${category.id}</p>
                     </div>
                     <div class="actions">
                         <button class="edit-btn" onclick="editCategory(${index})">تعديل</button>
@@ -623,17 +645,24 @@
                 categoriesList.appendChild(categoryElement);
 
                 // إضافة للقوائم المنسدلة
-                const option = new Option(category.name, category.name);
+                const option = new Option(category.name, category.id);
                 categorySelect.add(option);
-                parentCategorySelect.add(new Option(category.name, category.name));
+                parentCategorySelect.add(new Option(category.name, category.id));
             });
         }
 
         // إضافة تصنيف جديد
         function addCategory() {
+            const categoryName = document.getElementById('categoryName').value;
+            const parentCategory = document.getElementById('parentCategory').value;
+            
+            // إنشاء معرف فريد للتصنيف
+            const categoryId = categoryName.toLowerCase().replace(/\s+/g, '-');
+            
             const category = {
-                name: document.getElementById('categoryName').value,
-                parent: document.getElementById('parentCategory').value || null
+                name: categoryName,
+                id: categoryId,
+                parent: parentCategory || null
             };
 
             const categories = JSON.parse(localStorage.getItem('categories') || '[]');
@@ -642,6 +671,20 @@
 
             loadCategories();
             document.querySelector('#categories .add-company-form').reset();
+        }
+
+        // تعديل تصنيف
+        function editCategory(index) {
+            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            const category = categories[index];
+            
+            const newName = prompt('أدخل الاسم الجديد للتصنيف:', category.name);
+            if (newName) {
+                category.name = newName;
+                category.id = newName.toLowerCase().replace(/\s+/g, '-');
+                localStorage.setItem('categories', JSON.stringify(categories));
+                loadCategories();
+            }
         }
 
         // حذف تصنيف
