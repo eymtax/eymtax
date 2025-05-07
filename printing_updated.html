@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمات الطباعة - Eymta X</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            background-color: #f9f9f9; 
+            color: #333; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6;
+        }
+        header { 
+            background-color: #111; 
+            color: white; 
+            padding: 15px; 
+            text-align: center; 
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 1.5rem;
+        }
+        nav {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.1);
+        }
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .service-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .service-header h2 {
+            color: #0077cc;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .service-header p {
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: right;
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            color: #0077cc;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #0077cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #005fa3;
+        }
+
+        .features {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .features h3 {
+            color: #0077cc;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .feature-item h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            color: #666;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+            text-decoration: none;
+            padding: 12px 24px;
+            background: #0077cc;
+            color: white;
+            border-radius: 8px;
+            width: fit-content;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #005fa3;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<section class="container py-5">
+  <h2 class="text-center mb-4">خدمات الطباعة</h2>
+
+  <div class="mb-5">
+    <h4>أولًا: خدمات الطباعة للشركات والمؤسسات</h4>
+    <ul>
+      <li>كروت عمل بتصاميم راقية</li>
+      <li>ورق مراسلات رسمي ومغلفات مطبوعة</li>
+      <li>دفاتر فواتير وأختام مخصصة</li>
+      <li>بروشورات وكتيّبات تعريفية</li>
+      <li>ملفات عروض تقديمية</li>
+      <li>ستكرات تحمل شعار الشركة للتغليف والترويج</li>
+    </ul>
+  </div>
+
+  <div class="mb-5">
+    <h4>ثانيًا: خدمات الطباعة للأفراد</h4>
+    <ul>
+      <li>بطاقات تهنئة ودعوة</li>
+      <li>ستكرات مخصصة للاستخدام الشخصي</li>
+      <li>تقاويم مكتبية أو حائطية</li>
+      <li>صور مطبوعة بجودة عالية</li>
+      <li>دفاتر تنظيم أو مخططات مخصصة</li>
+    </ul>
+  </div>
+
+  <div class="mb-5">
+    <h4>ثالثًا: خدمات الطباعة للطلاب والجامعيين</h4>
+    <ul>
+      <li>طباعة أبحاث وتقارير علمية</li>
+      <li>تجليد مشاريع التخرج بأنواع مختلفة</li>
+      <li>طباعة عروض تقديمية وأوراق عمل</li>
+      <li>طباعة بوسترات أكاديمية بجودة عالية</li>
+      <li>دفاتر ملاحظات وتصاميم جامعية خاصة</li>
+    </ul>
+  </div>
+
+  <div>
+    <h4>رابعًا: خدمات اللوحات الإعلانية والأحرف النافرة</h4>
+    <ul>
+      <li>لوحات فليكس مضاءة وغير مضاءة</li>
+      <li>باك لايت للمحلات</li>
+      <li>لوحات أكريليك وألومنيوم</li>
+      <li>تنفيذ أحرف نافرة (إكريليك – ستانلس – MDF)</li>
+      <li>خدمات تركيب احترافية في مختلف المناطق</li>
+    </ul>
+  </div>
+</section>
+</body>
+</html>
