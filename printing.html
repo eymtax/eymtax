@@ -3,282 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خدمات الطباعة - Eymta X</title>
-    <style>
-        body { 
-            font-family: sans-serif; 
-            background-color: #f9f9f9; 
-            color: #333; 
-            margin: 0; 
-            padding: 0; 
-            line-height: 1.6;
-        }
-        header { 
-            background-color: #111; 
-            color: white; 
-            padding: 15px; 
-            text-align: center; 
-        }
-        header h1 { 
-            margin: 0; 
-            font-size: 1.5rem;
-        }
-        nav {
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            background-color: rgba(255,255,255,0.1);
-        }
-        nav a:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-        
-        .main-content {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        .service-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .service-header h2 {
-            color: #0077cc;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .service-header p {
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .service-card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            text-align: right;
-        }
-
-        .service-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .service-card h3 {
-            color: #0077cc;
-            margin-bottom: 10px;
-        }
-
-        .service-card p {
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #0077cc;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background-color 0.3s;
-        }
-
-        .cta-button:hover {
-            background-color: #005fa3;
-        }
-
-        .features {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin: 30px 0;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        .features h3 {
-            color: #0077cc;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .feature-item {
-            text-align: center;
-            padding: 15px;
-        }
-
-        .feature-item h4 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .feature-item p {
-            color: #666;
-        }
-
-        .back-btn {
-            display: block;
-            text-align: center;
-            margin: 20px auto;
-            text-decoration: none;
-            padding: 12px 24px;
-            background: #0077cc;
-            color: white;
-            border-radius: 8px;
-            width: fit-content;
-            transition: background-color 0.3s;
-        }
-
-        .back-btn:hover {
-            background-color: #005fa3;
-        }
-
-        footer {
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        @media (max-width: 768px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .service-header h2 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    <title>خدمات الطباعة | EYMTA X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-<div style="background:#fff; text-align:center; padding:18px 0 8px 0;">
-  <a href="index.html" style="font-size:2rem; font-weight:bold; color:#0077cc; text-decoration:none; letter-spacing:2px; font-family:sans-serif;">eymtax</a>
-</div>
-
-<header>
-  <h1><a href="index.html" style="color: white; text-decoration: none;">Eymta X</a></h1>
-  <p>خدمات طباعة احترافية لجميع احتياجاتك</p>
-  <nav>
-    <a href="index.html">الرئيسية</a>
-    <a href="marketing.html">التسويق الإلكتروني</a>
-    <a href="product-photography.html">تصوير المنتجات</a>
-    <a href="wedding-photography.html">تصوير الأعراس</a>
-    <a href="printing.html">خدمات الطباعة</a>
-    <a href="syrian-companies.html">دليل الشركات</a>
-    <a href="blog.html">المدونة</a>
-    <a href="about.html">من نحن</a>
-    <a href="contact.html">اتصل بنا</a>
-  </nav>
-</header>
-
-<div class="main-content">
-    <div class="service-header">
-        <h2>خدمات الطباعة الاحترافية</h2>
-        <p>نقدم مجموعة شاملة من خدمات الطباعة عالية الجودة لجميع احتياجاتك الشخصية والتجارية، باستخدام أحدث التقنيات وأفضل المواد.</p>
-    </div>
-
-    <div class="services-grid">
-        <div class="service-card">
-            <img src="https://via.placeholder.com/300x200?text=بروشورات+وفلايرات" alt="بروشورات وفلايرات">
-            <h3>بروشورات وفلايرات</h3>
-            <p>تصميم وطباعة بروشورات وفلايرات احترافية بجودة عالية وألوان زاهية، تناسب جميع المناسبات والفعاليات.</p>
-            <a href="tel:+963938029294" class="cta-button">اطلب خدمتك الآن</a>
+<body class="dark-bg">
+    <header>
+        <img src="img/logo.png" alt="EYMTA X Logo" class="logo">
+        <nav>
+            <a href="index.html">الرئيسية</a>
+            <a href="marketing.html">التسويق الإلكتروني</a>
+            <a href="product-photography.html">تصوير المنتجات</a>
+            <a href="wedding-photography.html">تصوير الأعراس</a>
+            <a href="printing.html" class="active">خدمات الطباعة</a>
+            <a href="syrian-companies.html">دليل الشركات</a>
+            <a href="contact.html">تواصل معنا</a>
+        </nav>
+    </header>
+    <section class="hero">
+        <img src="img/eymtax-print.jpg" alt="خدمات الطباعة" class="hero-img">
+        <div class="hero-content">
+            <h1>خدمات الطباعة</h1>
+            <p>نقدم جميع خدمات الطباعة الرقمية والتقليدية بجودة عالية وسرعة تنفيذ.</p>
         </div>
-
-        <div class="service-card">
-            <img src="https://via.placeholder.com/300x200?text=بطاقات+عمل" alt="بطاقات عمل">
-            <h3>بطاقات عمل</h3>
-            <p>تصميم وطباعة بطاقات عمل احترافية تعكس هوية شركتك، بأشكال وأحجام متنوعة تناسب جميع الأذواق.</p>
-            <a href="tel:+963938029294" class="cta-button">اطلب خدمتك الآن</a>
-        </div>
-
-        <div class="service-card">
-            <img src="https://via.placeholder.com/300x200?text=كتالوجات+ومجلات" alt="كتالوجات ومجلات">
-            <h3>كتالوجات ومجلات</h3>
-            <p>طباعة كتالوجات ومجلات بجودة عالية، مع خيارات متعددة للورق والتجليد لتناسب جميع الميزانيات.</p>
-            <a href="tel:+963938029294" class="cta-button">اطلب خدمتك الآن</a>
-        </div>
-
-        <div class="service-card">
-            <img src="https://via.placeholder.com/300x200?text=لافتات+وبنرات" alt="لافتات وبنرات">
-            <h3>لافتات وبنرات</h3>
-            <p>تصميم وطباعة لافتات وبنرات احترافية بأحجام مختلفة، مقاومة للعوامل الجوية وعالية الجودة.</p>
-            <a href="tel:+963938029294" class="cta-button">اطلب خدمتك الآن</a>
-        </div>
-
-        <div class="service-card">
-            <img src="https://via.placeholder.com/300x200?text=أختام+وطوابع" alt="أختام وطوابع">
-            <h3>أختام وطوابع</h3>
-            <p>تصنيع أختام وطوابع بجميع الأشكال والأحجام، مع خيارات متعددة للتصميم والمواد.</p>
-            <a href="tel:+963938029294" class="cta-button">اطلب خدمتك الآن</a>
-        </div>
-
-        <div class="service-card">
-            <img src="https://via.placeholder.com/300x200?text=طباعة+خاصة" alt="طباعة خاصة">
-            <h3>طباعة خاصة</h3>
-            <p>خدمات طباعة مخصصة حسب الطلب، مع إمكانية تلبية جميع متطلباتك الخاصة والمميزة.</p>
-            <a href="tel:+963938029294" class="cta-button">اطلب خدمتك الآن</a>
-        </div>
-    </div>
-
-    <div class="features">
-        <h3>لماذا تختار خدمات الطباعة لدينا؟</h3>
-        <div class="features-grid">
-            <div class="feature-item">
-                <h4>جودة عالية</h4>
-                <p>نستخدم أحدث التقنيات وأفضل المواد لضمان جودة الطباعة</p>
-            </div>
-            <div class="feature-item">
-                <h4>أسعار تنافسية</h4>
-                <p>عروض وباقات متنوعة تناسب جميع الميزانيات</p>
-            </div>
-            <div class="feature-item">
-                <h4>تصميم احترافي</h4>
-                <p>فريق تصميم متخصص لإنشاء تصاميم جذابة وفعالة</p>
-            </div>
-            <div class="feature-item">
-                <h4>تسليم سريع</h4>
-                <p>نضمن تسليم طلباتك في الوقت المحدد وبأعلى جودة</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<a href="index.html" class="back-btn">🔙 العودة إلى الصفحة الرئيسية</a>
-
-<footer>
-    <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
-</footer>
+    </section>
+    <section class="service-details">
+        <h2>خدمات الطباعة لدينا</h2>
+        <ul>
+            <li>طباعة بروشورات وفلايرات</li>
+            <li>بطاقات عمل وكروت شخصية</li>
+            <li>كتالوجات ومجلات</li>
+            <li>لافتات وبنرات إعلانية</li>
+            <li>أختام وطوابع</li>
+            <li>تصميم وتنفيذ مواد دعائية</li>
+        </ul>
+        <a href="contact.html" class="cta">اطلب عرض أسعار للطباعة</a>
+    </section>
+    <footer>
+        <p>EYMTA X &copy; جميع الحقوق محفوظة 2024</p>
+    </footer>
 </body>
 </html>
