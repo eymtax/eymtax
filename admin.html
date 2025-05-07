@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة التحكم - Eymta X</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #0077cc;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .dashboard {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #0077cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #005fa3;
+        }
+
+        .companies-list {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .company-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .add-company-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .nav-tab {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .nav-tab.active {
+            background: #0077cc;
+            color: white;
+            border-color: #0077cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>لوحة التحكم - Eymta X</h1>
+    </div>
+
+    <div class="container">
+        <!-- نموذج تسجيل الدخول -->
+        <div class="login-form" id="loginForm">
+            <h2>تسجيل الدخول</h2>
+            <div class="form-group">
+                <label for="username">اسم المستخدم</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" required>
+            </div>
+            <button onclick="login()">دخول</button>
+        </div>
+
+        <!-- لوحة التحكم -->
+        <div class="dashboard" id="dashboard">
+            <div class="nav-tabs">
+                <div class="nav-tab active" onclick="showTab('companies')">إدارة الشركات</div>
+                <div class="nav-tab" onclick="showTab('categories')">إدارة التصنيفات</div>
+            </div>
+
+            <!-- قسم إدارة الشركات -->
+            <div id="companiesTab">
+                <div class="add-company-form">
+                    <h2>إضافة شركة جديدة</h2>
+                    <div class="form-group">
+                        <label for="companyName">اسم الشركة</label>
+                        <input type="text" id="companyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyCategory">التصنيف</label>
+                        <select id="companyCategory" required>
+                            <option value="">اختر التصنيف</option>
+                            <!-- سيتم إضافة التصنيفات ديناميكياً -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyImage">رابط الصورة</label>
+                        <input type="url" id="companyImage" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyDescription">وصف الشركة</label>
+                        <textarea id="companyDescription" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyPhone">رقم الهاتف</label>
+                        <input type="tel" id="companyPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyLocation">الموقع</label>
+                        <input type="text" id="companyLocation" required>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="isVip">
+                            شركة مميزة
+                        </label>
+                    </div>
+                    <button onclick="addCompany()">إضافة الشركة</button>
+                </div>
+
+                <div class="companies-list">
+                    <h2>قائمة الشركات</h2>
+                    <div id="companiesList">
+                        <!-- سيتم إضافة الشركات ديناميكياً -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- قسم إدارة التصنيفات -->
+            <div id="categoriesTab" style="display: none;">
+                <div class="add-company-form">
+                    <h2>إضافة تصنيف جديد</h2>
+                    <div class="form-group">
+                        <label for="categoryName">اسم التصنيف</label>
+                        <input type="text" id="categoryName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="parentCategory">التصنيف الأب (اختياري)</label>
+                        <select id="parentCategory">
+                            <option value="">بدون تصنيف أب</option>
+                            <!-- سيتم إضافة التصنيفات ديناميكياً -->
+                        </select>
+                    </div>
+                    <button onclick="addCategory()">إضافة التصنيف</button>
+                </div>
+
+                <div class="companies-list">
+                    <h2>قائمة التصنيفات</h2>
+                    <div id="categoriesList">
+                        <!-- سيتم إضافة التصنيفات ديناميكياً -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // بيانات المستخدم (في الواقع يجب أن تكون في قاعدة بيانات)
+        const ADMIN_USERNAME = 'admin';
+        const ADMIN_PASSWORD = 'admin123';
+
+        // تسجيل الدخول
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                loadCompanies();
+                loadCategories();
+            } else {
+                alert('بيانات الدخول غير صحيحة');
+            }
+        }
+
+        // تبديل بين التبويبات
+        function showTab(tabName) {
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('companiesTab').style.display = tabName === 'companies' ? 'block' : 'none';
+            document.getElementById('categoriesTab').style.display = tabName === 'categories' ? 'block' : 'none';
+        }
+
+        // إضافة شركة جديدة
+        function addCompany() {
+            const company = {
+                name: document.getElementById('companyName').value,
+                category: document.getElementById('companyCategory').value,
+                image: document.getElementById('companyImage').value,
+                description: document.getElementById('companyDescription').value,
+                phone: document.getElementById('companyPhone').value,
+                location: document.getElementById('companyLocation').value,
+                isVip: document.getElementById('isVip').checked
+            };
+
+            // حفظ الشركة في localStorage
+            const companies = JSON.parse(localStorage.getItem('companies') || '[]');
+            companies.push(company);
+            localStorage.setItem('companies', JSON.stringify(companies));
+
+            // تحديث القائمة
+            loadCompanies();
+            
+            // إعادة تعيين النموذج
+            document.querySelector('.add-company-form').reset();
+        }
+
+        // تحميل الشركات
+        function loadCompanies() {
+            const companies = JSON.parse(localStorage.getItem('companies') || '[]');
+            const companiesList = document.getElementById('companiesList');
+            companiesList.innerHTML = '';
+
+            companies.forEach((company, index) => {
+                const companyElement = document.createElement('div');
+                companyElement.className = 'company-item';
+                companyElement.innerHTML = `
+                    <div>
+                        <h3>${company.name}</h3>
+                        <p>${company.description}</p>
+                    </div>
+                    <div class="actions">
+                        <button class="edit-btn" onclick="editCompany(${index})">تعديل</button>
+                        <button class="delete-btn" onclick="deleteCompany(${index})">حذف</button>
+                    </div>
+                `;
+                companiesList.appendChild(companyElement);
+            });
+        }
+
+        // حذف شركة
+        function deleteCompany(index) {
+            if (confirm('هل أنت متأكد من حذف هذه الشركة؟')) {
+                const companies = JSON.parse(localStorage.getItem('companies') || '[]');
+                companies.splice(index, 1);
+                localStorage.setItem('companies', JSON.stringify(companies));
+                loadCompanies();
+            }
+        }
+
+        // تحميل التصنيفات
+        function loadCategories() {
+            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            const categoriesList = document.getElementById('categoriesList');
+            const categorySelect = document.getElementById('companyCategory');
+            const parentCategorySelect = document.getElementById('parentCategory');
+
+            // تحديث قائمة التصنيفات
+            categoriesList.innerHTML = '';
+            categorySelect.innerHTML = '<option value="">اختر التصنيف</option>';
+            parentCategorySelect.innerHTML = '<option value="">بدون تصنيف أب</option>';
+
+            categories.forEach((category, index) => {
+                // إضافة للقائمة الرئيسية
+                const categoryElement = document.createElement('div');
+                categoryElement.className = 'company-item';
+                categoryElement.innerHTML = `
+                    <div>
+                        <h3>${category.name}</h3>
+                        <p>${category.parent ? 'تصنيف فرعي' : 'تصنيف رئيسي'}</p>
+                    </div>
+                    <div class="actions">
+                        <button class="edit-btn" onclick="editCategory(${index})">تعديل</button>
+                        <button class="delete-btn" onclick="deleteCategory(${index})">حذف</button>
+                    </div>
+                `;
+                categoriesList.appendChild(categoryElement);
+
+                // إضافة للقوائم المنسدلة
+                const option = new Option(category.name, category.name);
+                categorySelect.add(option);
+                parentCategorySelect.add(new Option(category.name, category.name));
+            });
+        }
+
+        // إضافة تصنيف جديد
+        function addCategory() {
+            const category = {
+                name: document.getElementById('categoryName').value,
+                parent: document.getElementById('parentCategory').value || null
+            };
+
+            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            categories.push(category);
+            localStorage.setItem('categories', JSON.stringify(categories));
+
+            loadCategories();
+            document.querySelector('#categoriesTab .add-company-form').reset();
+        }
+
+        // حذف تصنيف
+        function deleteCategory(index) {
+            if (confirm('هل أنت متأكد من حذف هذا التصنيف؟')) {
+                const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+                categories.splice(index, 1);
+                localStorage.setItem('categories', JSON.stringify(categories));
+                loadCategories();
+            }
+        }
+    </script>
+</body>
+</html> 
