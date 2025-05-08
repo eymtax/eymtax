@@ -1,5 +1,3 @@
-<!-- services.html -->
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
