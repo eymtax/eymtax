@@ -6,56 +6,41 @@
     <title>تسجيل الدخول - لوحة التحكم</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: sans-serif; background-color: #f5f5f5; margin: 0; padding: 0; }
-        .login-container {
-            max-width: 400px;
-            margin: 100px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            text-align: center;
+        body { font-family: sans-serif; background-color: #f2f2f2; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .login-box {
+            background-color: white; padding: 30px; border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px;
         }
-        h2 { margin-bottom: 20px; color: #0077cc; }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        h2 { color: #0077cc; margin-bottom: 20px; text-align: center; }
+        input[type="text"], input[type="password"] {
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            border: 1px solid #ccc; border-radius: 4px;
         }
         button {
-            width: 100%;
-            background-color: #0077cc;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
+            width: 100%; padding: 12px; background-color: #0077cc; color: white;
+            border: none; border-radius: 6px; cursor: pointer;
         }
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
+        .error { color: red; margin-top: 10px; text-align: center; }
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="login-box">
         <h2>تسجيل الدخول</h2>
         <input type="text" id="username" placeholder="اسم المستخدم">
         <input type="password" id="password" placeholder="كلمة المرور">
         <button onclick="login()">دخول</button>
-        <div id="error" class="error"></div>
+        <div class="error" id="errorMessage"></div>
     </div>
 
     <script>
         function login() {
-            var user = document.getElementById("username").value;
-            var pass = document.getElementById("password").value;
-            if (user === "admin" && pass === "239418") {
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+            if (user === "MZKPH" && pass === "239418") {
+                sessionStorage.setItem("loggedIn", "true");
                 window.location.href = "admin.html";
             } else {
-                document.getElementById("error").textContent = "اسم المستخدم أو كلمة المرور غير صحيحة";
+                document.getElementById("errorMessage").textContent = "بيانات الدخول غير صحيحة";
             }
         }
     </script>

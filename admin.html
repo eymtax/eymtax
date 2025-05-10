@@ -42,7 +42,11 @@
         }
     </style>
 </head>
-<body>
+<body><script>
+if (sessionStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+</script>
 <aside>
 <h2>لوحة التحكم</h2>
 <a href="#" onclick="showSection('dashboard')">الرئيسية</a>
