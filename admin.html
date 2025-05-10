@@ -118,8 +118,14 @@
 <p>تعديل محتوى الصفحات مثل من نحن، اتصل بنا، إلخ.</p>
 </div>
 </main>
-
 <script>
+function showSection(id) {
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+}
+</script><script>
 let companies = JSON.parse(localStorage.getItem('companies')) || [];
 const form = document.getElementById('companyForm');
 const tableBody = document.getElementById('companyTableBody');
