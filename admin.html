@@ -1,109 +1,179 @@
 
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+
+<html dir="rtl" lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <title>لوحة التحكم - إدارة الشركات</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
-        header { background: #0077cc; color: white; padding: 1rem; text-align: center; }
-        .container { max-width: 1000px; margin: auto; padding: 20px; }
-        h2 { color: #0077cc; }
-        form { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
-        button { background: #0077cc; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; }
-        table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        th, td { padding: 10px; border: 1px solid #ddd; text-align: right; }
-        th { background: #f0f0f0; }
-        .delete-btn { color: red; cursor: pointer; font-weight: bold; }
+<meta charset="utf-8"/>
+<title>لوحة تحكم الموقع - Eymta X</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+        body { margin: 0; font-family: sans-serif; background-color: #f9f9f9; display: flex; min-height: 100vh; }
+        aside {
+            width: 220px;
+            background: #0077cc;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        aside h2 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        aside a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        aside a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        main {
+            flex: 1;
+            padding: 30px;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>لوحة التحكم - دليل شركات سوريا</h1>
-    </header>
-    <div class="container">
-        <h2>إضافة شركة جديدة</h2>
-        <form id="companyForm">
-            <div class="form-group">
-                <label>اسم الشركة</label>
-                <input type="text" id="name" required />
-            </div>
-            <div class="form-group">
-                <label>التخصص</label>
-                <input type="text" id="category" required />
-            </div>
-            <div class="form-group">
-                <label>المدينة</label>
-                <input type="text" id="city" required />
-            </div>
-            <div class="form-group">
-                <label>الوصف</label>
-                <textarea id="description" rows="3"></textarea>
-            </div>
-            <button type="submit">إضافة الشركة</button>
-        </form>
+<aside>
+<h2>لوحة التحكم</h2>
+<a href="#" onclick="showSection('dashboard')">الرئيسية</a>
+<a href="#" onclick="showSection('companies')">دليل الشركات</a>
+<a href="#" onclick="showSection('services')">الخدمات</a>
+<a href="#" onclick="showSection('team')">فريق العمل</a>
+<a href="#" onclick="showSection('testimonials')">آراء العملاء</a>
+<a href="#" onclick="showSection('pages')">صفحات عامة</a>
+</aside>
+<main>
+<div class="section active" id="dashboard">
+<h1>مرحباً بك في لوحة التحكم</h1>
+<p>اختر من القائمة لإدارة محتوى الموقع.</p>
+</div>
+<div class="section" id="companies">
+<h1>إدارة دليل الشركات السورية</h1>
+<form id="companyForm" style="margin-bottom: 30px;">
+<div>
+<label>اسم الشركة</label>
+<input id="name" required="" type="text"/>
+</div>
+<div>
+<label>الفئة الرئيسية</label>
+<input id="category" required="" type="text"/>
+</div>
+<div>
+<label>التخصص الفرعي</label>
+<input id="subcategory" required="" type="text"/>
+</div>
+<div>
+<label>المدينة</label>
+<input id="city" required="" type="text"/>
+</div>
+<div>
+<label>الوصف</label>
+<textarea id="description" rows="3"></textarea>
+</div>
+<div>
+<label>صورة الشركة (اختيار من الجهاز)</label>
+<input accept="image/*" id="imageFile" type="file"/>
+</div>
+<button type="submit">إضافة الشركة</button>
+</form>
+<table style="width: 100%; border-collapse: collapse;">
+<thead>
+<tr>
+<th>الاسم</th>
+<th>الفئة</th>
+<th>التخصص</th>
+<th>المدينة</th>
+<th>الوصف</th>
+<th>صورة</th>
+<th>حذف</th>
+</tr>
+</thead>
+<tbody id="companyTableBody"></tbody>
+</table>
+</div>
+<div class="section" id="services">
+<h1>إدارة الخدمات</h1>
+<p>قريبًا سيتم عرض خدمات الموقع وإمكانية تعديلها من هنا.</p>
+</div>
+<div class="section" id="team">
+<h1>فريق العمل</h1>
+<p>إضافة أو حذف أو تعديل بيانات فريق العمل.</p>
+</div>
+<div class="section" id="testimonials">
+<h1>آراء العملاء</h1>
+<p>إدارة التعليقات والتقييمات.</p>
+</div>
+<div class="section" id="pages">
+<h1>الصفحات العامة</h1>
+<p>تعديل محتوى الصفحات مثل من نحن، اتصل بنا، إلخ.</p>
+</div>
+</main>
 
-        <h2>الشركات المضافة</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>اسم الشركة</th>
-                    <th>التخصص</th>
-                    <th>المدينة</th>
-                    <th>الوصف</th>
-                    <th>حذف</th>
-                </tr>
-            </thead>
-            <tbody id="companyTableBody"></tbody>
-        </table>
-    </div>
+<script>
+let companies = JSON.parse(localStorage.getItem('companies')) || [];
+const form = document.getElementById('companyForm');
+const tableBody = document.getElementById('companyTableBody');
+const imageInput = document.getElementById('imageFile');
 
-    <script>
-        const form = document.getElementById('companyForm');
-        const tableBody = document.getElementById('companyTableBody');
+function renderCompanies() {
+    tableBody.innerHTML = '';
+    companies.forEach((c, i) => {
+        let row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${c.name}</td>
+            <td>${c.category}</td>
+            <td>${c.subcategory}</td>
+            <td>${c.city}</td>
+            <td>${c.description}</td>
+            <td><img src="${c.imageBase64}" style="width: 60px; height: 60px; object-fit: cover;"></td>
+            <td><button onclick="deleteCompany(${i})" style="color:red">حذف</button></td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
 
-        let companies = JSON.parse(localStorage.getItem('companies')) || [];
+function deleteCompany(index) {
+    companies.splice(index, 1);
+    localStorage.setItem('companies', JSON.stringify(companies));
+    renderCompanies();
+}
 
-        function renderCompanies() {
-            tableBody.innerHTML = '';
-            companies.forEach((company, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${company.name}</td>
-                    <td>${company.category}</td>
-                    <td>${company.city}</td>
-                    <td>${company.description}</td>
-                    <td><span class="delete-btn" onclick="deleteCompany(${index})">حذف</span></td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const reader = new FileReader();
+    const file = imageInput.files[0];
 
-        function deleteCompany(index) {
-            companies.splice(index, 1);
-            localStorage.setItem('companies', JSON.stringify(companies));
-            renderCompanies();
-        }
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+    if (file) {
+        reader.onloadend = function () {
             const newCompany = {
                 name: document.getElementById('name').value,
                 category: document.getElementById('category').value,
+                subcategory: document.getElementById('subcategory').value,
                 city: document.getElementById('city').value,
                 description: document.getElementById('description').value,
+                imageBase64: reader.result
             };
             companies.push(newCompany);
             localStorage.setItem('companies', JSON.stringify(companies));
             form.reset();
             renderCompanies();
-        });
+        };
+        reader.readAsDataURL(file);
+    } else {
+        alert("يرجى اختيار صورة");
+    }
+});
 
-        renderCompanies();
-    </script>
-</body>
+renderCompanies();
+</script></body>
 </html>
