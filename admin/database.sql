@@ -1,8 +1,5 @@
 -- قاعدة بيانات eymtax_db
 
- IF NOT EXISTS eymtax_db DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE eymtax_db;
-
 -- جدول المستخدمين
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
