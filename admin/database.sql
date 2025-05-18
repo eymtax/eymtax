@@ -33,5 +33,5 @@ CREATE TABLE IF NOT EXISTS images (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- مستخدم افتراضي (admin: 123456)
-INSERT INTO users (username, password) VALUES ('admin', '$2y$10$wH8Qw6Qw6Qw6Qw6Qw6Qw6uQw6Qw6Qw6Qw6Qw6Qw6Qw6Qw6Qw6Qw6');
+INSERT INTO users (username, password) VALUES ('admin', '$2y$10$YourNewSecureHashHere');
 -- كلمة المرور مشفرة باستخدام password_hash('123456', PASSWORD_DEFAULT) 
