@@ -1,6 +1,6 @@
 -- قاعدة بيانات eymtax_db
 
-CREATE DATABASE IF NOT EXISTS eymtax_db DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ IF NOT EXISTS eymtax_db DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE eymtax_db;
 
 -- جدول المستخدمين
