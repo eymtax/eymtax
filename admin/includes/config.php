@@ -1,9 +1,9 @@
 <?php
 // Database configuration
 define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'eymtax_user');
+define('DB_USERNAME', 'eymtrift_eymtax_user');
 define('DB_PASSWORD', 'Eymtax@2024#Secure');
-define('DB_NAME', 'eymtax_db');
+define('DB_NAME', 'eymtrift_eymtax_db');
 
 // Attempt to connect to MySQL database
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
