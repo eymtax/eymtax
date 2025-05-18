@@ -1,6 +1,14 @@
+# تعيين نوع المحتوى لملفات PHP
 AddType application/x-httpd-php .php
 AddHandler application/x-httpd-php .php
 
+# تعيين نوع المحتوى الافتراضي
+DefaultType application/x-httpd-php
+
+# تعيين ترميز UTF-8
+AddDefaultCharset UTF-8
+
+# تفعيل محرك إعادة الكتابة
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
@@ -13,25 +21,31 @@ AddHandler application/x-httpd-php .php
     RewriteRule ^(.*)$ index.php [L]
 </IfModule>
 
-# تعيين نوع المحتوى الافتراضي
-DefaultType application/x-httpd-php
-
-# تعيين ترميز UTF-8
-AddDefaultCharset UTF-8
-
 # تعيين الصلاحيات
 <FilesMatch "^\.">
     Order allow,deny
     Deny from all
 </FilesMatch>
 
-# حماية مجلد admin
-<IfModule mod_rewrite.c>
-    RewriteRule ^admin/.*$ - [F,L]
-</IfModule>
-
 # تعيين الصلاحيات للملفات
 <FilesMatch "\.(php|html|htm)$">
     Order Allow,Deny
     Allow from all
-</FilesMatch> 
+</FilesMatch>
+
+# تعيين نوع MIME لملفات PHP
+<IfModule mod_mime.c>
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php-source .phps
+</IfModule>
+
+# تعيين معالج PHP
+<IfModule mod_php.c>
+    php_flag display_errors on
+    php_value error_reporting E_ALL
+</IfModule>
+
+# حماية مجلد admin
+<IfModule mod_rewrite.c>
+    RewriteRule ^admin/.*$ - [F,L]
+</IfModule> 
