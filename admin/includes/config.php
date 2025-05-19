@@ -1,22 +1,14 @@
 <?php
-// Database configuration
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'eymtrift_eymtax_user');
-define('DB_PASSWORD', 'Eymtax@2024#Secure');
-define('DB_NAME', 'eymtrift_eymtax_db');
+// إعدادات قاعدة البيانات
+$host = 'localhost';
+$db   = 'eymtrift_eymtax_db';
+$user = 'eymtrift_eymtax_user';
+$pass = 'Eymtax@2024#Secure';
 
-// Attempt to connect to MySQL database
-$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-// Check connection
-if($conn === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
+$conn = mysqli_connect($host, $user, $pass, $db);
+if (!$conn) {
+    die('فشل الاتصال بقاعدة البيانات: ' . mysqli_connect_error());
 }
-
-// Set charset to utf8
-mysqli_set_charset($conn, "utf8");
-
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// تعيين الترميز
+mysqli_set_charset($conn, 'utf8mb4');
 ?> 
