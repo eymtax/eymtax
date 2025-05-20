@@ -319,7 +319,7 @@ require_once "admin/includes/config.php";
 <body>
     <header>
         <h1><a href="index.php" style="color: white; text-decoration: none;">Eymta X</a></h1>
-        <p>أفضل شركة تسويق في سورية</p>
+        <p style="color: #ccc; margin: 0.2rem 0; font-size: 0.8rem; width: 100%;">أفضل شركة تسويق في سورية</p>
         <nav>
             <a href="index.php">الرئيسية</a>
             <a href="marketing.html">التسويق الإلكتروني</a>
