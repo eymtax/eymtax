@@ -118,7 +118,7 @@ require_once "admin/includes/config.php";
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hero-bg.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('img/البنر_الرئيسي.jpg');
             background-size: cover;
             background-position: center;
             color: white;
