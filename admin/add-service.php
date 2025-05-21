@@ -16,41 +16,38 @@ if (!hasPermission('admin')) {
 $message = '';
 $error = '';
 
-// معالجة إضافة الشركة
+// معالجة إضافة الخدمة
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = cleanInput($_POST['name']);
     $description = cleanInput($_POST['description']);
-    $address = cleanInput($_POST['address']);
-    $phone = cleanInput($_POST['phone']);
-    $email = cleanInput($_POST['email']);
-    $website = cleanInput($_POST['website']);
     $category = cleanInput($_POST['category']);
+    $price = cleanInput($_POST['price']);
     $status = cleanInput($_POST['status']);
 
     // التحقق من البيانات
     if (empty($name)) {
-        $error = 'يرجى إدخال اسم الشركة';
-    } elseif (!empty($email) && !isValidEmail($email)) {
-        $error = 'البريد الإلكتروني غير صالح';
+        $error = 'يرجى إدخال اسم الخدمة';
+    } elseif (empty($price) || !is_numeric($price)) {
+        $error = 'يرجى إدخال سعر صحيح للخدمة';
     } else {
         try {
             // معالجة الصورة
-            $logo = '';
-            if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = '../uploads/companies/';
+            $image = '';
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = '../uploads/services/';
                 if (!file_exists($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
 
-                $fileExtension = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
+                $fileExtension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
                 $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
                 if (in_array($fileExtension, $allowedExtensions)) {
                     $fileName = uniqid() . '.' . $fileExtension;
                     $uploadFile = $uploadDir . $fileName;
 
-                    if (move_uploaded_file($_FILES['logo']['tmp_name'], $uploadFile)) {
-                        $logo = 'uploads/companies/' . $fileName;
+                    if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+                        $image = 'uploads/services/' . $fileName;
                     } else {
                         $error = 'حدث خطأ أثناء رفع الصورة';
                     }
@@ -61,19 +58,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (empty($error)) {
                 $stmt = $pdo->prepare("
-                    INSERT INTO companies (name, description, address, phone, email, website, logo, category, status)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    INSERT INTO services (name, description, category, price, image, status)
+                    VALUES (?, ?, ?, ?, ?, ?)
                 ");
 
                 $stmt->execute([
-                    $name, $description, $address, $phone, $email, $website, $logo, $category, $status
+                    $name, $description, $category, $price, $image, $status
                 ]);
 
-                $message = 'تم إضافة الشركة بنجاح';
-                logError("تمت إضافة شركة جديدة: " . $name);
+                $message = 'تم إضافة الخدمة بنجاح';
+                logError("تمت إضافة خدمة جديدة: " . $name);
             }
         } catch (PDOException $e) {
-            $error = 'حدث خطأ أثناء إضافة الشركة';
+            $error = 'حدث خطأ أثناء إضافة الخدمة';
             logError($e->getMessage());
         }
     }
@@ -84,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إضافة شركة جديدة - <?php echo SITE_NAME; ?></title>
+    <title>إضافة خدمة جديدة - <?php echo SITE_NAME; ?></title>
     <style>
         * {
             margin: 0;
@@ -282,10 +279,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="dashboard.php" class="nav-link">الرئيسية</a>
                 </li>
                 <li class="nav-item">
-                    <a href="companies.php" class="nav-link active">الشركات</a>
+                    <a href="companies.php" class="nav-link">الشركات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="services.php" class="nav-link">الخدمات</a>
+                    <a href="services.php" class="nav-link active">الخدمات</a>
                 </li>
                 <li class="nav-item">
                     <a href="blog.php" class="nav-link">المدونة</a>
@@ -302,7 +299,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="main-content">
             <div class="header">
-                <h2>إضافة شركة جديدة</h2>
+                <h2>إضافة خدمة جديدة</h2>
             </div>
 
             <?php if ($message): ?>
@@ -316,7 +313,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-container">
                 <form method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="name">اسم الشركة *</label>
+                        <label for="name">اسم الخدمة *</label>
                         <input type="text" id="name" name="name" class="form-control" required>
                     </div>
 
@@ -326,33 +323,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <div class="form-group">
-                        <label for="address">العنوان</label>
-                        <input type="text" id="address" name="address" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">الهاتف</label>
-                        <input type="tel" id="phone" name="phone" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">البريد الإلكتروني</label>
-                        <input type="email" id="email" name="email" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="website">الموقع الإلكتروني</label>
-                        <input type="url" id="website" name="website" class="form-control">
-                    </div>
-
-                    <div class="form-group">
                         <label for="category">التصنيف</label>
                         <input type="text" id="category" name="category" class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <label for="logo">الشعار</label>
-                        <input type="file" id="logo" name="logo" class="form-control" accept="image/*">
+                        <label for="price">السعر (ريال) *</label>
+                        <input type="number" id="price" name="price" class="form-control" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">الصورة</label>
+                        <input type="file" id="image" name="image" class="form-control" accept="image/*">
                     </div>
 
                     <div class="form-group">
@@ -364,8 +346,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">إضافة الشركة</button>
-                        <a href="companies.php" class="btn btn-secondary">إلغاء</a>
+                        <button type="submit" class="btn btn-primary">إضافة الخدمة</button>
+                        <a href="services.php" class="btn btn-secondary">إلغاء</a>
                     </div>
                 </form>
             </div>

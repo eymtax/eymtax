@@ -16,25 +16,32 @@ if (!hasPermission('admin')) {
 $message = '';
 $error = '';
 
-// معالجة حذف الشركة
-if (isset($_POST['delete_company'])) {
-    $company_id = (int)$_POST['company_id'];
-    try {
-        $stmt = $pdo->prepare("DELETE FROM companies WHERE id = ?");
-        $stmt->execute([$company_id]);
-        $message = 'تم حذف الشركة بنجاح';
-    } catch (PDOException $e) {
-        $error = 'حدث خطأ أثناء حذف الشركة';
-        logError($e->getMessage());
+// معالجة حذف المستخدم
+if (isset($_POST['delete_user'])) {
+    $user_id = (int)$_POST['user_id'];
+    
+    // منع حذف المستخدم الحالي
+    if ($user_id === $_SESSION['user_id']) {
+        $error = 'لا يمكنك حذف حسابك الحالي';
+    } else {
+        try {
+            $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
+            $stmt->execute([$user_id]);
+            $message = 'تم حذف المستخدم بنجاح';
+            logError("تم حذف المستخدم رقم: " . $user_id);
+        } catch (PDOException $e) {
+            $error = 'حدث خطأ أثناء حذف المستخدم';
+            logError($e->getMessage());
+        }
     }
 }
 
-// جلب قائمة الشركات
+// جلب قائمة المستخدمين
 try {
-    $stmt = $pdo->query("SELECT * FROM companies ORDER BY created_at DESC");
-    $companies = $stmt->fetchAll();
+    $stmt = $pdo->query("SELECT * FROM users ORDER BY created_at DESC");
+    $users = $stmt->fetchAll();
 } catch (PDOException $e) {
-    $error = 'حدث خطأ أثناء جلب بيانات الشركات';
+    $error = 'حدث خطأ أثناء جلب بيانات المستخدمين';
     logError($e->getMessage());
 }
 ?>
@@ -43,7 +50,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إدارة الشركات - <?php echo SITE_NAME; ?></title>
+    <title>إدارة المستخدمين - <?php echo SITE_NAME; ?></title>
     <style>
         * {
             margin: 0;
@@ -160,7 +167,7 @@ try {
             border: 1px solid #f5c6cb;
         }
 
-        .companies-table {
+        .users-table {
             width: 100%;
             background-color: white;
             border-radius: 8px;
@@ -168,25 +175,25 @@ try {
             overflow: hidden;
         }
 
-        .companies-table table {
+        .users-table table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .companies-table th,
-        .companies-table td {
+        .users-table th,
+        .users-table td {
             padding: 15px;
             text-align: right;
             border-bottom: 1px solid #eee;
         }
 
-        .companies-table th {
+        .users-table th {
             background-color: #f8f9fa;
             font-weight: 600;
             color: #333;
         }
 
-        .companies-table tr:last-child td {
+        .users-table tr:last-child td {
             border-bottom: none;
         }
 
@@ -231,6 +238,13 @@ try {
             color: #dc3545;
         }
 
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
         .logout-link {
             color: #dc3545;
             text-decoration: none;
@@ -258,7 +272,7 @@ try {
                     <a href="dashboard.php" class="nav-link">الرئيسية</a>
                 </li>
                 <li class="nav-item">
-                    <a href="companies.php" class="nav-link active">الشركات</a>
+                    <a href="companies.php" class="nav-link">الشركات</a>
                 </li>
                 <li class="nav-item">
                     <a href="services.php" class="nav-link">الخدمات</a>
@@ -267,7 +281,7 @@ try {
                     <a href="blog.php" class="nav-link">المدونة</a>
                 </li>
                 <li class="nav-item">
-                    <a href="users.php" class="nav-link">المستخدمين</a>
+                    <a href="users.php" class="nav-link active">المستخدمين</a>
                 </li>
                 <li class="nav-item">
                     <a href="settings.php" class="nav-link">الإعدادات</a>
@@ -278,8 +292,8 @@ try {
 
         <div class="main-content">
             <div class="header">
-                <h2>إدارة الشركات</h2>
-                <a href="add-company.php" class="add-button">إضافة شركة جديدة</a>
+                <h2>إدارة المستخدمين</h2>
+                <a href="add-user.php" class="add-button">إضافة مستخدم جديد</a>
             </div>
 
             <?php if ($message): ?>
@@ -290,37 +304,47 @@ try {
                 <div class="message error"><?php echo $error; ?></div>
             <?php endif; ?>
 
-            <div class="companies-table">
+            <div class="users-table">
                 <table>
                     <thead>
                         <tr>
-                            <th>الاسم</th>
-                            <th>التصنيف</th>
+                            <th>الصورة</th>
+                            <th>اسم المستخدم</th>
                             <th>البريد الإلكتروني</th>
-                            <th>الهاتف</th>
+                            <th>الصلاحية</th>
                             <th>الحالة</th>
+                            <th>تاريخ التسجيل</th>
                             <th>الإجراءات</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($companies as $company): ?>
+                        <?php foreach ($users as $user): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($company['name']); ?></td>
-                            <td><?php echo htmlspecialchars($company['category']); ?></td>
-                            <td><?php echo htmlspecialchars($company['email']); ?></td>
-                            <td><?php echo htmlspecialchars($company['phone']); ?></td>
                             <td>
-                                <span class="status-<?php echo $company['status']; ?>">
-                                    <?php echo $company['status'] === 'active' ? 'نشط' : 'غير نشط'; ?>
+                                <?php if (!empty($user['avatar'])): ?>
+                                    <img src="../<?php echo htmlspecialchars($user['avatar']); ?>" alt="صورة المستخدم" class="user-avatar">
+                                <?php else: ?>
+                                    <img src="../assets/images/default-avatar.png" alt="صورة افتراضية" class="user-avatar">
+                                <?php endif; ?>
+                            </td>
+                            <td><?php echo htmlspecialchars($user['username']); ?></td>
+                            <td><?php echo htmlspecialchars($user['email']); ?></td>
+                            <td><?php echo $user['role'] === 'admin' ? 'مدير' : 'مستخدم'; ?></td>
+                            <td>
+                                <span class="status-<?php echo $user['status']; ?>">
+                                    <?php echo $user['status'] === 'active' ? 'نشط' : 'غير نشط'; ?>
                                 </span>
                             </td>
+                            <td><?php echo date('Y-m-d', strtotime($user['created_at'])); ?></td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="edit-company.php?id=<?php echo $company['id']; ?>" class="edit-button">تعديل</a>
-                                    <form method="POST" style="display: inline;" onsubmit="return confirm('هل أنت متأكد من حذف هذه الشركة؟');">
-                                        <input type="hidden" name="company_id" value="<?php echo $company['id']; ?>">
-                                        <button type="submit" name="delete_company" class="delete-button">حذف</button>
+                                    <a href="edit-user.php?id=<?php echo $user['id']; ?>" class="edit-button">تعديل</a>
+                                    <?php if ($user['id'] !== $_SESSION['user_id']): ?>
+                                    <form method="POST" style="display: inline;" onsubmit="return confirm('هل أنت متأكد من حذف هذا المستخدم؟');">
+                                        <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
+                                        <button type="submit" name="delete_user" class="delete-button">حذف</button>
                                     </form>
+                                    <?php endif; ?>
                                 </div>
                             </td>
                         </tr>

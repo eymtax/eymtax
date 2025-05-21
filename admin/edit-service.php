@@ -16,41 +16,65 @@ if (!hasPermission('admin')) {
 $message = '';
 $error = '';
 
-// معالجة إضافة الشركة
+// التحقق من وجود معرف الخدمة
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    header("Location: services.php");
+    exit;
+}
+
+$service_id = (int)$_GET['id'];
+
+// جلب بيانات الخدمة
+try {
+    $stmt = $pdo->prepare("SELECT * FROM services WHERE id = ?");
+    $stmt->execute([$service_id]);
+    $service = $stmt->fetch();
+
+    if (!$service) {
+        header("Location: services.php");
+        exit;
+    }
+} catch (PDOException $e) {
+    $error = 'حدث خطأ أثناء جلب بيانات الخدمة';
+    logError($e->getMessage());
+}
+
+// معالجة تحديث الخدمة
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = cleanInput($_POST['name']);
     $description = cleanInput($_POST['description']);
-    $address = cleanInput($_POST['address']);
-    $phone = cleanInput($_POST['phone']);
-    $email = cleanInput($_POST['email']);
-    $website = cleanInput($_POST['website']);
     $category = cleanInput($_POST['category']);
+    $price = cleanInput($_POST['price']);
     $status = cleanInput($_POST['status']);
 
     // التحقق من البيانات
     if (empty($name)) {
-        $error = 'يرجى إدخال اسم الشركة';
-    } elseif (!empty($email) && !isValidEmail($email)) {
-        $error = 'البريد الإلكتروني غير صالح';
+        $error = 'يرجى إدخال اسم الخدمة';
+    } elseif (empty($price) || !is_numeric($price)) {
+        $error = 'يرجى إدخال سعر صحيح للخدمة';
     } else {
         try {
             // معالجة الصورة
-            $logo = '';
-            if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = '../uploads/companies/';
+            $image = $service['image'];
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = '../uploads/services/';
                 if (!file_exists($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
 
-                $fileExtension = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
+                $fileExtension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
                 $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
                 if (in_array($fileExtension, $allowedExtensions)) {
                     $fileName = uniqid() . '.' . $fileExtension;
                     $uploadFile = $uploadDir . $fileName;
 
-                    if (move_uploaded_file($_FILES['logo']['tmp_name'], $uploadFile)) {
-                        $logo = 'uploads/companies/' . $fileName;
+                    if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+                        // حذف الصورة القديمة إذا كانت موجودة
+                        if (!empty($service['image']) && file_exists('../' . $service['image'])) {
+                            unlink('../' . $service['image']);
+                        }
+                        $image = 'uploads/services/' . $fileName;
                     } else {
                         $error = 'حدث خطأ أثناء رفع الصورة';
                     }
@@ -61,19 +85,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (empty($error)) {
                 $stmt = $pdo->prepare("
-                    INSERT INTO companies (name, description, address, phone, email, website, logo, category, status)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    UPDATE services 
+                    SET name = ?, description = ?, category = ?, price = ?, image = ?, status = ?
+                    WHERE id = ?
                 ");
 
                 $stmt->execute([
-                    $name, $description, $address, $phone, $email, $website, $logo, $category, $status
+                    $name, $description, $category, $price, $image, $status, $service_id
                 ]);
 
-                $message = 'تم إضافة الشركة بنجاح';
-                logError("تمت إضافة شركة جديدة: " . $name);
+                $message = 'تم تحديث الخدمة بنجاح';
+                logError("تم تحديث خدمة: " . $name);
+                
+                // تحديث بيانات الخدمة المعروضة
+                $service['name'] = $name;
+                $service['description'] = $description;
+                $service['category'] = $category;
+                $service['price'] = $price;
+                $service['image'] = $image;
+                $service['status'] = $status;
             }
         } catch (PDOException $e) {
-            $error = 'حدث خطأ أثناء إضافة الشركة';
+            $error = 'حدث خطأ أثناء تحديث الخدمة';
             logError($e->getMessage());
         }
     }
@@ -84,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إضافة شركة جديدة - <?php echo SITE_NAME; ?></title>
+    <title>تعديل الخدمة - <?php echo SITE_NAME; ?></title>
     <style>
         * {
             margin: 0;
@@ -255,6 +288,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #5a6268;
         }
 
+        .current-image {
+            margin-top: 10px;
+        }
+
+        .current-image img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 4px;
+        }
+
         .logout-link {
             color: #dc3545;
             text-decoration: none;
@@ -282,10 +325,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="dashboard.php" class="nav-link">الرئيسية</a>
                 </li>
                 <li class="nav-item">
-                    <a href="companies.php" class="nav-link active">الشركات</a>
+                    <a href="companies.php" class="nav-link">الشركات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="services.php" class="nav-link">الخدمات</a>
+                    <a href="services.php" class="nav-link active">الخدمات</a>
                 </li>
                 <li class="nav-item">
                     <a href="blog.php" class="nav-link">المدونة</a>
@@ -302,7 +345,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="main-content">
             <div class="header">
-                <h2>إضافة شركة جديدة</h2>
+                <h2>تعديل الخدمة</h2>
             </div>
 
             <?php if ($message): ?>
@@ -316,56 +359,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-container">
                 <form method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="name">اسم الشركة *</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
+                        <label for="name">اسم الخدمة *</label>
+                        <input type="text" id="name" name="name" class="form-control" value="<?php echo htmlspecialchars($service['name']); ?>" required>
                     </div>
 
                     <div class="form-group">
                         <label for="description">الوصف</label>
-                        <textarea id="description" name="description" class="form-control"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">العنوان</label>
-                        <input type="text" id="address" name="address" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">الهاتف</label>
-                        <input type="tel" id="phone" name="phone" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">البريد الإلكتروني</label>
-                        <input type="email" id="email" name="email" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="website">الموقع الإلكتروني</label>
-                        <input type="url" id="website" name="website" class="form-control">
+                        <textarea id="description" name="description" class="form-control"><?php echo htmlspecialchars($service['description']); ?></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="category">التصنيف</label>
-                        <input type="text" id="category" name="category" class="form-control">
+                        <input type="text" id="category" name="category" class="form-control" value="<?php echo htmlspecialchars($service['category']); ?>">
                     </div>
 
                     <div class="form-group">
-                        <label for="logo">الشعار</label>
-                        <input type="file" id="logo" name="logo" class="form-control" accept="image/*">
+                        <label for="price">السعر (ريال) *</label>
+                        <input type="number" id="price" name="price" class="form-control" step="0.01" min="0" value="<?php echo htmlspecialchars($service['price']); ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">الصورة</label>
+                        <?php if (!empty($service['image'])): ?>
+                            <div class="current-image">
+                                <img src="../<?php echo htmlspecialchars($service['image']); ?>" alt="صورة الخدمة الحالية">
+                            </div>
+                        <?php endif; ?>
+                        <input type="file" id="image" name="image" class="form-control" accept="image/*">
                     </div>
 
                     <div class="form-group">
                         <label for="status">الحالة</label>
                         <select id="status" name="status" class="form-control">
-                            <option value="active">نشط</option>
-                            <option value="inactive">غير نشط</option>
+                            <option value="active" <?php echo $service['status'] === 'active' ? 'selected' : ''; ?>>نشط</option>
+                            <option value="inactive" <?php echo $service['status'] === 'inactive' ? 'selected' : ''; ?>>غير نشط</option>
                         </select>
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">إضافة الشركة</button>
-                        <a href="companies.php" class="btn btn-secondary">إلغاء</a>
+                        <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                        <a href="services.php" class="btn btn-secondary">إلغاء</a>
                     </div>
                 </form>
             </div>

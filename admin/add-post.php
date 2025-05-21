@@ -16,41 +16,37 @@ if (!hasPermission('admin')) {
 $message = '';
 $error = '';
 
-// معالجة إضافة الشركة
+// معالجة إضافة المقال
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = cleanInput($_POST['name']);
-    $description = cleanInput($_POST['description']);
-    $address = cleanInput($_POST['address']);
-    $phone = cleanInput($_POST['phone']);
-    $email = cleanInput($_POST['email']);
-    $website = cleanInput($_POST['website']);
-    $category = cleanInput($_POST['category']);
+    $title = cleanInput($_POST['title']);
+    $content = $_POST['content']; // لا نقوم بتنظيف المحتوى لأنه قد يحتوي على HTML
     $status = cleanInput($_POST['status']);
+    $author_id = $_SESSION['user_id'];
 
     // التحقق من البيانات
-    if (empty($name)) {
-        $error = 'يرجى إدخال اسم الشركة';
-    } elseif (!empty($email) && !isValidEmail($email)) {
-        $error = 'البريد الإلكتروني غير صالح';
+    if (empty($title)) {
+        $error = 'يرجى إدخال عنوان المقال';
+    } elseif (empty($content)) {
+        $error = 'يرجى إدخال محتوى المقال';
     } else {
         try {
             // معالجة الصورة
-            $logo = '';
-            if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = '../uploads/companies/';
+            $image = '';
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = '../uploads/blog/';
                 if (!file_exists($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
 
-                $fileExtension = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
+                $fileExtension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
                 $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
                 if (in_array($fileExtension, $allowedExtensions)) {
                     $fileName = uniqid() . '.' . $fileExtension;
                     $uploadFile = $uploadDir . $fileName;
 
-                    if (move_uploaded_file($_FILES['logo']['tmp_name'], $uploadFile)) {
-                        $logo = 'uploads/companies/' . $fileName;
+                    if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+                        $image = 'uploads/blog/' . $fileName;
                     } else {
                         $error = 'حدث خطأ أثناء رفع الصورة';
                     }
@@ -61,19 +57,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (empty($error)) {
                 $stmt = $pdo->prepare("
-                    INSERT INTO companies (name, description, address, phone, email, website, logo, category, status)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    INSERT INTO blog_posts (title, content, image, author_id, status)
+                    VALUES (?, ?, ?, ?, ?)
                 ");
 
                 $stmt->execute([
-                    $name, $description, $address, $phone, $email, $website, $logo, $category, $status
+                    $title, $content, $image, $author_id, $status
                 ]);
 
-                $message = 'تم إضافة الشركة بنجاح';
-                logError("تمت إضافة شركة جديدة: " . $name);
+                $message = 'تم إضافة المقال بنجاح';
+                logError("تمت إضافة مقال جديد: " . $title);
             }
         } catch (PDOException $e) {
-            $error = 'حدث خطأ أثناء إضافة الشركة';
+            $error = 'حدث خطأ أثناء إضافة المقال';
             logError($e->getMessage());
         }
     }
@@ -84,7 +80,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إضافة شركة جديدة - <?php echo SITE_NAME; ?></title>
+    <title>إضافة مقال جديد - <?php echo SITE_NAME; ?></title>
+    <!-- إضافة TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#content',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+            language: 'ar',
+            directionality: 'rtl',
+            height: 500
+        });
+    </script>
     <style>
         * {
             margin: 0;
@@ -216,11 +224,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-color: #0077cc;
         }
 
-        textarea.form-control {
-            min-height: 100px;
-            resize: vertical;
-        }
-
         .form-actions {
             display: flex;
             gap: 10px;
@@ -268,6 +271,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .logout-link:hover {
             text-decoration: underline;
         }
+
+        /* تخصيص محرر TinyMCE */
+        .tox-tinymce {
+            border-radius: 4px !important;
+            border-color: #ddd !important;
+        }
+
+        .tox .tox-toolbar__primary {
+            background-color: #f8f9fa !important;
+        }
     </style>
 </head>
 <body>
@@ -282,13 +295,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="dashboard.php" class="nav-link">الرئيسية</a>
                 </li>
                 <li class="nav-item">
-                    <a href="companies.php" class="nav-link active">الشركات</a>
+                    <a href="companies.php" class="nav-link">الشركات</a>
                 </li>
                 <li class="nav-item">
                     <a href="services.php" class="nav-link">الخدمات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="blog.php" class="nav-link">المدونة</a>
+                    <a href="blog.php" class="nav-link active">المدونة</a>
                 </li>
                 <li class="nav-item">
                     <a href="users.php" class="nav-link">المستخدمين</a>
@@ -302,7 +315,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="main-content">
             <div class="header">
-                <h2>إضافة شركة جديدة</h2>
+                <h2>إضافة مقال جديد</h2>
             </div>
 
             <?php if ($message): ?>
@@ -316,43 +329,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-container">
                 <form method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="name">اسم الشركة *</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
+                        <label for="title">عنوان المقال *</label>
+                        <input type="text" id="title" name="title" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="description">الوصف</label>
-                        <textarea id="description" name="description" class="form-control"></textarea>
+                        <label for="content">محتوى المقال *</label>
+                        <textarea id="content" name="content" class="form-control"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="address">العنوان</label>
-                        <input type="text" id="address" name="address" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">الهاتف</label>
-                        <input type="tel" id="phone" name="phone" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">البريد الإلكتروني</label>
-                        <input type="email" id="email" name="email" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="website">الموقع الإلكتروني</label>
-                        <input type="url" id="website" name="website" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="category">التصنيف</label>
-                        <input type="text" id="category" name="category" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="logo">الشعار</label>
-                        <input type="file" id="logo" name="logo" class="form-control" accept="image/*">
+                        <label for="image">الصورة الرئيسية</label>
+                        <input type="file" id="image" name="image" class="form-control" accept="image/*">
                     </div>
 
                     <div class="form-group">
@@ -364,8 +352,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">إضافة الشركة</button>
-                        <a href="companies.php" class="btn btn-secondary">إلغاء</a>
+                        <button type="submit" class="btn btn-primary">نشر المقال</button>
+                        <a href="blog.php" class="btn btn-secondary">إلغاء</a>
                     </div>
                 </form>
             </div>

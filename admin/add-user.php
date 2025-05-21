@@ -16,64 +16,80 @@ if (!hasPermission('admin')) {
 $message = '';
 $error = '';
 
-// معالجة إضافة الشركة
+// معالجة إضافة المستخدم
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = cleanInput($_POST['name']);
-    $description = cleanInput($_POST['description']);
-    $address = cleanInput($_POST['address']);
-    $phone = cleanInput($_POST['phone']);
+    $username = cleanInput($_POST['username']);
     $email = cleanInput($_POST['email']);
-    $website = cleanInput($_POST['website']);
-    $category = cleanInput($_POST['category']);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    $role = cleanInput($_POST['role']);
     $status = cleanInput($_POST['status']);
 
     // التحقق من البيانات
-    if (empty($name)) {
-        $error = 'يرجى إدخال اسم الشركة';
-    } elseif (!empty($email) && !isValidEmail($email)) {
-        $error = 'البريد الإلكتروني غير صالح';
+    if (empty($username)) {
+        $error = 'يرجى إدخال اسم المستخدم';
+    } elseif (empty($email)) {
+        $error = 'يرجى إدخال البريد الإلكتروني';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'يرجى إدخال بريد إلكتروني صحيح';
+    } elseif (empty($password)) {
+        $error = 'يرجى إدخال كلمة المرور';
+    } elseif (strlen($password) < 6) {
+        $error = 'يجب أن تكون كلمة المرور 6 أحرف على الأقل';
+    } elseif ($password !== $confirm_password) {
+        $error = 'كلمات المرور غير متطابقة';
     } else {
         try {
-            // معالجة الصورة
-            $logo = '';
-            if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = '../uploads/companies/';
-                if (!file_exists($uploadDir)) {
-                    mkdir($uploadDir, 0777, true);
-                }
-
-                $fileExtension = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
-                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-
-                if (in_array($fileExtension, $allowedExtensions)) {
-                    $fileName = uniqid() . '.' . $fileExtension;
-                    $uploadFile = $uploadDir . $fileName;
-
-                    if (move_uploaded_file($_FILES['logo']['tmp_name'], $uploadFile)) {
-                        $logo = 'uploads/companies/' . $fileName;
-                    } else {
-                        $error = 'حدث خطأ أثناء رفع الصورة';
+            // التحقق من عدم وجود البريد الإلكتروني
+            $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+            $stmt->execute([$email]);
+            if ($stmt->fetch()) {
+                $error = 'البريد الإلكتروني مستخدم بالفعل';
+            } else {
+                // معالجة الصورة الشخصية
+                $avatar = '';
+                if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+                    $uploadDir = '../uploads/avatars/';
+                    if (!file_exists($uploadDir)) {
+                        mkdir($uploadDir, 0777, true);
                     }
-                } else {
-                    $error = 'نوع الملف غير مسموح به';
+
+                    $fileExtension = strtolower(pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION));
+                    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+                    if (in_array($fileExtension, $allowedExtensions)) {
+                        $fileName = uniqid() . '.' . $fileExtension;
+                        $uploadFile = $uploadDir . $fileName;
+
+                        if (move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadFile)) {
+                            $avatar = 'uploads/avatars/' . $fileName;
+                        } else {
+                            $error = 'حدث خطأ أثناء رفع الصورة';
+                        }
+                    } else {
+                        $error = 'نوع الملف غير مسموح به';
+                    }
                 }
-            }
 
-            if (empty($error)) {
-                $stmt = $pdo->prepare("
-                    INSERT INTO companies (name, description, address, phone, email, website, logo, category, status)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ");
+                if (empty($error)) {
+                    // تشفير كلمة المرور
+                    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                $stmt->execute([
-                    $name, $description, $address, $phone, $email, $website, $logo, $category, $status
-                ]);
+                    $stmt = $pdo->prepare("
+                        INSERT INTO users (username, email, password, avatar, role, status)
+                        VALUES (?, ?, ?, ?, ?, ?)
+                    ");
 
-                $message = 'تم إضافة الشركة بنجاح';
-                logError("تمت إضافة شركة جديدة: " . $name);
+                    $stmt->execute([
+                        $username, $email, $hashed_password, $avatar, $role, $status
+                    ]);
+
+                    $message = 'تم إضافة المستخدم بنجاح';
+                    logError("تمت إضافة مستخدم جديد: " . $username);
+                }
             }
         } catch (PDOException $e) {
-            $error = 'حدث خطأ أثناء إضافة الشركة';
+            $error = 'حدث خطأ أثناء إضافة المستخدم';
             logError($e->getMessage());
         }
     }
@@ -84,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إضافة شركة جديدة - <?php echo SITE_NAME; ?></title>
+    <title>إضافة مستخدم جديد - <?php echo SITE_NAME; ?></title>
     <style>
         * {
             margin: 0;
@@ -216,11 +232,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-color: #0077cc;
         }
 
-        textarea.form-control {
-            min-height: 100px;
-            resize: vertical;
-        }
-
         .form-actions {
             display: flex;
             gap: 10px;
@@ -282,7 +293,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="dashboard.php" class="nav-link">الرئيسية</a>
                 </li>
                 <li class="nav-item">
-                    <a href="companies.php" class="nav-link active">الشركات</a>
+                    <a href="companies.php" class="nav-link">الشركات</a>
                 </li>
                 <li class="nav-item">
                     <a href="services.php" class="nav-link">الخدمات</a>
@@ -291,7 +302,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="blog.php" class="nav-link">المدونة</a>
                 </li>
                 <li class="nav-item">
-                    <a href="users.php" class="nav-link">المستخدمين</a>
+                    <a href="users.php" class="nav-link active">المستخدمين</a>
                 </li>
                 <li class="nav-item">
                     <a href="settings.php" class="nav-link">الإعدادات</a>
@@ -302,7 +313,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="main-content">
             <div class="header">
-                <h2>إضافة شركة جديدة</h2>
+                <h2>إضافة مستخدم جديد</h2>
             </div>
 
             <?php if ($message): ?>
@@ -316,43 +327,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-container">
                 <form method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="name">اسم الشركة *</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
+                        <label for="username">اسم المستخدم *</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="description">الوصف</label>
-                        <textarea id="description" name="description" class="form-control"></textarea>
+                        <label for="email">البريد الإلكتروني *</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="address">العنوان</label>
-                        <input type="text" id="address" name="address" class="form-control">
+                        <label for="password">كلمة المرور *</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">الهاتف</label>
-                        <input type="tel" id="phone" name="phone" class="form-control">
+                        <label for="confirm_password">تأكيد كلمة المرور *</label>
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="email">البريد الإلكتروني</label>
-                        <input type="email" id="email" name="email" class="form-control">
+                        <label for="avatar">الصورة الشخصية</label>
+                        <input type="file" id="avatar" name="avatar" class="form-control" accept="image/*">
                     </div>
 
                     <div class="form-group">
-                        <label for="website">الموقع الإلكتروني</label>
-                        <input type="url" id="website" name="website" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="category">التصنيف</label>
-                        <input type="text" id="category" name="category" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="logo">الشعار</label>
-                        <input type="file" id="logo" name="logo" class="form-control" accept="image/*">
+                        <label for="role">الصلاحية</label>
+                        <select id="role" name="role" class="form-control">
+                            <option value="user">مستخدم</option>
+                            <option value="admin">مدير</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -364,8 +368,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">إضافة الشركة</button>
-                        <a href="companies.php" class="btn btn-secondary">إلغاء</a>
+                        <button type="submit" class="btn btn-primary">إضافة المستخدم</button>
+                        <a href="users.php" class="btn btn-secondary">إلغاء</a>
                     </div>
                 </form>
             </div>

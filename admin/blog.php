@@ -16,25 +16,41 @@ if (!hasPermission('admin')) {
 $message = '';
 $error = '';
 
-// معالجة حذف الشركة
-if (isset($_POST['delete_company'])) {
-    $company_id = (int)$_POST['company_id'];
+// معالجة حذف المقال
+if (isset($_POST['delete_post'])) {
+    $post_id = (int)$_POST['post_id'];
     try {
-        $stmt = $pdo->prepare("DELETE FROM companies WHERE id = ?");
-        $stmt->execute([$company_id]);
-        $message = 'تم حذف الشركة بنجاح';
+        // جلب معلومات المقال قبل الحذف
+        $stmt = $pdo->prepare("SELECT image FROM blog_posts WHERE id = ?");
+        $stmt->execute([$post_id]);
+        $post = $stmt->fetch();
+
+        // حذف الصورة إذا كانت موجودة
+        if ($post && !empty($post['image']) && file_exists('../' . $post['image'])) {
+            unlink('../' . $post['image']);
+        }
+
+        // حذف المقال من قاعدة البيانات
+        $stmt = $pdo->prepare("DELETE FROM blog_posts WHERE id = ?");
+        $stmt->execute([$post_id]);
+        $message = 'تم حذف المقال بنجاح';
     } catch (PDOException $e) {
-        $error = 'حدث خطأ أثناء حذف الشركة';
+        $error = 'حدث خطأ أثناء حذف المقال';
         logError($e->getMessage());
     }
 }
 
-// جلب قائمة الشركات
+// جلب قائمة المقالات
 try {
-    $stmt = $pdo->query("SELECT * FROM companies ORDER BY created_at DESC");
-    $companies = $stmt->fetchAll();
+    $stmt = $pdo->query("
+        SELECT p.*, u.username as author_name 
+        FROM blog_posts p 
+        LEFT JOIN users u ON p.author_id = u.id 
+        ORDER BY p.created_at DESC
+    ");
+    $posts = $stmt->fetchAll();
 } catch (PDOException $e) {
-    $error = 'حدث خطأ أثناء جلب بيانات الشركات';
+    $error = 'حدث خطأ أثناء جلب بيانات المقالات';
     logError($e->getMessage());
 }
 ?>
@@ -43,7 +59,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إدارة الشركات - <?php echo SITE_NAME; ?></title>
+    <title>إدارة المدونة - <?php echo SITE_NAME; ?></title>
     <style>
         * {
             margin: 0;
@@ -160,7 +176,7 @@ try {
             border: 1px solid #f5c6cb;
         }
 
-        .companies-table {
+        .posts-table {
             width: 100%;
             background-color: white;
             border-radius: 8px;
@@ -168,25 +184,25 @@ try {
             overflow: hidden;
         }
 
-        .companies-table table {
+        .posts-table table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .companies-table th,
-        .companies-table td {
+        .posts-table th,
+        .posts-table td {
             padding: 15px;
             text-align: right;
             border-bottom: 1px solid #eee;
         }
 
-        .companies-table th {
+        .posts-table th {
             background-color: #f8f9fa;
             font-weight: 600;
             color: #333;
         }
 
-        .companies-table tr:last-child td {
+        .posts-table tr:last-child td {
             border-bottom: none;
         }
 
@@ -231,6 +247,28 @@ try {
             color: #dc3545;
         }
 
+        .post-image {
+            width: 100px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .post-title {
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .post-excerpt {
+            max-width: 400px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #666;
+        }
+
         .logout-link {
             color: #dc3545;
             text-decoration: none;
@@ -258,13 +296,13 @@ try {
                     <a href="dashboard.php" class="nav-link">الرئيسية</a>
                 </li>
                 <li class="nav-item">
-                    <a href="companies.php" class="nav-link active">الشركات</a>
+                    <a href="companies.php" class="nav-link">الشركات</a>
                 </li>
                 <li class="nav-item">
                     <a href="services.php" class="nav-link">الخدمات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="blog.php" class="nav-link">المدونة</a>
+                    <a href="blog.php" class="nav-link active">المدونة</a>
                 </li>
                 <li class="nav-item">
                     <a href="users.php" class="nav-link">المستخدمين</a>
@@ -278,8 +316,8 @@ try {
 
         <div class="main-content">
             <div class="header">
-                <h2>إدارة الشركات</h2>
-                <a href="add-company.php" class="add-button">إضافة شركة جديدة</a>
+                <h2>إدارة المدونة</h2>
+                <a href="add-post.php" class="add-button">إضافة مقال جديد</a>
             </div>
 
             <?php if ($message): ?>
@@ -290,36 +328,48 @@ try {
                 <div class="message error"><?php echo $error; ?></div>
             <?php endif; ?>
 
-            <div class="companies-table">
+            <div class="posts-table">
                 <table>
                     <thead>
                         <tr>
-                            <th>الاسم</th>
-                            <th>التصنيف</th>
-                            <th>البريد الإلكتروني</th>
-                            <th>الهاتف</th>
+                            <th>الصورة</th>
+                            <th>العنوان</th>
+                            <th>المحتوى</th>
+                            <th>الكاتب</th>
+                            <th>التاريخ</th>
                             <th>الحالة</th>
                             <th>الإجراءات</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($companies as $company): ?>
+                        <?php foreach ($posts as $post): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($company['name']); ?></td>
-                            <td><?php echo htmlspecialchars($company['category']); ?></td>
-                            <td><?php echo htmlspecialchars($company['email']); ?></td>
-                            <td><?php echo htmlspecialchars($company['phone']); ?></td>
                             <td>
-                                <span class="status-<?php echo $company['status']; ?>">
-                                    <?php echo $company['status'] === 'active' ? 'نشط' : 'غير نشط'; ?>
+                                <?php if (!empty($post['image'])): ?>
+                                    <img src="../<?php echo htmlspecialchars($post['image']); ?>" alt="صورة المقال" class="post-image">
+                                <?php else: ?>
+                                    <span>لا توجد صورة</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <div class="post-title"><?php echo htmlspecialchars($post['title']); ?></div>
+                            </td>
+                            <td>
+                                <div class="post-excerpt"><?php echo htmlspecialchars($post['content']); ?></div>
+                            </td>
+                            <td><?php echo htmlspecialchars($post['author_name']); ?></td>
+                            <td><?php echo date('Y-m-d', strtotime($post['created_at'])); ?></td>
+                            <td>
+                                <span class="status-<?php echo $post['status']; ?>">
+                                    <?php echo $post['status'] === 'active' ? 'نشط' : 'غير نشط'; ?>
                                 </span>
                             </td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="edit-company.php?id=<?php echo $company['id']; ?>" class="edit-button">تعديل</a>
-                                    <form method="POST" style="display: inline;" onsubmit="return confirm('هل أنت متأكد من حذف هذه الشركة؟');">
-                                        <input type="hidden" name="company_id" value="<?php echo $company['id']; ?>">
-                                        <button type="submit" name="delete_company" class="delete-button">حذف</button>
+                                    <a href="edit-post.php?id=<?php echo $post['id']; ?>" class="edit-button">تعديل</a>
+                                    <form method="POST" style="display: inline;" onsubmit="return confirm('هل أنت متأكد من حذف هذا المقال؟');">
+                                        <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
+                                        <button type="submit" name="delete_post" class="delete-button">حذف</button>
                                     </form>
                                 </div>
                             </td>
