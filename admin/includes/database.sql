@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS blog_posts (
 
 -- إدخال بيانات المستخدم الافتراضي
 INSERT INTO users (username, password, email, full_name, role) VALUES
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@eymtax.com', 'مدير النظام', 'admin');
+('MZKAM', '$2y$10$wQwQwQwQwQwQwQwQwQwQOeQwQwQwQwQwQwQwQwQwQwQwQwQwQwQwQwQwQwQwQw', 'admin@eymtax.com', 'مدير النظام', 'admin');
 
 -- إدخال بيانات الخدمات الافتراضية
 INSERT INTO services (title, description, status) VALUES
