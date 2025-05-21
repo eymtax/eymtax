@@ -13,6 +13,10 @@ AddDefaultCharset UTF-8
     RewriteEngine On
     RewriteBase /eymtax/
     
+    # السماح بالوصول المباشر للصور
+    RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif)$ [NC]
+    RewriteRule .* - [L]
+    
     # إذا كان الملف أو المجلد غير موجود
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
@@ -27,14 +31,23 @@ AddDefaultCharset UTF-8
     Deny from all
 </FilesMatch>
 
+# السماح بالوصول للصور
+<FilesMatch "\.(jpg|jpeg|png|gif)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
 # تعيين الصلاحيات للملفات
 <FilesMatch "\.(php|html|htm)$">
     Order Allow,Deny
     Allow from all
 </FilesMatch>
 
-# تعيين نوع MIME لملفات PHP
+# تعيين نوع MIME للصور
 <IfModule mod_mime.c>
+    AddType image/jpeg .jpg .jpeg
+    AddType image/png .png
+    AddType image/gif .gif
     AddType application/x-httpd-php .php
     AddType application/x-httpd-php-source .phps
 </IfModule>
