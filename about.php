@@ -49,58 +49,6 @@ require_once 'includes/config.php';
             margin-bottom: 30px;
         }
         
-        .team-section {
-            background-color: #f8f9fa;
-            padding: 80px 0;
-        }
-        
-        .team-member {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .team-member img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 5px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .team-member h3 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        
-        .team-member .position {
-            color: #666;
-            margin-bottom: 15px;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .social-links a {
-            width: 35px;
-            height: 35px;
-            line-height: 35px;
-            text-align: center;
-            background: #f8f9fa;
-            border-radius: 50%;
-            color: #333;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-        
         .stats-section {
             padding: 80px 0;
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/images/stats-bg.jpg');
@@ -247,54 +195,6 @@ require_once 'includes/config.php';
                         <i class="fas fa-handshake"></i>
                         <h3>الموثوقية</h3>
                         <p>نلتزم بمواعيدنا ونفي بوعودنا لعملائنا</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section class="team-section">
-        <div class="container">
-            <h2 class="text-center mb-5">فريق العمل</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="team-member">
-                        <img src="assets/images/team/member1.jpg" alt="أحمد محمد">
-                        <h3>أحمد محمد</h3>
-                        <div class="position">المدير التنفيذي</div>
-                        <p>خبرة 10 سنوات في مجال التسويق الرقمي</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="team-member">
-                        <img src="assets/images/team/member2.jpg" alt="سارة أحمد">
-                        <h3>سارة أحمد</h3>
-                        <div class="position">مديرة التصوير</div>
-                        <p>مصورة محترفة مع خبرة 8 سنوات</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="team-member">
-                        <img src="assets/images/team/member3.jpg" alt="محمد علي">
-                        <h3>محمد علي</h3>
-                        <div class="position">مدير الطباعة</div>
-                        <p>خبرة 12 سنة في مجال الطباعة والتصميم</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
                     </div>
                 </div>
             </div>
