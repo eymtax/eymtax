@@ -6,12 +6,12 @@ define('DB_PASS', '');
 define('DB_NAME', 'eymtax_db');
 
 // إعدادات الموقع
-define('SITE_URL', 'https://eymtax.com');
+define('SITE_URL', 'http://localhost/eymtax');
 define('SITE_NAME', 'Eymta X');
 define('SITE_DESC', 'أفضل شركة تسويق في سورية');
 
 // إعدادات الأمان
-define('SECURE_SESSION', true);
+define('SECURE_SESSION', false); // تم تعطيله للتطوير المحلي
 define('SESSION_LIFETIME', 3600); // ساعة واحدة
 
 // إعدادات البريد الإلكتروني
@@ -21,7 +21,7 @@ define('SMTP_USER', 'your-email@gmail.com');
 define('SMTP_PASS', 'your-password');
 
 // إعدادات التخزين المؤقت
-define('CACHE_ENABLED', true);
+define('CACHE_ENABLED', false); // تم تعطيله للتطوير المحلي
 define('CACHE_LIFETIME', 3600);
 
 // إعدادات التصحيح
@@ -64,7 +64,7 @@ function isLoggedIn() {
 
 // دالة للتحقق من الصلاحيات
 function hasPermission($permission) {
-    return isset($_SESSION['permissions']) && in_array($permission, $_SESSION['permissions']);
+    return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 }
 
 // دالة لتنظيف المدخلات

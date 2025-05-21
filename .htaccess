@@ -11,11 +11,7 @@ AddDefaultCharset UTF-8
 # تفعيل محرك إعادة الكتابة
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /
-    
-    # إعادة توجيه من HTTP إلى HTTPS
-    RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    RewriteBase /eymtax/
     
     # إذا كان الملف أو المجلد غير موجود
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -51,11 +47,6 @@ AddDefaultCharset UTF-8
     php_value post_max_size 10M
     php_value max_execution_time 300
     php_value max_input_time 300
-</IfModule>
-
-# حماية مجلد admin
-<IfModule mod_rewrite.c>
-    RewriteRule ^admin/.*$ - [F,L]
 </IfModule>
 
 # تحسين الأداء
