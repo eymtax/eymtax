@@ -74,6 +74,9 @@ $result = mysqli_query($conn, $sql);
         </nav>
     </header>
     <main style="margin-top: 80px;">
+        <div style="width:100%;text-align:center;margin-bottom:20px;">
+            <img src="img/دليل_الشركات.jpg" alt="دليل الشركات" style="max-width:100%;height:auto;">
+        </div>
         <section class="services">
             <h2>دليل الشركات السورية</h2>
             <div class="companies-list">
