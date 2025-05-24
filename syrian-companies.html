@@ -15,7 +15,7 @@
         --text-color: #2c3e50;
         --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         --transition-speed: 0.3s;
-        --container-width: min(95vw, 1400px);
+        --container-width: min(95vw, 1200px);
         --header-height: 4rem;
         --footer-height: 3rem;
     }
@@ -542,16 +542,106 @@
     }
 </style>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll(".main-category").forEach(function(category) {
-    category.addEventListener("click", function() {
-      let sub = this.nextElementSibling;
-      if (sub && sub.classList.contains("sub-categories")) {
-        sub.style.display = sub.style.display === "block" ? "none" : "block";
-      }
+    // تعريف المتغيرات مرة واحدة فقط في الأعلى
+    const searchInput = document.getElementById('searchInput');
+    let searchTimeout;
+    const companies = document.querySelectorAll('.company');
+
+    // دالة تأخير البحث
+    const debounce = (func, delay) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(func, delay);
+    };
+
+    // وظيفة البحث
+    searchInput.addEventListener('input', () => {
+        debounce(() => {
+            const query = searchInput.value.toLowerCase().trim();
+            companies.forEach(company => {
+                const name = company.dataset.name.toLowerCase();
+                const category = company.dataset.category.toLowerCase();
+                const shouldShow = name.includes(query) || category.includes(query);
+                company.style.display = shouldShow ? 'block' : 'none';
+            });
+        }, 300);
     });
-  });
-});
+
+    // وظيفة التصفية
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const category = btn.dataset.category;
+            companies.forEach(company => {
+                company.style.display = (category === 'all' || company.dataset.category === category) ? 'block' : 'none';
+            });
+        });
+    });
+
+    // تفعيل القوائم الجانبية
+    document.querySelectorAll('.main-category').forEach(category => {
+        category.addEventListener('click', function() {
+            const sub = this.nextElementSibling;
+            if (sub && sub.classList.contains('sub-categories')) {
+                sub.style.display = sub.style.display === 'block' ? 'none' : 'block';
+            }
+        });
+    });
+
+    // نظام التقييم
+    function createStars(container, name) {
+        const saved = localStorage.getItem('rate_' + name);
+        const countKey = 'count_' + name;
+        const count = localStorage.getItem(countKey) || 0;
+        const wrap = container;
+        wrap.innerHTML = '';
+        for (let i = 1; i <= 5; i++) {
+            const s = document.createElement('span');
+            s.textContent = '★';
+            s.classList.add('star');
+            if (saved && i <= saved) s.classList.add('selected');
+            s.onclick = () => {
+                if (!saved) {
+                    localStorage.setItem('rate_' + name, i);
+                    localStorage.setItem(countKey, +count + 1);
+                    document.getElementById('count-' + name).textContent = (+count + 1) + ' تقييم';
+                    [...wrap.children].forEach((star, idx) => {
+                        star.classList.toggle('selected', idx < i);
+                    });
+                    const successMsg = document.createElement('div');
+                    successMsg.textContent = 'شكراً لتقييمك!';
+                    successMsg.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: var(--secondary-color);
+                        color: white;
+                        padding: 1rem 2rem;
+                        border-radius: 8px;
+                        box-shadow: var(--card-shadow);
+                        animation: slideIn 0.3s ease-out;
+                        z-index: 1000;
+                    `;
+                    document.body.appendChild(successMsg);
+                    setTimeout(() => successMsg.remove(), 3000);
+                }
+            };
+            wrap.appendChild(s);
+        }
+        document.getElementById('count-' + name).textContent = count + ' تقييم';
+    }
+
+    // تفعيل التقييم على جميع الشركات
+    document.querySelectorAll('.stars').forEach(div => {
+        const name = div.dataset.name;
+        createStars(div, name);
+    });
+
+    // تأثيرات حركية للشركات
+    companies.forEach((company, index) => {
+        company.style.animationDelay = `${index * 0.1}s`;
+        company.classList.add('loading');
+    });
 </script></head>
 <body>
 <div class="top-bar">
@@ -625,177 +715,6 @@ document.addEventListener("DOMContentLoaded", function() {
     <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
     </footer>
     <script>
-    const companies = document.querySelectorAll(".company");
-    const mainCategories = document.querySelectorAll(".main-category");
-
-    // Toggle sub-categories
-    mainCategories.forEach(category => {
-      category.addEventListener("click", () => {
-        category.classList.toggle("active");
-      });
-    });
-
-    // Filter companies by category
-    function filter(category) {
-      companies.forEach(card => {
-        const match = category === 'all' || card.dataset.category === category;
-        card.style.display = match ? 'block' : 'none';
-      });
-    }
-
-    // Search functionality
-    const searchInput = document.getElementById('searchInput');
-    let searchTimeout;
-    const debounce = (func, delay) => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(func, delay);
-    };
-
-    searchInput.addEventListener('input', () => {
-        debounce(() => {
-            const query = searchInput.value.toLowerCase().trim();
-            companies.forEach(c => {
-                const name = c.dataset.name.toLowerCase();
-                c.style.display = name.includes(query) ? 'block' : 'none';
-            });
-        }, 300);
-    });
-
-    // Star rating system
-    function createStars(container, name) {
-        const saved = localStorage.getItem('rate_' + name);
-        const countKey = 'count_' + name;
-        const count = localStorage.getItem(countKey) || 0;
-        const wrap = container;
-        
-        wrap.innerHTML = '';
-        
-        for (let i = 1; i <= 5; i++) {
-            const s = document.createElement("span");
-            s.textContent = "★";
-            s.classList.add("star");
-            if (saved && i <= saved) s.classList.add("selected");
-            
-            s.onclick = () => {
-                if (!saved) {
-                    localStorage.setItem('rate_' + name, i);
-                    localStorage.setItem(countKey, +count + 1);
-                    document.getElementById('count-' + name).textContent = (+count + 1) + " تقييم";
-                    [...wrap.children].forEach((star, idx) => {
-                        star.classList.toggle("selected", idx < i);
-                    });
-                    
-                    const successMsg = document.createElement('div');
-                    successMsg.textContent = "شكراً لتقييمك!";
-                    successMsg.style.cssText = `
-                        position: fixed;
-                        top: 20px;
-                        right: 20px;
-                        background: var(--secondary-color);
-                        color: white;
-                        padding: 1rem 2rem;
-                        border-radius: 8px;
-                        box-shadow: var(--card-shadow);
-                        animation: slideIn 0.3s ease-out;
-                        z-index: 1000;
-                    `;
-                    document.body.appendChild(successMsg);
-                    setTimeout(() => successMsg.remove(), 3000);
-                }
-            };
-            wrap.appendChild(s);
-        }
-        document.getElementById('count-' + name).textContent = count + " تقييم";
-    }
-
-    document.querySelectorAll('.stars').forEach(div => {
-        const name = div.dataset.name;
-        createStars(div, name);
-    });
-
-    // Show first category's sub-categories by default
-    document.querySelector(".main-category").classList.add("active");
-
-    // تحسين وظيفة التصفية
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            // إزالة الفئة النشطة من جميع الأزرار
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            // إضافة الفئة النشطة للزر المحدد
-            btn.classList.add('active');
-            // تصفية الشركات
-            filter(btn.dataset.category);
-        });
-    });
-
-    // تحسين وظيفة البحث
-    const searchInput = document.getElementById('searchInput');
-    let searchTimeout;
-
-    searchInput.addEventListener('input', function() {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            const query = this.value.toLowerCase().trim();
-            companies.forEach(company => {
-                const name = company.dataset.name.toLowerCase();
-                const category = company.dataset.category.toLowerCase();
-                const shouldShow = name.includes(query) || category.includes(query);
-                company.style.display = shouldShow ? 'block' : 'none';
-            });
-        }, 300);
-    });
-
-    // تحسين نظام التقييم
-    function createStars(container, name) {
-        const saved = localStorage.getItem('rate_' + name);
-        const countKey = 'count_' + name;
-        const count = localStorage.getItem(countKey) || 0;
-        const wrap = container;
-        
-        wrap.innerHTML = ''; // مسح النجوم السابقة
-        
-        for (let i = 1; i <= 5; i++) {
-            const s = document.createElement("span");
-            s.textContent = "★";
-            s.classList.add("star");
-            if (saved && i <= saved) s.classList.add("selected");
-            
-            s.onclick = () => {
-                if (!saved) {
-                    localStorage.setItem('rate_' + name, i);
-                    localStorage.setItem(countKey, +count + 1);
-                    document.getElementById('count-' + name).textContent = (+count + 1) + " تقييم";
-                    [...wrap.children].forEach((star, idx) => {
-                        star.classList.toggle("selected", idx < i);
-                    });
-                    // إظهار رسالة نجاح أكثر جاذبية
-                    const successMsg = document.createElement('div');
-                    successMsg.textContent = "شكراً لتقييمك!";
-                    successMsg.style.cssText = `
-                        position: fixed;
-                        top: 20px;
-                        right: 20px;
-                        background: var(--secondary-color);
-                        color: white;
-                        padding: 1rem 2rem;
-                        border-radius: 8px;
-                        box-shadow: var(--card-shadow);
-                        animation: slideIn 0.3s ease-out;
-                    `;
-                    document.body.appendChild(successMsg);
-                    setTimeout(() => successMsg.remove(), 3000);
-                }
-            };
-            wrap.appendChild(s);
-        }
-        document.getElementById('count-' + name).textContent = count + " تقييم";
-    }
-
-    // إضافة تأثيرات حركية للشركات
-    companies.forEach(company => {
-        company.classList.add('loading');
-    });
-
     // تحسين تحميل الصور
     document.addEventListener('DOMContentLoaded', () => {
         const images = document.querySelectorAll('img[loading="lazy"]');
