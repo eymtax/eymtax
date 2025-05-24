@@ -5,250 +5,512 @@
 <meta charset="utf-8"/>
 <title>دليل شركات سوريا الشامل - Eymta X</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+    :root {
+        --primary-color: #2c3e50;
+        --secondary-color: #3498db;
+        --accent-color: #e74c3c;
+        --background-color: #f8f9fa;
+        --text-color: #2c3e50;
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --transition-speed: 0.3s;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     body { 
-      font-family: sans-serif; 
-      background-color: #f9f9f9; 
-      color: #333; 
-      margin: 0; 
-      padding: 0; 
-      line-height: 1.6;
+        font-family: 'Tajawal', sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
     }
+
     header { 
-      background-color: #111; 
-      color: white; 
-      padding: 15px; 
-      text-align: center; 
+        background-color: var(--primary-color);
+        color: white;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: var(--card-shadow);
     }
+
     header h1 { 
-      margin: 0; 
-      font-size: 1.5rem;
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 700;
     }
-    .search { 
-      padding: 12px; 
-      width: 90%; 
-      max-width: 600px; 
-      margin: 15px auto; 
-      display: block;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 16px;
+
+    .search-container {
+        position: relative;
+        max-width: 600px;
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+    }
+
+    .search {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        padding-right: 3rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all var(--transition-speed);
+        font-family: 'Tajawal', sans-serif;
+        background: white;
+    }
+
+    .search:focus {
+        outline: none;
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
     }
     
     .main-content {
-      display: flex;
-      gap: 20px;
-      padding: 15px;
-      max-width: 1400px;
-      margin: 0 auto;
+        display: flex;
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
     }
 
     .sidebar {
-      width: 300px;
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      height: fit-content;
-      position: sticky;
-      top: 20px;
+        width: 320px;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+        height: fit-content;
+        position: sticky;
+        top: 2rem;
     }
 
     .category-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+        list-style: none;
     }
 
     .main-category {
-      margin-bottom: 12px;
-      font-weight: bold;
-      color: #0077cc;
-      cursor: pointer;
-      padding: 8px;
-      border-radius: 6px;
-      transition: background-color 0.3s;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        cursor: pointer;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        transition: all var(--transition-speed);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .main-category:hover {
-      background-color: #f0f7ff;
+        background-color: rgba(52, 152, 219, 0.1);
+        color: var(--secondary-color);
     }
 
     .sub-categories {
-      list-style: none;
-      padding-right: 15px;
-      margin: 5px 0;
-      display: none;
+        list-style: none;
+        padding-right: 1.5rem;
+        margin: 0.5rem 0;
+        display: none;
     }
 
     .sub-categories li {
-      margin: 8px 0;
-      cursor: pointer;
-      color: #555;
-      transition: color 0.3s;
-      padding: 6px 8px;
-      border-radius: 4px;
+        margin: 0.5rem 0;
+        cursor: pointer;
+        color: #666;
+        transition: all var(--transition-speed);
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
     }
 
     .sub-categories li:hover {
-      color: #0077cc;
-      background-color: #f0f7ff;
+        color: var(--secondary-color);
+        background-color: rgba(52, 152, 219, 0.1);
     }
 
     .container {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-      justify-content: flex-start;
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
     }
 
     .company {
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: right;
-      position: relative;
-      transition: transform 0.3s;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+        text-align: right;
+        position: relative;
+        transition: all var(--transition-speed);
+        overflow: hidden;
     }
 
     .company:hover {
-      transform: translateY(-5px);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     }
 
     .vip {
-      border: 2px solid gold;
-      background-color: #fffbe6;
+        border: 2px solid #f1c40f;
+        background-color: #fffdf0;
     }
 
     .vip::before {
-      content: "شركة مميزة";
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      background-color: gold;
-      color: #111;
-      padding: 5px 10px;
-      border-radius: 0 0 10px 0;
-      font-size: 14px;
+        content: "شركة مميزة";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        background-color: #f1c40f;
+        color: #2c3e50;
+        padding: 0.5rem 1rem;
+        border-radius: 0 0 12px 0;
+        font-size: 0.9rem;
+        font-weight: 600;
+        box-shadow: var(--card-shadow);
     }
 
     .company img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 10px;
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        transition: transform var(--transition-speed);
+    }
+
+    .company:hover img {
+        transform: scale(1.05);
     }
 
     .company h3 {
-      margin: 10px 0;
-      font-size: 1.2rem;
+        margin: 1rem 0;
+        font-size: 1.3rem;
+        color: var(--primary-color);
     }
 
     .company p {
-      margin: 8px 0;
-      color: #666;
+        margin: 0.8rem 0;
+        color: #666;
+        font-size: 1rem;
     }
 
     .stars { 
-      color: #ccc; 
-      cursor: pointer; 
-      margin: 10px 0;
+        color: #ddd;
+        cursor: pointer;
+        margin: 1rem 0;
+        font-size: 1.2rem;
     }
-    .stars span.selected { color: gold; }
+
+    .stars span {
+        transition: color var(--transition-speed);
+    }
+
+    .stars span.selected { 
+        color: #f1c40f;
+    }
+
     .rating-count { 
-      font-size: 12px; 
-      color: #555; 
-      margin-top: 5px;
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 0.5rem;
     }
     
     footer {
-      background-color: #222;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+        background-color: var(--primary-color);
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        margin-top: 4rem;
     }
 
     .back-btn {
-      display: block;
-      text-align: center;
-      margin: 20px auto;
-      text-decoration: none;
-      padding: 12px 24px;
-      background: #0077cc;
-      color: white;
-      border-radius: 8px;
-      width: fit-content;
-      transition: background-color 0.3s;
+        display: inline-block;
+        text-align: center;
+        margin: 2rem auto;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        background: var(--secondary-color);
+        color: white;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: all var(--transition-speed);
+        box-shadow: var(--card-shadow);
     }
 
     .back-btn:hover {
-      background-color: #005fa3;
+        background-color: #2980b9;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 1024px) {
+        .main-content {
+            padding: 1.5rem;
+        }
+
+        .container {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
     }
 
     @media (max-width: 768px) {
-      .main-content {
-        flex-direction: column;
-        padding: 10px;
-      }
-      
-      .sidebar {
-        width: 100%;
-        position: static;
-        margin-bottom: 20px;
-      }
+        .main-content {
+            flex-direction: column;
+            padding: 1rem;
+        }
+        
+        .sidebar {
+            width: 100%;
+            position: static;
+            margin-bottom: 2rem;
+        }
 
-      .container {
-        grid-template-columns: 1fr;
-      }
+        .container {
+            grid-template-columns: 1fr;
+        }
 
-      .company {
-        width: 100%;
-      }
+        header h1 {
+            font-size: 1.5rem;
+        }
 
-      .company img {
-        height: 200px;
-      }
-
-      header {
-        padding: 10px;
-      }
-
-      header h1 {
-        font-size: 1.3rem;
-      }
-
-      .search {
-        width: 95%;
-        padding: 10px;
-      }
-
-      .main-category {
-        font-size: 0.95rem;
-      }
-
-      .sub-categories li {
-        font-size: 0.9rem;
-      }
+        .search {
+            padding: 0.8rem 1.2rem;
+        }
     }
 
     @media (max-width: 480px) {
-      .company img {
-        height: 180px;
-      }
+        .company {
+            padding: 1rem;
+        }
 
-      .company h3 {
-        font-size: 1.1rem;
-      }
+        .company img {
+            height: 180px;
+        }
 
-      .company p {
-        font-size: 0.9rem;
-      }
+        .company h3 {
+            font-size: 1.2rem;
+        }
+
+        .company p {
+            font-size: 0.9rem;
+        }
+
+        .main-category {
+            font-size: 1rem;
+        }
+
+        .sub-categories li {
+            font-size: 0.9rem;
+        }
     }
-  </style>
+
+    /* تحسينات إضافية للقابلية للقراءة */
+    .company-info {
+        padding: 1rem 0;
+    }
+
+    .company-contact {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+    }
+
+    .company-contact a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        transition: color var(--transition-speed);
+    }
+
+    .company-contact a:hover {
+        color: var(--primary-color);
+    }
+
+    /* تأثيرات التحميل */
+    .loading {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* تحسين شريط التنقل العلوي */
+    .top-bar {
+        background: white;
+        padding: 1rem 0;
+        box-shadow: var(--card-shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .logo {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        text-decoration: none;
+        letter-spacing: 2px;
+        font-family: 'Tajawal', sans-serif;
+        transition: color var(--transition-speed);
+    }
+
+    .logo:hover {
+        color: var(--secondary-color);
+    }
+
+    /* تحسين تصميم الإعلانات */
+    .ad-banner-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+        padding: 0 1rem;
+    }
+
+    .ad-banner {
+        width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transition: transform var(--transition-speed);
+    }
+
+    .ad-banner:hover {
+        transform: translateY(-5px);
+    }
+
+    .ad-banner img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* تحسين حقل البحث */
+    .search-container {
+        position: relative;
+        max-width: 600px;
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+    }
+
+    .search {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        padding-right: 3rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all var(--transition-speed);
+        font-family: 'Tajawal', sans-serif;
+        background: white;
+    }
+
+    .search:focus {
+        outline: none;
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+
+    .search-icon {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+        pointer-events: none;
+    }
+
+    /* تحسين أزرار التصفية */
+    .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1rem 0;
+        padding: 0 1rem;
+    }
+
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 8px;
+        background: white;
+        color: var(--primary-color);
+        cursor: pointer;
+        transition: all var(--transition-speed);
+        font-family: 'Tajawal', sans-serif;
+        box-shadow: var(--card-shadow);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+        background: var(--secondary-color);
+        color: white;
+    }
+
+    /* تحسين عرض الشركات */
+    .company {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .company-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .company-footer {
+        margin-top: auto;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+    }
+
+    /* تحسين التقييمات */
+    .rating-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .stars {
+        display: flex;
+        gap: 0.2rem;
+    }
+
+    .star {
+        cursor: pointer;
+        transition: transform var(--transition-speed);
+    }
+
+    .star:hover {
+        transform: scale(1.2);
+    }
+
+    /* تحسين التجاوب */
+    @media (max-width: 768px) {
+        .ad-banner-container {
+            grid-template-columns: 1fr;
+        }
+
+        .filter-buttons {
+            justify-content: center;
+        }
+
+        .filter-btn {
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+        }
+    }
+</style>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll(".main-category").forEach(function(category) {
@@ -262,114 +524,222 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script></head>
 <body>
-<div style="background:#fff; text-align:center; padding:18px 0 8px 0;">
-<a href="index.html" style="font-size:2rem; font-weight:bold; color:#0077cc; text-decoration:none; letter-spacing:2px; font-family:sans-serif;">eymtax</a>
+<div class="top-bar">
+    <div style="max-width: 1400px; margin: 0 auto; text-align: center;">
+        <a href="index.html" class="logo">eymtax</a>
+    </div>
 </div>
+
 <header>
-<h1><a href="index.html" style="color: white; text-decoration: none;">Eymta X</a></h1>
-<p>نرفع أعمالك إلى مستوى جديد</p>
-<a href="tel:+963938029294" style="display: inline-block; padding: 12px 24px; background-color: #0077cc; color: white; text-decoration: none; border-radius: 8px; font-size: 18px; margin: 20px 0;">➕ أضف شركتك</a>
-<input class="search" id="searchInput" placeholder="ابحث عن شركة..." type="text"/>
+    <h1><a href="index.html" style="color: white; text-decoration: none;">Eymta X</a></h1>
+    <p>نرفع أعمالك إلى مستوى جديد</p>
+    <a href="tel:+963938029294" style="display: inline-block; padding: 1rem 2rem; background-color: var(--secondary-color); color: white; text-decoration: none; border-radius: 12px; font-size: 1.1rem; margin: 1.5rem 0; transition: all var(--transition-speed); box-shadow: var(--card-shadow);">
+        ➕ أضف شركتك
+    </a>
+    <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input class="search" id="searchInput" placeholder="ابحث عن شركة..." type="text"/>
+    </div>
 </header>
-<div class="main-content"><div class="ad-banner-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;"><img src="img/اعلان-1.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/><img src="img/اعلان-2.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/><img src="img/اعلان-3.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/></div>
-<aside class="sidebar">
-<ul class="category-list"><li class="main-category">مطاعم / كافيهات</li><ul class="sub-categories"><li>مطاعم شرقية</li><li>مطاعم غربية</li><li>مشاوي</li><li>مخابز</li><li>حلويات</li><li>كافيهات</li></ul><li class="main-category">شحن / نقل</li><ul class="sub-categories"><li>شركات شحن داخلي</li><li>شركات شحن خارجي</li><li>نقل بضائع</li><li>نقل ركاب</li></ul><li class="main-category">تصوير / تسويق</li><ul class="sub-categories"><li>تصوير منتجات</li><li>تصوير أعراس</li><li>تصوير إعلاني</li><li>تصميم جرافيك</li><li>إدارة محتوى</li></ul><li class="main-category">تصنيع / ورشات</li><ul class="sub-categories"><li>نجارة</li><li>حدادة</li><li>خياطة</li><li>مطابع</li><li>صناعة غذائية</li></ul><li class="main-category">تجارة عامة</li><ul class="sub-categories"><li>أدوات كهربائية</li><li>مواد غذائية</li><li>ملابس</li><li>عقارات</li></ul><li class="main-category">خدمات طبية</li><ul class="sub-categories"><li>عيادات</li><li>مخابر</li><li>صيدليات</li><li>مراكز علاج</li></ul><li class="main-category">تعليم / تدريب</li><ul class="sub-categories"><li>معاهد لغات</li><li>دورات برمجة</li><li>كورسات تصوير</li><li>مدارس خاصة</li></ul><li class="main-category">تكنولوجيا / برمجة</li><ul class="sub-categories"><li>شركات برمجة</li><li>تصميم مواقع</li><li>تطبيقات موبايل</li><li>خدمات الإنترنت</li></ul><li class="main-category">أعمال يدوية</li><ul class="sub-categories"><li>صناعة صابون</li><li>تطريز</li><li>حياكة</li><li>مجوهرات يدوية</li></ul></ul>
-</aside>
-<div class="container" id="companyContainer">
-<div class="company vip" data-category="طباعة" data-name="شركة النور للطباعة">
-<img src="https://via.placeholder.com/280x150?text=نور+للطباعة"/>
-<h3>شركة النور للطباعة</h3>
-<p>متخصصة في طباعة البروشورات والفلايرات وبطاقات العمل.</p>
-<p>📞 0999999999 | 📍 حماة</p>
-<div class="stars" data-name="شركة النور للطباعة"></div>
-<div class="rating-count" id="count-شركة النور للطباعة">0 تقييم</div>
-</div>
-<div class="company" data-category="تسويق" data-name="مركز البيان للتسويق">
-<img src="https://via.placeholder.com/280x150?text=البيان+للتسويق"/>
-<h3>مركز البيان للتسويق</h3>
-<p>خبراء في التسويق الإلكتروني والإعلانات الممولة.</p>
-<p>📞 0933333333 | 📍 دمشق</p>
-<div class="stars" data-name="مركز البيان للتسويق"></div>
-<div class="rating-count" id="count-مركز البيان للتسويق">0 تقييم</div>
-</div>
-<div class="company" data-category="تصوير" data-name="فوتوغرافيا ستوديو">
-<img src="https://via.placeholder.com/280x150?text=فوتوغرافيا+ستوديو"/>
-<h3>فوتوغرافيا ستوديو</h3>
-<p>تصوير احترافي للمنتجات والمناسبات.</p>
-<p>📞 0911111111 | 📍 اللاذقية</p>
-<div class="stars" data-name="فوتوغرافيا ستوديو"></div>
-<div class="rating-count" id="count-فوتوغرافيا ستوديو">0 تقييم</div>
-</div>
-</div>
-</div>
-<a class="back-btn" href="index.html">🔙 العودة إلى الصفحة الرئيسية</a>
-<footer>
-<p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
-</footer>
-<script>
-const companies = document.querySelectorAll(".company");
-const mainCategories = document.querySelectorAll(".main-category");
 
-// Toggle sub-categories
-mainCategories.forEach(category => {
-  category.addEventListener("click", () => {
-    category.classList.toggle("active");
-  });
-});
+<div class="main-content">
+    <div class="ad-banner-container">
+        <div class="ad-banner">
+            <img src="img/اعلان-1.png" alt="إعلان 1"/>
+        </div>
+        <div class="ad-banner">
+            <img src="img/اعلان-2.png" alt="إعلان 2"/>
+        </div>
+        <div class="ad-banner">
+            <img src="img/اعلان-3.png" alt="إعلان 3"/>
+        </div>
+    </div>
 
-// Filter companies by category
-function filter(category) {
-  companies.forEach(card => {
-    const match = category === 'all' || card.dataset.category === category;
-    card.style.display = match ? 'block' : 'none';
-  });
-}
+    <div class="filter-buttons">
+        <button class="filter-btn active" data-category="all">الكل</button>
+        <button class="filter-btn" data-category="طباعة">طباعة</button>
+        <button class="filter-btn" data-category="تسويق">تسويق</button>
+        <button class="filter-btn" data-category="تصوير">تصوير</button>
+    </div>
 
-// Search functionality
-document.getElementById("searchInput").addEventListener("input", function () {
-  const q = this.value.toLowerCase();
-  companies.forEach(c => {
-    const name = c.dataset.name.toLowerCase();
-    c.style.display = name.includes(q) ? 'block' : 'none';
-  });
-});
+    <aside class="sidebar">
+    <ul class="category-list"><li class="main-category">مطاعم / كافيهات</li><ul class="sub-categories"><li>مطاعم شرقية</li><li>مطاعم غربية</li><li>مشاوي</li><li>مخابز</li><li>حلويات</li><li>كافيهات</li></ul><li class="main-category">شحن / نقل</li><ul class="sub-categories"><li>شركات شحن داخلي</li><li>شركات شحن خارجي</li><li>نقل بضائع</li><li>نقل ركاب</li></ul><li class="main-category">تصوير / تسويق</li><ul class="sub-categories"><li>تصوير منتجات</li><li>تصوير أعراس</li><li>تصوير إعلاني</li><li>تصميم جرافيك</li><li>إدارة محتوى</li></ul><li class="main-category">تصنيع / ورشات</li><ul class="sub-categories"><li>نجارة</li><li>حدادة</li><li>خياطة</li><li>مطابع</li><li>صناعة غذائية</li></ul><li class="main-category">تجارة عامة</li><ul class="sub-categories"><li>أدوات كهربائية</li><li>مواد غذائية</li><li>ملابس</li><li>عقارات</li></ul><li class="main-category">خدمات طبية</li><ul class="sub-categories"><li>عيادات</li><li>مخابر</li><li>صيدليات</li><li>مراكز علاج</li></ul><li class="main-category">تعليم / تدريب</li><ul class="sub-categories"><li>معاهد لغات</li><li>دورات برمجة</li><li>كورسات تصوير</li><li>مدارس خاصة</li></ul><li class="main-category">تكنولوجيا / برمجة</li><ul class="sub-categories"><li>شركات برمجة</li><li>تصميم مواقع</li><li>تطبيقات موبايل</li><li>خدمات الإنترنت</li></ul><li class="main-category">أعمال يدوية</li><ul class="sub-categories"><li>صناعة صابون</li><li>تطريز</li><li>حياكة</li><li>مجوهرات يدوية</li></ul></ul>
+    </aside>
+    <div class="container" id="companyContainer">
+    <div class="company vip" data-category="طباعة" data-name="شركة النور للطباعة">
+    <img src="https://via.placeholder.com/280x150?text=نور+للطباعة"/>
+    <h3>شركة النور للطباعة</h3>
+    <p>متخصصة في طباعة البروشورات والفلايرات وبطاقات العمل.</p>
+    <p>📞 0999999999 | 📍 حماة</p>
+    <div class="stars" data-name="شركة النور للطباعة"></div>
+    <div class="rating-count" id="count-شركة النور للطباعة">0 تقييم</div>
+    </div>
+    <div class="company" data-category="تسويق" data-name="مركز البيان للتسويق">
+    <img src="https://via.placeholder.com/280x150?text=البيان+للتسويق"/>
+    <h3>مركز البيان للتسويق</h3>
+    <p>خبراء في التسويق الإلكتروني والإعلانات الممولة.</p>
+    <p>📞 0933333333 | 📍 دمشق</p>
+    <div class="stars" data-name="مركز البيان للتسويق"></div>
+    <div class="rating-count" id="count-مركز البيان للتسويق">0 تقييم</div>
+    </div>
+    <div class="company" data-category="تصوير" data-name="فوتوغرافيا ستوديو">
+    <img src="https://via.placeholder.com/280x150?text=فوتوغرافيا+ستوديو"/>
+    <h3>فوتوغرافيا ستوديو</h3>
+    <p>تصوير احترافي للمنتجات والمناسبات.</p>
+    <p>📞 0911111111 | 📍 اللاذقية</p>
+    <div class="stars" data-name="فوتوغرافيا ستوديو"></div>
+    <div class="rating-count" id="count-فوتوغرافيا ستوديو">0 تقييم</div>
+    </div>
+    </div>
+    </div>
+    <a class="back-btn" href="index.html">🔙 العودة إلى الصفحة الرئيسية</a>
+    <footer>
+    <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
+    </footer>
+    <script>
+    const companies = document.querySelectorAll(".company");
+    const mainCategories = document.querySelectorAll(".main-category");
 
-// Star rating system
-function createStars(container, name) {
-  const saved = localStorage.getItem('rate_' + name);
-  const countKey = 'count_' + name;
-  const count = localStorage.getItem(countKey) || 0;
-  const wrap = container;
-  for (let i = 1; i <= 5; i++) {
-    const s = document.createElement("span");
-    s.textContent = "★";
-    s.classList.add("star");
-    if (saved && i <= saved) s.classList.add("selected");
-    s.onclick = () => {
-      if (!saved) {
-        localStorage.setItem('rate_' + name, i);
-        localStorage.setItem(countKey, +count + 1);
-        document.getElementById('count-' + name).textContent = (+count + 1) + " تقييم";
-        [...wrap.children].forEach((star, idx) => {
-          star.classList.toggle("selected", idx < i);
-        });
-        alert("شكراً لتقييمك!");
-      } else {
-        alert("لقد قمت بالتقييم سابقاً.");
+    // Toggle sub-categories
+    mainCategories.forEach(category => {
+      category.addEventListener("click", () => {
+        category.classList.toggle("active");
+      });
+    });
+
+    // Filter companies by category
+    function filter(category) {
+      companies.forEach(card => {
+        const match = category === 'all' || card.dataset.category === category;
+        card.style.display = match ? 'block' : 'none';
+      });
+    }
+
+    // Search functionality
+    document.getElementById("searchInput").addEventListener("input", function () {
+      const q = this.value.toLowerCase();
+      companies.forEach(c => {
+        const name = c.dataset.name.toLowerCase();
+        c.style.display = name.includes(q) ? 'block' : 'none';
+      });
+    });
+
+    // Star rating system
+    function createStars(container, name) {
+      const saved = localStorage.getItem('rate_' + name);
+      const countKey = 'count_' + name;
+      const count = localStorage.getItem(countKey) || 0;
+      const wrap = container;
+      for (let i = 1; i <= 5; i++) {
+        const s = document.createElement("span");
+        s.textContent = "★";
+        s.classList.add("star");
+        if (saved && i <= saved) s.classList.add("selected");
+        s.onclick = () => {
+          if (!saved) {
+            localStorage.setItem('rate_' + name, i);
+            localStorage.setItem(countKey, +count + 1);
+            document.getElementById('count-' + name).textContent = (+count + 1) + " تقييم";
+            [...wrap.children].forEach((star, idx) => {
+              star.classList.toggle("selected", idx < i);
+            });
+            alert("شكراً لتقييمك!");
+          } else {
+            alert("لقد قمت بالتقييم سابقاً.");
+          }
+        };
+        wrap.appendChild(s);
       }
-    };
-    wrap.appendChild(s);
-  }
-  document.getElementById('count-' + name).textContent = count + " تقييم";
-}
+      document.getElementById('count-' + name).textContent = count + " تقييم";
+    }
 
-document.querySelectorAll('.stars').forEach(div => {
-  const name = div.dataset.name;
-  createStars(div, name);
-});
+    document.querySelectorAll('.stars').forEach(div => {
+      const name = div.dataset.name;
+      createStars(div, name);
+    });
 
-// Show first category's sub-categories by default
-document.querySelector(".main-category").classList.add("active");
-</script>
+    // Show first category's sub-categories by default
+    document.querySelector(".main-category").classList.add("active");
+
+    // تحسين وظيفة التصفية
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            // إزالة الفئة النشطة من جميع الأزرار
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            // إضافة الفئة النشطة للزر المحدد
+            btn.classList.add('active');
+            // تصفية الشركات
+            filter(btn.dataset.category);
+        });
+    });
+
+    // تحسين وظيفة البحث
+    const searchInput = document.getElementById('searchInput');
+    let searchTimeout;
+
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            const query = this.value.toLowerCase().trim();
+            companies.forEach(company => {
+                const name = company.dataset.name.toLowerCase();
+                const category = company.dataset.category.toLowerCase();
+                const shouldShow = name.includes(query) || category.includes(query);
+                company.style.display = shouldShow ? 'block' : 'none';
+            });
+        }, 300);
+    });
+
+    // تحسين نظام التقييم
+    function createStars(container, name) {
+        const saved = localStorage.getItem('rate_' + name);
+        const countKey = 'count_' + name;
+        const count = localStorage.getItem(countKey) || 0;
+        const wrap = container;
+        
+        wrap.innerHTML = ''; // مسح النجوم السابقة
+        
+        for (let i = 1; i <= 5; i++) {
+            const s = document.createElement("span");
+            s.textContent = "★";
+            s.classList.add("star");
+            if (saved && i <= saved) s.classList.add("selected");
+            
+            s.onclick = () => {
+                if (!saved) {
+                    localStorage.setItem('rate_' + name, i);
+                    localStorage.setItem(countKey, +count + 1);
+                    document.getElementById('count-' + name).textContent = (+count + 1) + " تقييم";
+                    [...wrap.children].forEach((star, idx) => {
+                        star.classList.toggle("selected", idx < i);
+                    });
+                    // إظهار رسالة نجاح أكثر جاذبية
+                    const successMsg = document.createElement('div');
+                    successMsg.textContent = "شكراً لتقييمك!";
+                    successMsg.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: var(--secondary-color);
+                        color: white;
+                        padding: 1rem 2rem;
+                        border-radius: 8px;
+                        box-shadow: var(--card-shadow);
+                        animation: slideIn 0.3s ease-out;
+                    `;
+                    document.body.appendChild(successMsg);
+                    setTimeout(() => successMsg.remove(), 3000);
+                }
+            };
+            wrap.appendChild(s);
+        }
+        document.getElementById('count-' + name).textContent = count + " تقييم";
+    }
+
+    // إضافة تأثيرات حركية للشركات
+    companies.forEach(company => {
+        company.classList.add('loading');
+    });
+    </script>
 </body>
 </html>
