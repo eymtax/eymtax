@@ -29,22 +29,22 @@
     </section>
 
     <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
-        <form style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <form action="mailto:info@eymtax.com" method="post" enctype="text/plain" style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
             <div style="margin-bottom: 20px;">
                 <label style="display: block; margin-bottom: 8px; font-weight: bold;">الاسم</label>
-                <input type="text" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                <input type="text" name="name" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
             </div>
             <div style="margin-bottom: 20px;">
                 <label style="display: block; margin-bottom: 8px; font-weight: bold;">البريد الإلكتروني</label>
-                <input type="email" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                <input type="email" name="email" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
             </div>
             <div style="margin-bottom: 20px;">
                 <label style="display: block; margin-bottom: 8px; font-weight: bold;">الموضوع</label>
-                <input type="text" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                <input type="text" name="subject" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
             </div>
             <div style="margin-bottom: 20px;">
                 <label style="display: block; margin-bottom: 8px; font-weight: bold;">الرسالة</label>
-                <textarea style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; height: 150px;"></textarea>
+                <textarea name="message" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; height: 150px;"></textarea>
             </div>
             <button type="submit" style="background-color: #0077cc; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">إرسال الرسالة</button>
         </form>
@@ -53,8 +53,8 @@
     <div style="max-width: 800px; margin: 40px auto; padding: 20px;">
         <div style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
             <h3 style="margin-bottom: 20px;">معلومات الاتصال</h3>
-            <p style="margin-bottom: 10px;">📞 الهاتف: +963 938 029 294</p>
-            <p style="margin-bottom: 10px;">📧 البريد الإلكتروني: info@eymtax.com</p>
+            <p style="margin-bottom: 10px;">📞 الهاتف: <a href="tel:+963938029294" style="color: #0077cc; text-decoration: none;">+963 938 029 294</a></p>
+            <p style="margin-bottom: 10px;">📧 البريد الإلكتروني: <a href="mailto:info@eymtax.com" style="color: #0077cc; text-decoration: none;">info@eymtax.com</a></p>
             <p style="margin-bottom: 10px;">📍 العنوان: دمشق، سوريا</p>
         </div>
     </div>
