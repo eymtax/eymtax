@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصوير المنتجات - Eymta X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { font-family: sans-serif; margin: 0; background-color: #f4f4f4; color: #222; }
+        header { background-color: #111; padding: 20px; text-align: center; }
+        header h1 { color: white; margin: 0; }
+        header p { color: #ccc; }
+        nav { margin-top: 10px; }
+        nav a { color: #fff; margin: 0 10px; text-decoration: none; }
+        
+        .main-section { 
+            text-align: center; 
+            padding: 40px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('img/تصوير_المنتجات.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-title {
+            color: #0077cc;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .contact-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0077cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        
+        .contact-button:hover {
+            background-color: #005fa3;
+        }
+        
+        .category-section {
+            margin-bottom: 40px;
+        }
+        
+        .category-title {
+            color: #0077cc;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1><a href="index.html" style="color: white; text-decoration: none;">Eymta X</a></h1>
+    <p>نرفع أعمالك إلى مستوى جديد</p>
+    <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="marketing.html">التسويق الإلكتروني</a>
+        <a href="product-photography.html">تصوير المنتجات</a>
+        <a href="wedding-photography.html">تصوير الأعراس</a>
+        <a href="printing.html">خدمات الطباعة</a>
+        <a href="syrian-companies.html">دليل الشركات</a>
+        <a href="contact-us.html">تواصل معنا</a>
+    </nav>
+</header>
+
+<section class="main-section">
+    <h2>تصوير المنتجات</h2>
+    <p style="font-size: 18px; max-width: 700px; margin: 20px auto;">
+        نقدم خدمات تصوير احترافية للمنتجات بجميع أنواعها، مع التركيز على إبراز التفاصيل والجودة العالية
+    </p>
+    <a href="tel:+963938029294" class="contact-button">📞 اتصل بنا الآن</a>
+</section>
+
+<section class="services-grid">
+    <div class="category-section">
+        <h3 class="category-title">تصوير المنتجات الأساسية</h3>
+        <div class="service-card">
+            <h4 class="service-title">تصوير منتجات ثابتة</h4>
+            <p>منتجات فردية بخلفيات بيضاء أو ملوّنة مع إضاءة احترافية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصوير منيو المطاعم</h4>
+            <p>تصوير احترافي لأصناف الطعام والمشروبات</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصوير منتجات التجميل</h4>
+            <p>تصوير احترافي لمنتجات التجميل والعناية بالبشرة</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصوير المجوهرات</h4>
+            <p>تصوير احترافي للمجوهرات والاكسسوارات</p>
+        </div>
+    </div>
+    
+    <div class="category-section">
+        <h3 class="category-title">تصوير الأزياء والمنتجات المنزلية</h3>
+        <div class="service-card">
+            <h4 class="service-title">تصوير الملابس</h4>
+            <p>تصوير احترافي للملابس والأزياء التجارية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصوير الأثاث</h4>
+            <p>تصوير احترافي للأثاث والمفروشات</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصوير الإلكترونيات</h4>
+            <p>تصوير احترافي للأدوات المنزلية والإلكترونيات</p>
+        </div>
+    </div>
+    
+    <div class="category-section">
+        <h3 class="category-title">تصوير الشركات والمشاريع</h3>
+        <div class="service-card">
+            <h4 class="service-title">التصوير الصناعي</h4>
+            <p>تصوير خطوط الإنتاج والورشات</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصوير الشركات</h4>
+            <p>تصوير المكاتب والشركات</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصوير الموظفين</h4>
+            <p>تصوير احترافي لفريق العمل</p>
+        </div>
+    </div>
+    
+    <div class="category-section">
+        <h3 class="category-title">تصوير الفيديو والمحتوى الرقمي</h3>
+        <div class="service-card">
+            <h4 class="service-title">تصوير الريلز</h4>
+            <p>تصوير ريلز احترافية للسوشيال ميديا</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصوير الفيديو</h4>
+            <p>تصوير فيديو دعائي للإعلانات الرقمية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصوير خلف الكواليس</h4>
+            <p>تصوير احترافي لخلف الكواليس</p>
+        </div>
+    </div>
+    
+    <div class="category-section">
+        <h3 class="category-title">تصوير المواقع والمشاريع الكبيرة</h3>
+        <div class="service-card">
+            <h4 class="service-title">تصوير البانوراما</h4>
+            <p>تصوير بانورامي للمشاريع العقارية</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصوير المواقع</h4>
+            <p>تصوير داخلي وخارجي لمواقع الأعمال</p>
+        </div>
+        
+        <div class="service-card">
+            <h4 class="service-title">تصوير الدرون</h4>
+            <p>تصوير جوي للمواقع الكبيرة والمشاريع الخارجية</p>
+        </div>
+    </div>
+</section>
+
+<div style="text-align: center; padding: 40px; background-color: #f8f9fa;">
+    <a href="tel:+963938029294" style="display: inline-block; padding: 15px 30px; background-color: #0077cc; color: white; text-decoration: none; border-radius: 8px; font-size: 18px; transition: background-color 0.3s;">
+        📞 اطلب الخدمة الآن
+    </a>
+</div>
+
+<footer>
+    <p>Eymta X – نرفع أعمالك إلى مستوى جديد</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<title>لوحة تحكم الموقع - Eymta X</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+        body { margin: 0; font-family: sans-serif; background-color: #f9f9f9; display: flex; min-height: 100vh; }
+        aside {
+            width: 220px;
+            background: #0077cc;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        aside h2 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        aside a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        aside a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        main {
+            flex: 1;
+            padding: 30px;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body><script>
+if (sessionStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+</script>
+<aside>
+<h2>لوحة التحكم</h2>
+<a href="#" onclick="showSection('dashboard')">الرئيسية</a>
+<a href="#" onclick="showSection('companies')">دليل الشركات</a>
+<a href="#" onclick="showSection('services')">الخدمات</a>
+<a href="#" onclick="showSection('team')">فريق العمل</a>
+<a href="#" onclick="showSection('testimonials')">آراء العملاء</a>
+<a href="#" onclick="showSection('pages')">صفحات عامة</a>
+</aside>
+<main>
+<div class="section active" id="dashboard">
+<h1>مرحباً بك في لوحة التحكم</h1>
+<p>اختر من القائمة لإدارة محتوى الموقع.</p>
+</div>
+<div class="section" id="companies">
+<h1>إدارة دليل الشركات السورية</h1>
+<form id="companyForm" style="margin-bottom: 30px;">
+<div>
+<label>اسم الشركة</label>
+<input id="name" required="" type="text"/>
+</div>
+<div>
+<label>الفئة الرئيسية</label>
+<input id="category" required="" type="text"/>
+</div>
+<div>
+<label>التخصص الفرعي</label>
+<input id="subcategory" required="" type="text"/>
+</div>
+<div>
+<label>المدينة</label>
+<input id="city" required="" type="text"/>
+</div>
+<div>
+<label>الوصف</label>
+<textarea id="description" rows="3"></textarea>
+</div>
+<div>
+<label>صورة الشركة (اختيار من الجهاز)</label>
+<input accept="image/*" id="imageFile" type="file"/>
+</div>
+<button type="submit">إضافة الشركة</button>
+</form>
+<table style="width: 100%; border-collapse: collapse;">
+<thead>
+<tr>
+<th>الاسم</th>
+<th>الفئة</th>
+<th>التخصص</th>
+<th>المدينة</th>
+<th>الوصف</th>
+<th>صورة</th>
+<th>حذف</th>
+</tr>
+</thead>
+<tbody id="companyTableBody"></tbody>
+</table>
+</div>
+<div class="section" id="services">
+<h1>إدارة الخدمات</h1>
+<p>قريبًا سيتم عرض خدمات الموقع وإمكانية تعديلها من هنا.</p>
+</div>
+<div class="section" id="team">
+<h1>فريق العمل</h1>
+<p>إضافة أو حذف أو تعديل بيانات فريق العمل.</p>
+</div>
+<div class="section" id="testimonials">
+<h1>آراء العملاء</h1>
+<p>إدارة التعليقات والتقييمات.</p>
+</div>
+<div class="section" id="pages">
+<h1>الصفحات العامة</h1>
+<p>تعديل محتوى الصفحات مثل من نحن، اتصل بنا، إلخ.</p>
+</div>
+</main>
+<script>
+function showSection(id) {
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+}
+</script><script>
+let companies = JSON.parse(localStorage.getItem('companies')) || [];
+const form = document.getElementById('companyForm');
+const tableBody = document.getElementById('companyTableBody');
+const imageInput = document.getElementById('imageFile');
+
+function renderCompanies() {
+    tableBody.innerHTML = '';
+    companies.forEach((c, i) => {
+        let row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${c.name}</td>
+            <td>${c.category}</td>
+            <td>${c.subcategory}</td>
+            <td>${c.city}</td>
+            <td>${c.description}</td>
+            <td><img src="${c.imageBase64}" style="width: 60px; height: 60px; object-fit: cover;"></td>
+            <td><button onclick="deleteCompany(${i})" style="color:red">حذف</button></td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function deleteCompany(index) {
+    companies.splice(index, 1);
+    localStorage.setItem('companies', JSON.stringify(companies));
+    renderCompanies();
+}
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const reader = new FileReader();
+    const file = imageInput.files[0];
+
+    if (file) {
+        reader.onloadend = function () {
+            const newCompany = {
+                name: document.getElementById('name').value,
+                category: document.getElementById('category').value,
+                subcategory: document.getElementById('subcategory').value,
+                city: document.getElementById('city').value,
+                description: document.getElementById('description').value,
+                imageBase64: reader.result
+            };
+            companies.push(newCompany);
+            localStorage.setItem('companies', JSON.stringify(companies));
+            form.reset();
+            renderCompanies();
+        };
+        reader.readAsDataURL(file);
+    } else {
+        alert("يرجى اختيار صورة");
+    }
+});
+
+renderCompanies();
+</script></body>
+</html>
