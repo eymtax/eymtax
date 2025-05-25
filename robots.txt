@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /admin/
-Disallow: /login/
-Disallow: /.git/
-Disallow: /.htaccess
-
-Sitemap: https://eymtax.com/sitemap.xml 
