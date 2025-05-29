@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <title>إدارة الشركات - Eymta X</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: sans-serif; 
+            background-color: #f9f9f9; 
+            color: #333; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: #111;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .admin-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tab.active {
+            background: #0077cc;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .image-upload {
+            border: 2px dashed #ddd;
+            padding: 20px;
+            text-align: center;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background: #0077cc;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .companies-list {
+            margin-top: 20px;
+        }
+
+        .company-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .company-info {
+            flex: 1;
+        }
+
+        .company-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #0077cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 10px;
+            }
+
+            .company-item {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .company-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .error-message {
+            color: #dc3545;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginSection" class="login-container">
+        <h2>تسجيل الدخول</h2>
+        <form id="loginForm" onsubmit="login(event)">
+            <div class="form-group">
+                <label>اسم المستخدم:</label>
+                <input type="text" name="username" required>
+            </div>
+            <div class="form-group">
+                <label>كلمة المرور:</label>
+                <input type="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">دخول</button>
+            <div id="loginError" class="error-message">بيانات الدخول غير صحيحة</div>
+        </form>
+    </div>
+
+    <div id="mainContent" class="hidden">
+        <div class="header">
+            <h1>إدارة الشركات - Eymta X</h1>
+        </div>
+
+        <div class="main-content">
+            <a href="syrian-companies.html" class="back-btn">🔙 العودة إلى دليل الشركات</a>
+
+            <div class="admin-panel">
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('add')">إضافة شركة</button>
+                    <button class="tab" onclick="showTab('manage')">إدارة الشركات</button>
+                </div>
+
+                <div id="addCompanyForm" class="tab-content">
+                    <div class="alert alert-success" id="successAlert">تم إضافة الشركة بنجاح!</div>
+                    <div class="alert alert-danger" id="errorAlert">حدث خطأ أثناء إضافة الشركة.</div>
+
+                    <form id="companyForm" onsubmit="addCompany(event)">
+                        <div class="form-group">
+                            <label>اسم الشركة:</label>
+                            <input type="text" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>التصنيف:</label>
+                            <select name="category" required>
+                                <option value="">اختر التصنيف</option>
+                                <option value="طباعة">طباعة</option>
+                                <option value="تسويق">تسويق</option>
+                                <option value="تصوير">تصوير</option>
+                                <!-- يمكن إضافة المزيد من التصنيفات -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>المدينة:</label>
+                            <select name="city" required>
+                                <option value="">اختر المدينة</option>
+                                <option value="حماة">حماة</option>
+                                <option value="دمشق">دمشق</option>
+                                <option value="حلب">حلب</option>
+                                <option value="اللاذقية">اللاذقية</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>رقم الهاتف:</label>
+                            <input type="tel" name="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>الوصف:</label>
+                            <textarea name="description" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>الموقع الإلكتروني:</label>
+                            <input type="url" name="website">
+                        </div>
+
+                        <div class="form-group">
+                            <label>روابط التواصل الاجتماعي:</label>
+                            <input type="url" name="facebook" placeholder="رابط فيسبوك">
+                            <input type="url" name="instagram" placeholder="رابط انستغرام" style="margin-top: 10px;">
+                        </div>
+
+                        <div class="form-group">
+                            <label>ساعات العمل:</label>
+                            <div class="hours-grid">
+                                <div class="hour-input">
+                                    <label>الأحد:</label>
+                                    <input type="text" name="hours_sunday" placeholder="مثال: 9:00 - 18:00">
+                                </div>
+                                <div class="hour-input">
+                                    <label>الإثنين:</label>
+                                    <input type="text" name="hours_monday" placeholder="مثال: 9:00 - 18:00">
+                                </div>
+                                <!-- يمكن إضافة باقي الأيام -->
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>صور الشركة:</label>
+                            <div class="image-upload">
+                                <input type="file" id="imageUpload" multiple accept="image/*" onchange="previewImages(event)">
+                                <p>اسحب الصور هنا أو انقر للاختيار</p>
+                                <div class="image-preview" id="imagePreview"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" name="isVip">
+                                شركة مميزة (VIP)
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">إضافة الشركة</button>
+                    </form>
+                </div>
+
+                <div id="manageCompanies" class="tab-content" style="display: none;">
+                    <div class="companies-list" id="companiesList">
+                        <!-- سيتم إضافة الشركات هنا ديناميكياً -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // بيانات تسجيل الدخول (يمكنك تغييرها)
+        const ADMIN_CREDENTIALS = {
+            username: "admin",
+            password: "eymtax123"
+        };
+
+        // التحقق من حالة تسجيل الدخول
+        function checkLogin() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            document.getElementById('loginSection').classList.toggle('hidden', isLoggedIn);
+            document.getElementById('mainContent').classList.toggle('hidden', !isLoggedIn);
+            
+            if (isLoggedIn) {
+                loadCompanies();
+            }
+        }
+
+        // تسجيل الدخول
+        function login(event) {
+            event.preventDefault();
+            const form = event.target;
+            const username = form.username.value;
+            const password = form.password.value;
+
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                localStorage.setItem('isLoggedIn', 'true');
+                checkLogin();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('loginError').style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // تسجيل الخروج
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            checkLogin();
+        }
+
+        // إضافة زر تسجيل الخروج في الهيدر
+        document.querySelector('.header').innerHTML += `
+            <button onclick="logout()" class="btn btn-danger" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%);">
+                تسجيل الخروج
+            </button>
+        `;
+
+        // التحقق من تسجيل الدخول عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', checkLogin);
+
+        // إظهار/إخفاء التبويبات
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(tabName === 'add' ? 'addCompanyForm' : 'manageCompanies').style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        // معاينة الصور
+        function previewImages(event) {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+            
+            const files = event.target.files;
+            for (let file of files) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    preview.appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // إضافة شركة جديدة
+        function addCompany(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // تحويل البيانات إلى كائن
+            const companyData = {
+                name: formData.get('name'),
+                category: formData.get('category'),
+                city: formData.get('city'),
+                phone: formData.get('phone'),
+                description: formData.get('description'),
+                website: formData.get('website'),
+                social: {
+                    facebook: formData.get('facebook'),
+                    instagram: formData.get('instagram')
+                },
+                hours: {
+                    "الأحد": formData.get('hours_sunday'),
+                    "الإثنين": formData.get('hours_monday')
+                },
+                isVip: formData.get('isVip') === 'on',
+                images: [] // سيتم إضافة روابط الصور هنا
+            };
+
+            // حفظ البيانات في localStorage
+            const companies = JSON.parse(localStorage.getItem('companies') || '{}');
+            companies[companyData.name] = companyData;
+            localStorage.setItem('companies', JSON.stringify(companies));
+
+            // إظهار رسالة النجاح
+            document.getElementById('successAlert').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('successAlert').style.display = 'none';
+            }, 3000);
+
+            // إعادة تعيين النموذج
+            form.reset();
+            document.getElementById('imagePreview').innerHTML = '';
+        }
+
+        // عرض قائمة الشركات
+        function loadCompanies() {
+            const companies = JSON.parse(localStorage.getItem('companies') || '{}');
+            const companiesList = document.getElementById('companiesList');
+            companiesList.innerHTML = '';
+
+            for (let [name, company] of Object.entries(companies)) {
+                const companyElement = document.createElement('div');
+                companyElement.className = 'company-item';
+                companyElement.innerHTML = `
+                    <div class="company-info">
+                        <h3>${company.name}</h3>
+                        <p>${company.description}</p>
+                        <small>${company.city} | ${company.category}</small>
+                    </div>
+                    <div class="company-actions">
+                        <button class="btn btn-primary" onclick="editCompany('${name}')">تعديل</button>
+                        <button class="btn btn-danger" onclick="deleteCompany('${name}')">حذف</button>
+                    </div>
+                `;
+                companiesList.appendChild(companyElement);
+            }
+        }
+
+        // حذف شركة
+        function deleteCompany(name) {
+            if (confirm('هل أنت متأكد من حذف هذه الشركة؟')) {
+                const companies = JSON.parse(localStorage.getItem('companies') || '{}');
+                delete companies[name];
+                localStorage.setItem('companies', JSON.stringify(companies));
+                loadCompanies();
+            }
+        }
+
+        // تعديل شركة
+        function editCompany(name) {
+            const companies = JSON.parse(localStorage.getItem('companies') || '{}');
+            const company = companies[name];
+            
+            // ملء النموذج ببيانات الشركة
+            const form = document.getElementById('companyForm');
+            form.name.value = company.name;
+            form.category.value = company.category;
+            form.city.value = company.city;
+            form.phone.value = company.phone;
+            form.description.value = company.description;
+            form.website.value = company.website;
+            form.facebook.value = company.social.facebook;
+            form.instagram.value = company.social.instagram;
+            form.isVip.checked = company.isVip;
+
+            // التبديل إلى تبويب الإضافة
+            showTab('add');
+        }
+    </script>
+</body>
+</html> 
