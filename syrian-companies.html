@@ -5,6 +5,7 @@
 <meta charset="utf-8"/>
 <title>دليل شركات سوريا الشامل - Eymta X</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
     body { 
       font-family: sans-serif; 
@@ -248,7 +249,207 @@
         font-size: 0.9rem;
       }
     }
-  </style>
+
+    /* New styles for improvements */
+    .filter-bar {
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        margin: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .filter-group select {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: white;
+    }
+
+    .company-details {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.8);
+        z-index: 1000;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .company-details-content {
+        background: white;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 12px;
+        position: relative;
+    }
+
+    .close-details {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #666;
+    }
+
+    .company-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        margin: 15px 0;
+    }
+
+    .company-gallery img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .company-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 15px 0;
+    }
+
+    .info-item {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .info-item i {
+        color: #0077cc;
+        margin-left: 5px;
+    }
+
+    .comments-section {
+        margin-top: 20px;
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+    }
+
+    .comment {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+
+    .comment-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        color: #666;
+    }
+
+    .share-buttons {
+        display: flex;
+        gap: 10px;
+        margin: 15px 0;
+    }
+
+    .share-button {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .share-button.facebook { background: #1877f2; }
+    .share-button.twitter { background: #1da1f2; }
+    .share-button.whatsapp { background: #25d366; }
+
+    .map-preview {
+        height: 200px;
+        border-radius: 8px;
+        margin: 15px 0;
+        overflow: hidden;
+    }
+
+    .company-hours {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+        margin: 15px 0;
+    }
+
+    .hour-item {
+        background: #f8f9fa;
+        padding: 8px;
+        border-radius: 6px;
+        text-align: center;
+    }
+
+    .hour-item.active {
+        background: #e3f2fd;
+        color: #0077cc;
+    }
+
+    .loading-spinner {
+        display: none;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .loading-spinner i {
+        font-size: 24px;
+        color: #0077cc;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+        display: none;
+    }
+
+    .company-stats {
+        display: flex;
+        gap: 15px;
+        margin: 10px 0;
+        color: #666;
+    }
+
+    .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .stat-item i {
+        color: #0077cc;
+    }
+</style>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll(".main-category").forEach(function(category) {
@@ -271,7 +472,36 @@ document.addEventListener("DOMContentLoaded", function() {
 <a href="tel:+963938029294" style="display: inline-block; padding: 12px 24px; background-color: #0077cc; color: white; text-decoration: none; border-radius: 8px; font-size: 18px; margin: 20px 0;">➕ أضف شركتك</a>
 <input class="search" id="searchInput" placeholder="ابحث عن شركة..." type="text"/>
 </header>
-<div class="main-content"><div class="ad-banner-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;"><img src="img/اعلان-1.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/><img src="img/اعلان-2.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/><img src="img/اعلان-3.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/></div>
+<div class="main-content"><div class="filter-bar">
+    <div class="filter-group">
+        <label>المدينة:</label>
+        <select id="cityFilter">
+            <option value="">الكل</option>
+            <option value="حماة">حماة</option>
+            <option value="دمشق">دمشق</option>
+            <option value="حلب">حلب</option>
+            <option value="اللاذقية">اللاذقية</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>التقييم:</label>
+        <select id="ratingFilter">
+            <option value="">الكل</option>
+            <option value="5">5 نجوم</option>
+            <option value="4">4 نجوم وأعلى</option>
+            <option value="3">3 نجوم وأعلى</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>الترتيب:</label>
+        <select id="sortFilter">
+            <option value="name">الاسم</option>
+            <option value="rating">التقييم</option>
+            <option value="reviews">عدد التقييمات</option>
+        </select>
+    </div>
+</div>
+<div class="ad-banner-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;"><img src="img/اعلان-1.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/><img src="img/اعلان-2.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/><img src="img/اعلان-3.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/></div>
 <aside class="sidebar">
 <ul class="category-list"><li class="main-category">مطاعم / كافيهات</li><ul class="sub-categories"><li>مطاعم شرقية</li><li>مطاعم غربية</li><li>مشاوي</li><li>مخابز</li><li>حلويات</li><li>كافيهات</li></ul><li class="main-category">شحن / نقل</li><ul class="sub-categories"><li>شركات شحن داخلي</li><li>شركات شحن خارجي</li><li>نقل بضائع</li><li>نقل ركاب</li></ul><li class="main-category">تصوير / تسويق</li><ul class="sub-categories"><li>تصوير منتجات</li><li>تصوير أعراس</li><li>تصوير إعلاني</li><li>تصميم جرافيك</li><li>إدارة محتوى</li></ul><li class="main-category">تصنيع / ورشات</li><ul class="sub-categories"><li>نجارة</li><li>حدادة</li><li>خياطة</li><li>مطابع</li><li>صناعة غذائية</li></ul><li class="main-category">تجارة عامة</li><ul class="sub-categories"><li>أدوات كهربائية</li><li>مواد غذائية</li><li>ملابس</li><li>عقارات</li></ul><li class="main-category">خدمات طبية</li><ul class="sub-categories"><li>عيادات</li><li>مخابر</li><li>صيدليات</li><li>مراكز علاج</li></ul><li class="main-category">تعليم / تدريب</li><ul class="sub-categories"><li>معاهد لغات</li><li>دورات برمجة</li><li>كورسات تصوير</li><li>مدارس خاصة</li></ul><li class="main-category">تكنولوجيا / برمجة</li><ul class="sub-categories"><li>شركات برمجة</li><li>تصميم مواقع</li><li>تطبيقات موبايل</li><li>خدمات الإنترنت</li></ul><li class="main-category">أعمال يدوية</li><ul class="sub-categories"><li>صناعة صابون</li><li>تطريز</li><li>حياكة</li><li>مجوهرات يدوية</li></ul></ul>
 </aside>
@@ -301,6 +531,20 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="rating-count" id="count-فوتوغرافيا ستوديو">0 تقييم</div>
 </div>
 </div>
+</div>
+<div class="loading-spinner">
+    <i class="fas fa-spinner"></i>
+</div>
+<div class="no-results">
+    <i class="fas fa-search" style="font-size: 48px; color: #ccc; margin-bottom: 20px;"></i>
+    <h3>لم يتم العثور على نتائج</h3>
+    <p>جرب تغيير معايير البحث</p>
+</div>
+<div class="company-details" id="companyDetails">
+    <div class="company-details-content">
+        <button class="close-details" onclick="closeDetails()">×</button>
+        <div id="detailsContent"></div>
+    </div>
 </div>
 <a class="back-btn" href="index.html">🔙 العودة إلى الصفحة الرئيسية</a>
 <footer>
@@ -370,6 +614,270 @@ document.querySelectorAll('.stars').forEach(div => {
 
 // Show first category's sub-categories by default
 document.querySelector(".main-category").classList.add("active");
+
+// Enhanced company data structure
+const companyData = {
+    "شركة النور للطباعة": {
+        name: "شركة النور للطباعة",
+        category: "طباعة",
+        city: "حماة",
+        phone: "0999999999",
+        description: "متخصصة في طباعة البروشورات والفلايرات وبطاقات العمل.",
+        images: [
+            "https://via.placeholder.com/800x600?text=نور+للطباعة+1",
+            "https://via.placeholder.com/800x600?text=نور+للطباعة+2",
+            "https://via.placeholder.com/800x600?text=نور+للطباعة+3"
+        ],
+        location: {
+            lat: 35.1376,
+            lng: 36.7584
+        },
+        hours: {
+            "الأحد": "9:00 - 18:00",
+            "الإثنين": "9:00 - 18:00",
+            "الثلاثاء": "9:00 - 18:00",
+            "الأربعاء": "9:00 - 18:00",
+            "الخميس": "9:00 - 18:00",
+            "الجمعة": "10:00 - 16:00",
+            "السبت": "مغلق"
+        },
+        website: "https://example.com",
+        social: {
+            facebook: "https://facebook.com/example",
+            instagram: "https://instagram.com/example"
+        },
+        isVip: true
+    }
+    // Add more companies here
+};
+
+// Enhanced filtering and sorting
+function filterCompanies() {
+    const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+    const cityFilter = document.getElementById('cityFilter').value;
+    const ratingFilter = document.getElementById('ratingFilter').value;
+    const sortFilter = document.getElementById('sortFilter').value;
+
+    let filteredCompanies = Object.values(companyData).filter(company => {
+        const matchesSearch = company.name.toLowerCase().includes(searchQuery) ||
+                            company.description.toLowerCase().includes(searchQuery);
+        const matchesCity = !cityFilter || company.city === cityFilter;
+        const matchesRating = !ratingFilter || getCompanyRating(company.name) >= parseInt(ratingFilter);
+        return matchesSearch && matchesCity && matchesRating;
+    });
+
+    // Sort companies
+    filteredCompanies.sort((a, b) => {
+        switch(sortFilter) {
+            case 'name':
+                return a.name.localeCompare(b.name);
+            case 'rating':
+                return getCompanyRating(b.name) - getCompanyRating(a.name);
+            case 'reviews':
+                return getCompanyReviewCount(b.name) - getCompanyReviewCount(a.name);
+            default:
+                return 0;
+        }
+    });
+
+    displayCompanies(filteredCompanies);
+}
+
+// Enhanced company display
+function displayCompanies(companies) {
+    const container = document.getElementById('companyContainer');
+    container.innerHTML = '';
+
+    if (companies.length === 0) {
+        document.querySelector('.no-results').style.display = 'block';
+        return;
+    }
+
+    document.querySelector('.no-results').style.display = 'none';
+
+    companies.forEach(company => {
+        const card = createCompanyCard(company);
+        container.appendChild(card);
+    });
+}
+
+// Enhanced company card creation
+function createCompanyCard(company) {
+    const card = document.createElement('div');
+    card.className = `company ${company.isVip ? 'vip' : ''}`;
+    card.dataset.name = company.name;
+    card.dataset.category = company.category;
+
+    card.innerHTML = `
+        <img src="${company.images[0]}" alt="${company.name}"/>
+        <h3>${company.name}</h3>
+        <p>${company.description}</p>
+        <div class="company-stats">
+            <div class="stat-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>${company.city}</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-phone"></i>
+                <span>${company.phone}</span>
+            </div>
+        </div>
+        <div class="stars" data-name="${company.name}"></div>
+        <div class="rating-count" id="count-${company.name}">0 تقييم</div>
+        <button onclick="showDetails('${company.name}')" class="view-details-btn">عرض التفاصيل</button>
+    `;
+
+    return card;
+}
+
+// Company details view
+function showDetails(companyName) {
+    const company = companyData[companyName];
+    const detailsContent = document.getElementById('detailsContent');
+    
+    detailsContent.innerHTML = `
+        <h2>${company.name}</h2>
+        <div class="company-gallery">
+            ${company.images.map(img => `<img src="${img}" alt="${company.name}"/>`).join('')}
+        </div>
+        <div class="company-info-grid">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>${company.city}</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-phone"></i>
+                <span>${company.phone}</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-globe"></i>
+                <a href="${company.website}" target="_blank">الموقع الإلكتروني</a>
+            </div>
+        </div>
+        <div class="map-preview">
+            <iframe
+                width="100%"
+                height="100%"
+                frameborder="0"
+                style="border:0"
+                src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${company.location.lat},${company.location.lng}"
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class="company-hours">
+            ${Object.entries(company.hours).map(([day, hours]) => `
+                <div class="hour-item ${isToday(day) ? 'active' : ''}">
+                    <strong>${day}</strong>
+                    <div>${hours}</div>
+                </div>
+            `).join('')}
+        </div>
+        <div class="share-buttons">
+            <button class="share-button facebook" onclick="shareOnFacebook('${company.name}')">
+                <i class="fab fa-facebook-f"></i>
+                مشاركة
+            </button>
+            <button class="share-button twitter" onclick="shareOnTwitter('${company.name}')">
+                <i class="fab fa-twitter"></i>
+                تغريد
+            </button>
+            <button class="share-button whatsapp" onclick="shareOnWhatsApp('${company.name}')">
+                <i class="fab fa-whatsapp"></i>
+                واتساب
+            </button>
+        </div>
+        <div class="comments-section">
+            <h3>التعليقات</h3>
+            <div id="comments-${company.name}"></div>
+            <form onsubmit="addComment(event, '${company.name}')">
+                <textarea placeholder="اكتب تعليقك هنا..." required></textarea>
+                <button type="submit">إرسال</button>
+            </form>
+        </div>
+    `;
+
+    document.getElementById('companyDetails').style.display = 'block';
+    loadComments(companyName);
+}
+
+function closeDetails() {
+    document.getElementById('companyDetails').style.display = 'none';
+}
+
+// Helper functions
+function isToday(day) {
+    const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+    return days[new Date().getDay()] === day;
+}
+
+function getCompanyRating(name) {
+    return parseInt(localStorage.getItem('rate_' + name)) || 0;
+}
+
+function getCompanyReviewCount(name) {
+    return parseInt(localStorage.getItem('count_' + name)) || 0;
+}
+
+// Social sharing functions
+function shareOnFacebook(companyName) {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
+}
+
+function shareOnTwitter(companyName) {
+    const text = encodeURIComponent(`تعرف على ${companyName} في دليل الشركات السورية`);
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
+}
+
+function shareOnWhatsApp(companyName) {
+    const text = encodeURIComponent(`تعرف على ${companyName} في دليل الشركات السورية`);
+    window.open(`https://wa.me/?text=${text}`);
+}
+
+// Comments system
+function loadComments(companyName) {
+    const comments = JSON.parse(localStorage.getItem('comments_' + companyName)) || [];
+    const commentsContainer = document.getElementById('comments-' + companyName);
+    
+    commentsContainer.innerHTML = comments.map(comment => `
+        <div class="comment">
+            <div class="comment-header">
+                <span>${comment.author}</span>
+                <span>${new Date(comment.date).toLocaleDateString('ar-SA')}</span>
+            </div>
+            <div class="comment-content">${comment.text}</div>
+        </div>
+    `).join('');
+}
+
+function addComment(event, companyName) {
+    event.preventDefault();
+    const form = event.target;
+    const text = form.querySelector('textarea').value;
+    
+    const comments = JSON.parse(localStorage.getItem('comments_' + companyName)) || [];
+    comments.push({
+        author: 'زائر',
+        text: text,
+        date: new Date().toISOString()
+    });
+    
+    localStorage.setItem('comments_' + companyName, JSON.stringify(comments));
+    loadComments(companyName);
+    form.reset();
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    filterCompanies();
+    
+    // Add event listeners for filters
+    document.getElementById('cityFilter').addEventListener('change', filterCompanies);
+    document.getElementById('ratingFilter').addEventListener('change', filterCompanies);
+    document.getElementById('sortFilter').addEventListener('change', filterCompanies);
+    document.getElementById('searchInput').addEventListener('input', filterCompanies);
+});
 </script>
 </body>
 </html>
