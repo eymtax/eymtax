@@ -1,0 +1,7 @@
+[[plugins]]
+  package = "netlify-plugin-cache-control"
+
+  [plugins.inputs]
+    headers = [
+      "/*: Cache-Control: no-store"
+    ] 
