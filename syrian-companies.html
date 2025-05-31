@@ -41,7 +41,7 @@
     }
     .main-content {
       display: flex;
-      flex-direction: row-reverse;
+      flex-direction: row;
       gap: 30px;
       padding: 30px 20px 0 20px;
       max-width: 1400px;
@@ -50,15 +50,20 @@
     }
     .sidebar {
       width: 270px;
-      background: #fff;
-      padding: 20px 18px;
-      border-radius: 14px;
-      box-shadow: 0 2px 16px rgba(0,119,204,0.07);
+      background: linear-gradient(135deg,#f8fafc 60%,#e3eafc 100%);
+      padding: 24px 18px 24px 18px;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,119,204,0.10);
       height: fit-content;
       position: sticky;
       top: 30px;
       min-width: 220px;
       align-self: flex-start;
+      border: 1.5px solid #e0e7ef;
+      transition: box-shadow 0.3s;
+    }
+    .sidebar:hover {
+      box-shadow: 0 8px 32px rgba(0,119,204,0.16);
     }
     .category-list {
       list-style: none;
@@ -70,19 +75,29 @@
       font-weight: bold;
       color: #0077cc;
       cursor: pointer;
-      padding: 10px 8px;
-      border-radius: 8px;
-      transition: background-color 0.3s;
-      font-size: 1.1rem;
+      padding: 12px 10px 12px 0;
+      border-radius: 10px;
+      transition: background-color 0.3s, color 0.3s;
+      font-size: 1.13rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .main-category i {
+      color: #0077cc;
+      font-size: 1.2em;
+      margin-left: 7px;
     }
     .main-category:hover, .main-category.active {
-      background-color: #f0f7ff;
+      background-color: #eaf4ff;
+      color: #005fa3;
     }
     .sub-categories {
       list-style: none;
-      padding-right: 18px;
+      padding-right: 24px;
       margin: 5px 0 12px 0;
       display: none;
+      font-size: 0.98rem;
     }
     .sub-categories li {
       margin: 8px 0;
@@ -90,7 +105,7 @@
       color: #555;
       transition: color 0.3s, background 0.3s;
       padding: 7px 10px;
-      border-radius: 6px;
+      border-radius: 7px;
       font-size: 1rem;
     }
     .sub-categories li:hover {
@@ -153,8 +168,10 @@
     .slide img {
       width: 100%;
       height: 220px;
-      object-fit: cover;
+      object-fit: contain;
+      background: #f8fafc;
       border-radius: 14px;
+      display: block;
     }
     .slider-nav {
       position: absolute;
@@ -353,6 +370,11 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script></head>
 <body>
+<!-- صورة الجامع الأموي -->
+<div style="width:100%;max-height:340px;overflow:hidden;position:relative;">
+  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="الجامع الأموي بدمشق" style="width:100%;height:340px;object-fit:cover;filter:brightness(0.92) contrast(1.08);display:block;" loading="lazy">
+  <div style="position:absolute;bottom:0;right:0;left:0;padding:24px 0 18px 0;background:linear-gradient(0deg,rgba(0,0,0,0.55) 60%,rgba(0,0,0,0));color:#fff;text-align:center;font-size:2.1rem;font-weight:bold;letter-spacing:2px;font-family:'Cairo',Tahoma,sans-serif;">دليل الشركات السورية</div>
+</div>
 <div style="background:#fff; text-align:center; padding:18px 0 8px 0;">
 <a href="index.html" style="font-size:2rem; font-weight:bold; color:#0077cc; text-decoration:none; letter-spacing:2px; font-family:sans-serif;">eymtax</a>
 </div>
@@ -364,7 +386,26 @@ document.addEventListener("DOMContentLoaded", function() {
 </header>
 <div class="main-content">
     <aside class="sidebar">
-        <ul class="category-list"><li class="main-category">مطاعم / كافيهات</li><ul class="sub-categories"><li>مطاعم شرقية</li><li>مطاعم غربية</li><li>مشاوي</li><li>مخابز</li><li>حلويات</li><li>كافيهات</li></ul><li class="main-category">شحن / نقل</li><ul class="sub-categories"><li>شركات شحن داخلي</li><li>شركات شحن خارجي</li><li>نقل بضائع</li><li>نقل ركاب</li></ul><li class="main-category">تصوير / تسويق</li><ul class="sub-categories"><li>تصوير منتجات</li><li>تصوير أعراس</li><li>تصوير إعلاني</li><li>تصميم جرافيك</li><li>إدارة محتوى</li></ul><li class="main-category">تصنيع / ورشات</li><ul class="sub-categories"><li>نجارة</li><li>حدادة</li><li>خياطة</li><li>مطابع</li><li>صناعة غذائية</li></ul><li class="main-category">تجارة عامة</li><ul class="sub-categories"><li>أدوات كهربائية</li><li>مواد غذائية</li><li>ملابس</li><li>عقارات</li></ul><li class="main-category">خدمات طبية</li><ul class="sub-categories"><li>عيادات</li><li>مخابر</li><li>صيدليات</li><li>مراكز علاج</li></ul><li class="main-category">تعليم / تدريب</li><ul class="sub-categories"><li>معاهد لغات</li><li>دورات برمجة</li><li>كورسات تصوير</li><li>مدارس خاصة</li></ul><li class="main-category">تكنولوجيا / برمجة</li><ul class="sub-categories"><li>شركات برمجة</li><li>تصميم مواقع</li><li>تطبيقات موبايل</li><li>خدمات الإنترنت</li></ul><li class="main-category">أعمال يدوية</li><ul class="sub-categories"><li>صناعة صابون</li><li>تطريز</li><li>حياكة</li><li>مجوهرات يدوية</li></ul></ul>
+        <ul class="category-list">
+            <li class="main-category"><i class="fas fa-utensils"></i> مطاعم / كافيهات</li>
+            <ul class="sub-categories"><li>مطاعم شرقية</li><li>مطاعم غربية</li><li>مشاوي</li><li>مخابز</li><li>حلويات</li><li>كافيهات</li></ul>
+            <li class="main-category"><i class="fas fa-truck"></i> شحن / نقل</li>
+            <ul class="sub-categories"><li>شركات شحن داخلي</li><li>شركات شحن خارجي</li><li>نقل بضائع</li><li>نقل ركاب</li></ul>
+            <li class="main-category"><i class="fas fa-camera"></i> تصوير / تسويق</li>
+            <ul class="sub-categories"><li>تصوير منتجات</li><li>تصوير أعراس</li><li>تصوير إعلاني</li><li>تصميم جرافيك</li><li>إدارة محتوى</li></ul>
+            <li class="main-category"><i class="fas fa-industry"></i> تصنيع / ورشات</li>
+            <ul class="sub-categories"><li>نجارة</li><li>حدادة</li><li>خياطة</li><li>مطابع</li><li>صناعة غذائية</li></ul>
+            <li class="main-category"><i class="fas fa-store"></i> تجارة عامة</li>
+            <ul class="sub-categories"><li>أدوات كهربائية</li><li>مواد غذائية</li><li>ملابس</li><li>عقارات</li></ul>
+            <li class="main-category"><i class="fas fa-briefcase-medical"></i> خدمات طبية</li>
+            <ul class="sub-categories"><li>عيادات</li><li>مخابر</li><li>صيدليات</li><li>مراكز علاج</li></ul>
+            <li class="main-category"><i class="fas fa-chalkboard-teacher"></i> تعليم / تدريب</li>
+            <ul class="sub-categories"><li>معاهد لغات</li><li>دورات برمجة</li><li>كورسات تصوير</li><li>مدارس خاصة</li></ul>
+            <li class="main-category"><i class="fas fa-laptop-code"></i> تكنولوجيا / برمجة</li>
+            <ul class="sub-categories"><li>شركات برمجة</li><li>تصميم مواقع</li><li>تطبيقات موبايل</li><li>خدمات الإنترنت</li></ul>
+            <li class="main-category"><i class="fas fa-gem"></i> أعمال يدوية</li>
+            <ul class="sub-categories"><li>صناعة صابون</li><li>تطريز</li><li>حياكة</li><li>مجوهرات يدوية</li></ul>
+        </ul>
     </aside>
     <div class="content-area">
         <div class="filter-bar">
@@ -794,23 +835,45 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('searchInput').addEventListener('input', filterCompanies);
 });
 
-// سلايدر الإعلانات
-const slides = document.querySelectorAll('.slide');
-let currentSlide = 0;
-function showSlide(idx) {
-    slides.forEach((slide, i) => {
-        slide.style.transform = `translateX(${(i-idx)*100}%)`;
-    });
+// سلايدر الإعلانات متحرك تلقائيًا
+let autoSlideInterval;
+function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }, 3500);
 }
-document.getElementById('prevSlide').onclick = () => {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
-};
-document.getElementById('nextSlide').onclick = () => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-};
-showSlide(currentSlide);
+function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+}
+document.getElementById('adSlider').addEventListener('mouseenter', stopAutoSlide);
+document.getElementById('adSlider').addEventListener('mouseleave', startAutoSlide);
+startAutoSlide();
+
+// تفعيل التقييم بالنجوم على كل بطاقة (حتى الفارغة)
+document.querySelectorAll('.company').forEach(card => {
+    let starsDiv = card.querySelector('.stars');
+    if (starsDiv) {
+        starsDiv.innerHTML = '';
+        for (let i = 1; i <= 5; i++) {
+            let s = document.createElement('span');
+            s.textContent = '★';
+            s.classList.add('star');
+            s.style.cursor = 'pointer';
+            s.onclick = function() {
+                let all = starsDiv.querySelectorAll('span');
+                all.forEach((star, idx) => {
+                    star.classList.toggle('selected', idx < i);
+                });
+                localStorage.setItem('rate_' + card.dataset.name, i);
+                let countDiv = card.querySelector('.rating-count');
+                if (countDiv) countDiv.textContent = '1 تقييم';
+                alert('شكراً لتقييمك!');
+            };
+            starsDiv.appendChild(s);
+        }
+    }
+});
 </script>
 </body>
 </html>
