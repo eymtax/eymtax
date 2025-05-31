@@ -1,0 +1,15 @@
+{
+  "name": "eymtax",
+  "version": "1.0.0",
+  "description": "Eymta X Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "netlify-plugin-cache-control": "^1.0.4"
+  }
+} 
