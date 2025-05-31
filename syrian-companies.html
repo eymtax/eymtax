@@ -41,6 +41,7 @@
     }
     .main-content {
       display: flex;
+      flex-direction: row-reverse;
       gap: 30px;
       padding: 30px 20px 0 20px;
       max-width: 1400px;
@@ -57,6 +58,7 @@
       position: sticky;
       top: 30px;
       min-width: 220px;
+      align-self: flex-start;
     }
     .category-list {
       list-style: none;
@@ -95,103 +97,150 @@
       color: #0077cc;
       background-color: #f0f7ff;
     }
-    .container {
+    .content-area {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .filter-bar {
+      background: #fff;
+      padding: 18px 20px;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(0,119,204,0.07);
+      margin: 0 0 18px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 1.05rem;
+    }
+    .filter-group select {
+      padding: 9px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f8f9fa;
+      font-size: 1rem;
+    }
+    .slider-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto 18px auto;
+      position: relative;
+    }
+    .slider {
+      display: flex;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(0,119,204,0.07);
+      background: #fff;
+      min-height: 180px;
+      position: relative;
+    }
+    .slide {
+      min-width: 100%;
+      transition: transform 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+    .slider-btn {
+      background: rgba(0,0,0,0.3);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .slider-btn:hover {
+      background: #0077cc;
+    }
+    .container {
+      width: 100%;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 18px;
       justify-content: flex-start;
       align-items: stretch;
+      margin-top: 0;
     }
     .company {
       background: #fff;
-      padding: 22px 18px 18px 18px;
-      border-radius: 14px;
-      box-shadow: 0 2px 16px rgba(0,119,204,0.07);
-      text-align: right;
+      padding: 18px 10px 14px 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,119,204,0.07);
+      text-align: center;
       position: relative;
-      transition: transform 0.3s, box-shadow 0.3s;
-      min-height: 340px;
+      min-height: 170px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      align-items: center;
+      transition: box-shadow 0.3s, transform 0.3s;
     }
     .company:hover {
-      transform: translateY(-7px) scale(1.02);
       box-shadow: 0 6px 24px rgba(0,119,204,0.13);
-    }
-    .vip {
-      border: 2px solid gold;
-      background-color: #fffbe6;
-    }
-    .vip::before {
-      content: "شركة مميزة";
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      background-color: gold;
-      color: #111;
-      padding: 5px 12px;
-      border-radius: 0 0 12px 0;
-      font-size: 15px;
-      font-weight: bold;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    }
-    .company img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 14px;
-      box-shadow: 0 1px 6px rgba(0,119,204,0.04);
+      transform: translateY(-5px) scale(1.03);
     }
     .company h3 {
-      margin: 10px 0 6px 0;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       color: #0077cc;
+      margin: 0 0 8px 0;
       font-weight: bold;
     }
-    .company p {
-      margin: 8px 0 0 0;
+    .add-company-text {
       color: #444;
       font-size: 1rem;
+      margin-bottom: 10px;
     }
-    .stars { 
-      color: #ccc; 
-      cursor: pointer; 
-      margin: 10px 0 0 0;
+    .stars {
+      color: #ccc;
+      cursor: pointer;
+      margin: 8px 0 0 0;
       font-size: 1.1rem;
     }
     .stars span.selected { color: gold; }
-    .rating-count { 
-      font-size: 13px; 
-      color: #555; 
+    .rating-count {
+      font-size: 13px;
+      color: #555;
       margin-top: 5px;
     }
-    .company-stats {
-      display: flex;
-      gap: 15px;
-      margin: 10px 0 0 0;
-      color: #666;
-      font-size: 0.98rem;
-    }
-    .stat-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .stat-item i {
-      color: #0077cc;
-    }
     .view-details-btn {
-      margin-top: 14px;
+      margin-top: 10px;
       background: #0077cc;
       color: #fff;
       border: none;
       border-radius: 8px;
-      padding: 10px 0;
+      padding: 8px 0;
       width: 100%;
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-weight: bold;
       cursor: pointer;
       transition: background 0.2s;
@@ -199,51 +248,12 @@
     .view-details-btn:hover {
       background: #005fa3;
     }
-    .filter-bar {
-        background: #fff;
-        padding: 18px 20px;
-        border-radius: 14px;
-        box-shadow: 0 2px 16px rgba(0,119,204,0.07);
-        margin: 24px 0 18px 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 18px;
-        align-items: center;
-    }
-    .filter-group {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        font-size: 1.05rem;
-    }
-    .filter-group select {
-        padding: 9px 12px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background: #f8f9fa;
-        font-size: 1rem;
-    }
-    .ad-banner-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 14px;
-        margin-bottom: 24px;
-    }
-    .ad-banner-container img {
-        max-width: 100%;
-        height: auto;
-        width: 100%;
-        max-width: 728px;
-        border-radius: 10px;
-        box-shadow: 0 1px 6px rgba(0,119,204,0.04);
-    }
     .no-results {
-        text-align: center;
-        padding: 60px 0;
-        color: #666;
-        display: none;
-        font-size: 1.2rem;
+      text-align: center;
+      padding: 60px 0;
+      color: #666;
+      display: none;
+      font-size: 1.2rem;
     }
     .back-btn {
       display: block;
@@ -283,9 +293,12 @@
         position: static;
         margin-bottom: 18px;
       }
+      .content-area {
+        width: 100%;
+      }
       .container {
-        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-        gap: 18px;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
       }
     }
     @media (max-width: 768px) {
@@ -301,31 +314,25 @@
         margin-bottom: 10px;
         padding: 12px 8px;
       }
-      .container {
-        grid-template-columns: 1fr;
-        gap: 10px;
+      .content-area {
+        width: 100%;
       }
-      .company img {
-        height: 160px;
+      .container {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
       }
       .company {
-        min-height: 260px;
-        padding: 12px 8px 10px 8px;
-      }
-      .ad-banner-container img {
-        max-width: 100%;
-        border-radius: 8px;
+        min-height: 120px;
+        padding: 8px 4px 8px 4px;
       }
     }
     @media (max-width: 480px) {
-      .company img {
-        height: 120px;
+      .container {
+        grid-template-columns: 1fr;
       }
-      .company h3 {
-        font-size: 1.05rem;
-      }
-      .company p {
-        font-size: 0.92rem;
+      .company {
+        min-height: 90px;
+        padding: 6px 2px 6px 2px;
       }
       .back-btn {
         padding: 10px 12px;
@@ -355,65 +362,90 @@ document.addEventListener("DOMContentLoaded", function() {
 <a href="tel:+963938029294" style="display: inline-block; padding: 12px 24px; background-color: #0077cc; color: white; text-decoration: none; border-radius: 8px; font-size: 18px; margin: 20px 0;">➕ أضف شركتك</a>
 <input class="search" id="searchInput" placeholder="ابحث عن شركة..." type="text"/>
 </header>
-<div class="main-content"><div class="filter-bar">
-    <div class="filter-group">
-        <label>المدينة:</label>
-        <select id="cityFilter">
-            <option value="">الكل</option>
-            <option value="حماة">حماة</option>
-            <option value="دمشق">دمشق</option>
-            <option value="حلب">حلب</option>
-            <option value="اللاذقية">اللاذقية</option>
-        </select>
+<div class="main-content">
+    <aside class="sidebar">
+        <ul class="category-list"><li class="main-category">مطاعم / كافيهات</li><ul class="sub-categories"><li>مطاعم شرقية</li><li>مطاعم غربية</li><li>مشاوي</li><li>مخابز</li><li>حلويات</li><li>كافيهات</li></ul><li class="main-category">شحن / نقل</li><ul class="sub-categories"><li>شركات شحن داخلي</li><li>شركات شحن خارجي</li><li>نقل بضائع</li><li>نقل ركاب</li></ul><li class="main-category">تصوير / تسويق</li><ul class="sub-categories"><li>تصوير منتجات</li><li>تصوير أعراس</li><li>تصوير إعلاني</li><li>تصميم جرافيك</li><li>إدارة محتوى</li></ul><li class="main-category">تصنيع / ورشات</li><ul class="sub-categories"><li>نجارة</li><li>حدادة</li><li>خياطة</li><li>مطابع</li><li>صناعة غذائية</li></ul><li class="main-category">تجارة عامة</li><ul class="sub-categories"><li>أدوات كهربائية</li><li>مواد غذائية</li><li>ملابس</li><li>عقارات</li></ul><li class="main-category">خدمات طبية</li><ul class="sub-categories"><li>عيادات</li><li>مخابر</li><li>صيدليات</li><li>مراكز علاج</li></ul><li class="main-category">تعليم / تدريب</li><ul class="sub-categories"><li>معاهد لغات</li><li>دورات برمجة</li><li>كورسات تصوير</li><li>مدارس خاصة</li></ul><li class="main-category">تكنولوجيا / برمجة</li><ul class="sub-categories"><li>شركات برمجة</li><li>تصميم مواقع</li><li>تطبيقات موبايل</li><li>خدمات الإنترنت</li></ul><li class="main-category">أعمال يدوية</li><ul class="sub-categories"><li>صناعة صابون</li><li>تطريز</li><li>حياكة</li><li>مجوهرات يدوية</li></ul></ul>
+    </aside>
+    <div class="content-area">
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label>المدينة:</label>
+                <select id="cityFilter">
+                    <option value="">الكل</option>
+                    <option value="حماة">حماة</option>
+                    <option value="دمشق">دمشق</option>
+                    <option value="حلب">حلب</option>
+                    <option value="اللاذقية">اللاذقية</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>التقييم:</label>
+                <select id="ratingFilter">
+                    <option value="">الكل</option>
+                    <option value="5">5 نجوم</option>
+                    <option value="4">4 نجوم وأعلى</option>
+                    <option value="3">3 نجوم وأعلى</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>الترتيب:</label>
+                <select id="sortFilter">
+                    <option value="name">الاسم</option>
+                    <option value="rating">التقييم</option>
+                    <option value="reviews">عدد التقييمات</option>
+                </select>
+            </div>
+        </div>
+        <div class="slider-container">
+            <div class="slider" id="adSlider">
+                <div class="slide"><img src="img/اعلان-1.png" alt="اعلان 1"></div>
+                <div class="slide"><img src="img/اعلان-2.png" alt="اعلان 2"></div>
+                <div class="slide"><img src="img/اعلان-3.png" alt="اعلان 3"></div>
+            </div>
+            <div class="slider-nav">
+                <button class="slider-btn" id="prevSlide">&#8592;</button>
+                <button class="slider-btn" id="nextSlide">&#8594;</button>
+            </div>
+        </div>
+        <div class="container" id="companyContainer">
+            <div class="company">
+                <div class="add-company-text">أضف شركتك هنا</div>
+                <div class="stars"></div>
+                <div class="rating-count">0 تقييم</div>
+                <button class="view-details-btn">عرض التفاصيل</button>
+            </div>
+            <div class="company">
+                <div class="add-company-text">أضف شركتك هنا</div>
+                <div class="stars"></div>
+                <div class="rating-count">0 تقييم</div>
+                <button class="view-details-btn">عرض التفاصيل</button>
+            </div>
+            <div class="company">
+                <div class="add-company-text">أضف شركتك هنا</div>
+                <div class="stars"></div>
+                <div class="rating-count">0 تقييم</div>
+                <button class="view-details-btn">عرض التفاصيل</button>
+            </div>
+            <div class="company">
+                <div class="add-company-text">أضف شركتك هنا</div>
+                <div class="stars"></div>
+                <div class="rating-count">0 تقييم</div>
+                <button class="view-details-btn">عرض التفاصيل</button>
+            </div>
+            <div class="company">
+                <div class="add-company-text">أضف شركتك هنا</div>
+                <div class="stars"></div>
+                <div class="rating-count">0 تقييم</div>
+                <button class="view-details-btn">عرض التفاصيل</button>
+            </div>
+            <div class="company">
+                <div class="add-company-text">أضف شركتك هنا</div>
+                <div class="stars"></div>
+                <div class="rating-count">0 تقييم</div>
+                <button class="view-details-btn">عرض التفاصيل</button>
+            </div>
+        </div>
     </div>
-    <div class="filter-group">
-        <label>التقييم:</label>
-        <select id="ratingFilter">
-            <option value="">الكل</option>
-            <option value="5">5 نجوم</option>
-            <option value="4">4 نجوم وأعلى</option>
-            <option value="3">3 نجوم وأعلى</option>
-        </select>
-    </div>
-    <div class="filter-group">
-        <label>الترتيب:</label>
-        <select id="sortFilter">
-            <option value="name">الاسم</option>
-            <option value="rating">التقييم</option>
-            <option value="reviews">عدد التقييمات</option>
-        </select>
-    </div>
-</div>
-<div class="ad-banner-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;"><img src="img/اعلان-1.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/><img src="img/اعلان-2.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/><img src="img/اعلان-3.png" style="max-width: 100%; height: auto; width: 100%; max-width: 728px; border-radius: 8px;"/></div>
-<aside class="sidebar">
-<ul class="category-list"><li class="main-category">مطاعم / كافيهات</li><ul class="sub-categories"><li>مطاعم شرقية</li><li>مطاعم غربية</li><li>مشاوي</li><li>مخابز</li><li>حلويات</li><li>كافيهات</li></ul><li class="main-category">شحن / نقل</li><ul class="sub-categories"><li>شركات شحن داخلي</li><li>شركات شحن خارجي</li><li>نقل بضائع</li><li>نقل ركاب</li></ul><li class="main-category">تصوير / تسويق</li><ul class="sub-categories"><li>تصوير منتجات</li><li>تصوير أعراس</li><li>تصوير إعلاني</li><li>تصميم جرافيك</li><li>إدارة محتوى</li></ul><li class="main-category">تصنيع / ورشات</li><ul class="sub-categories"><li>نجارة</li><li>حدادة</li><li>خياطة</li><li>مطابع</li><li>صناعة غذائية</li></ul><li class="main-category">تجارة عامة</li><ul class="sub-categories"><li>أدوات كهربائية</li><li>مواد غذائية</li><li>ملابس</li><li>عقارات</li></ul><li class="main-category">خدمات طبية</li><ul class="sub-categories"><li>عيادات</li><li>مخابر</li><li>صيدليات</li><li>مراكز علاج</li></ul><li class="main-category">تعليم / تدريب</li><ul class="sub-categories"><li>معاهد لغات</li><li>دورات برمجة</li><li>كورسات تصوير</li><li>مدارس خاصة</li></ul><li class="main-category">تكنولوجيا / برمجة</li><ul class="sub-categories"><li>شركات برمجة</li><li>تصميم مواقع</li><li>تطبيقات موبايل</li><li>خدمات الإنترنت</li></ul><li class="main-category">أعمال يدوية</li><ul class="sub-categories"><li>صناعة صابون</li><li>تطريز</li><li>حياكة</li><li>مجوهرات يدوية</li></ul></ul>
-</aside>
-<div class="container" id="companyContainer">
-<div class="company vip" data-category="طباعة" data-name="شركة النور للطباعة">
-<img src="https://via.placeholder.com/280x150?text=نور+للطباعة"/>
-<h3>شركة النور للطباعة</h3>
-<p>متخصصة في طباعة البروشورات والفلايرات وبطاقات العمل.</p>
-<p>📞 0999999999 | 📍 حماة</p>
-<div class="stars" data-name="شركة النور للطباعة"></div>
-<div class="rating-count" id="count-شركة النور للطباعة">0 تقييم</div>
-</div>
-<div class="company" data-category="تسويق" data-name="مركز البيان للتسويق">
-<img src="https://via.placeholder.com/280x150?text=البيان+للتسويق"/>
-<h3>مركز البيان للتسويق</h3>
-<p>خبراء في التسويق الإلكتروني والإعلانات الممولة.</p>
-<p>📞 0933333333 | 📍 دمشق</p>
-<div class="stars" data-name="مركز البيان للتسويق"></div>
-<div class="rating-count" id="count-مركز البيان للتسويق">0 تقييم</div>
-</div>
-<div class="company" data-category="تصوير" data-name="فوتوغرافيا ستوديو">
-<img src="https://via.placeholder.com/280x150?text=فوتوغرافيا+ستوديو"/>
-<h3>فوتوغرافيا ستوديو</h3>
-<p>تصوير احترافي للمنتجات والمناسبات.</p>
-<p>📞 0911111111 | 📍 اللاذقية</p>
-<div class="stars" data-name="فوتوغرافيا ستوديو"></div>
-<div class="rating-count" id="count-فوتوغرافيا ستوديو">0 تقييم</div>
-</div>
-</div>
 </div>
 <div class="loading-spinner">
     <i class="fas fa-spinner"></i>
@@ -761,6 +793,24 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('sortFilter').addEventListener('change', filterCompanies);
     document.getElementById('searchInput').addEventListener('input', filterCompanies);
 });
+
+// سلايدر الإعلانات
+const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
+function showSlide(idx) {
+    slides.forEach((slide, i) => {
+        slide.style.transform = `translateX(${(i-idx)*100}%)`;
+    });
+}
+document.getElementById('prevSlide').onclick = () => {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+};
+document.getElementById('nextSlide').onclick = () => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+};
+showSlide(currentSlide);
 </script>
 </body>
 </html>
