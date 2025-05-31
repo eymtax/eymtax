@@ -845,5 +845,28 @@
             images.forEach(img => imageObserver.observe(img));
         });
     </script>
+    <script>
+    (function(){
+      var v = Date.now();
+      // الصور
+      document.querySelectorAll('img').forEach(function(img){
+        if(img.src && img.src.indexOf(window.location.origin) === 0 && img.src.indexOf('?v=') === -1){
+          img.src += (img.src.indexOf('?')>-1?'&':'?')+'v='+v;
+        }
+      });
+      // CSS
+      document.querySelectorAll('link[rel="stylesheet"]').forEach(function(link){
+        if(link.href && link.href.indexOf(window.location.origin) === 0 && link.href.indexOf('?v=') === -1){
+          link.href += (link.href.indexOf('?')>-1?'&':'?')+'v='+v;
+        }
+      });
+      // JS
+      document.querySelectorAll('script[src]').forEach(function(script){
+        if(script.src && script.src.indexOf(window.location.origin) === 0 && script.src.indexOf('?v=') === -1){
+          script.src += (script.src.indexOf('?')>-1?'&':'?')+'v='+v;
+        }
+      });
+    })();
+    </script>
 </body>
 </html>
