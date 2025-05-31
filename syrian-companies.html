@@ -242,12 +242,18 @@
       cursor: pointer;
       margin: 8px 0 0 0;
       font-size: 1.1rem;
+      direction: ltr;
+      display: flex;
+      justify-content: center;
+      gap: 2px;
     }
     .stars span.selected { color: gold; }
-    .rating-count {
+    .stars span:hover, .stars span.hovered { color: #ffb700; }
+    .rating-info {
       font-size: 13px;
       color: #555;
       margin-top: 5px;
+      text-align: center;
     }
     .view-details-btn {
       margin-top: 10px;
@@ -372,7 +378,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <body>
 <!-- صورة الجامع الأموي -->
 <div style="width:100%;max-height:340px;overflow:hidden;position:relative;">
-  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="الجامع الأموي بدمشق" style="width:100%;height:340px;object-fit:cover;filter:brightness(0.92) contrast(1.08);display:block;" loading="lazy">
+  <img src="img/umayyad-mosque.jpg" alt="الجامع الأموي بدمشق" style="width:100%;height:340px;object-fit:cover;filter:brightness(0.92) contrast(1.08);display:block;" loading="lazy">
   <div style="position:absolute;bottom:0;right:0;left:0;padding:24px 0 18px 0;background:linear-gradient(0deg,rgba(0,0,0,0.55) 60%,rgba(0,0,0,0));color:#fff;text-align:center;font-size:2.1rem;font-weight:bold;letter-spacing:2px;font-family:'Cairo',Tahoma,sans-serif;">دليل الشركات السورية</div>
 </div>
 <div style="background:#fff; text-align:center; padding:18px 0 8px 0;">
@@ -452,37 +458,37 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="company">
                 <div class="add-company-text">أضف شركتك هنا</div>
                 <div class="stars"></div>
-                <div class="rating-count">0 تقييم</div>
+                <div class="rating-info">0 تقييم</div>
                 <button class="view-details-btn">عرض التفاصيل</button>
             </div>
             <div class="company">
                 <div class="add-company-text">أضف شركتك هنا</div>
                 <div class="stars"></div>
-                <div class="rating-count">0 تقييم</div>
+                <div class="rating-info">0 تقييم</div>
                 <button class="view-details-btn">عرض التفاصيل</button>
             </div>
             <div class="company">
                 <div class="add-company-text">أضف شركتك هنا</div>
                 <div class="stars"></div>
-                <div class="rating-count">0 تقييم</div>
+                <div class="rating-info">0 تقييم</div>
                 <button class="view-details-btn">عرض التفاصيل</button>
             </div>
             <div class="company">
                 <div class="add-company-text">أضف شركتك هنا</div>
                 <div class="stars"></div>
-                <div class="rating-count">0 تقييم</div>
+                <div class="rating-info">0 تقييم</div>
                 <button class="view-details-btn">عرض التفاصيل</button>
             </div>
             <div class="company">
                 <div class="add-company-text">أضف شركتك هنا</div>
                 <div class="stars"></div>
-                <div class="rating-count">0 تقييم</div>
+                <div class="rating-info">0 تقييم</div>
                 <button class="view-details-btn">عرض التفاصيل</button>
             </div>
             <div class="company">
                 <div class="add-company-text">أضف شركتك هنا</div>
                 <div class="stars"></div>
-                <div class="rating-count">0 تقييم</div>
+                <div class="rating-info">0 تقييم</div>
                 <button class="view-details-btn">عرض التفاصيل</button>
             </div>
         </div>
@@ -534,78 +540,53 @@ document.getElementById("searchInput").addEventListener("input", function () {
   });
 });
 
-// Star rating system
-function createStars(container, name) {
-  const saved = localStorage.getItem('rate_' + name);
-  const countKey = 'count_' + name;
-  const count = localStorage.getItem(countKey) || 0;
-  const wrap = container;
-  for (let i = 1; i <= 5; i++) {
-    const s = document.createElement("span");
-    s.textContent = "★";
-    s.classList.add("star");
-    if (saved && i <= saved) s.classList.add("selected");
-    s.onclick = () => {
-      if (!saved) {
-        localStorage.setItem('rate_' + name, i);
-        localStorage.setItem(countKey, +count + 1);
-        document.getElementById('count-' + name).textContent = (+count + 1) + " تقييم";
-        [...wrap.children].forEach((star, idx) => {
-          star.classList.toggle("selected", idx < i);
-        });
-        alert("شكراً لتقييمك!");
-      } else {
-        alert("لقد قمت بالتقييم سابقاً.");
-      }
-    };
-    wrap.appendChild(s);
-  }
-  document.getElementById('count-' + name).textContent = count + " تقييم";
+// نظام التقييم الحقيقي على كل بطاقة شركة
+function renderStars(starsDiv, companyName) {
+    starsDiv.innerHTML = '';
+    let ratings = JSON.parse(localStorage.getItem('ratings_' + companyName) || '[]');
+    let userRating = localStorage.getItem('user_rating_' + companyName);
+    let avg = ratings.length ? (ratings.reduce((a,b)=>a+b,0)/ratings.length).toFixed(1) : 0;
+    for (let i = 1; i <= 5; i++) {
+        let s = document.createElement('span');
+        s.textContent = '★';
+        s.classList.add('star');
+        if (userRating && i <= userRating) s.classList.add('selected');
+        s.onmouseenter = () => {
+            [...starsDiv.children].forEach((star, idx) => {
+                star.classList.toggle('hovered', idx < i);
+            });
+        };
+        s.onmouseleave = () => {
+            [...starsDiv.children].forEach(star => star.classList.remove('hovered'));
+        };
+        s.onclick = () => {
+            if (!userRating) {
+                ratings.push(i);
+                localStorage.setItem('ratings_' + companyName, JSON.stringify(ratings));
+                localStorage.setItem('user_rating_' + companyName, i);
+                renderStars(starsDiv, companyName);
+                let info = starsDiv.parentElement.querySelector('.rating-info');
+                if (info) info.textContent = `${(ratings.reduce((a,b)=>a+b,0)/ratings.length).toFixed(1)} من 5 (${ratings.length} تقييم)`;
+                alert('شكراً لتقييمك!');
+            } else {
+                alert('لقد قمت بالتقييم مسبقاً.');
+            }
+        };
+        starsDiv.appendChild(s);
+    }
+    let info = starsDiv.parentElement.querySelector('.rating-info');
+    if (info) info.textContent = `${avg} من 5 (${ratings.length} تقييم)`;
 }
 
-document.querySelectorAll('.stars').forEach(div => {
-  const name = div.dataset.name;
-  createStars(div, name);
-});
-
-// Show first category's sub-categories by default
-document.querySelector(".main-category").classList.add("active");
-
-// Enhanced company data structure
-const companyData = {
-    "شركة النور للطباعة": {
-        name: "شركة النور للطباعة",
-        category: "طباعة",
-        city: "حماة",
-        phone: "0999999999",
-        description: "متخصصة في طباعة البروشورات والفلايرات وبطاقات العمل.",
-        images: [
-            "https://via.placeholder.com/800x600?text=نور+للطباعة+1",
-            "https://via.placeholder.com/800x600?text=نور+للطباعة+2",
-            "https://via.placeholder.com/800x600?text=نور+للطباعة+3"
-        ],
-        location: {
-            lat: 35.1376,
-            lng: 36.7584
-        },
-        hours: {
-            "الأحد": "9:00 - 18:00",
-            "الإثنين": "9:00 - 18:00",
-            "الثلاثاء": "9:00 - 18:00",
-            "الأربعاء": "9:00 - 18:00",
-            "الخميس": "9:00 - 18:00",
-            "الجمعة": "10:00 - 16:00",
-            "السبت": "مغلق"
-        },
-        website: "https://example.com",
-        social: {
-            facebook: "https://facebook.com/example",
-            instagram: "https://instagram.com/example"
-        },
-        isVip: true
-    }
-    // Add more companies here
-};
+// تفعيل التقييم على كل بطاقة عند التحميل
+function activateAllStars() {
+    document.querySelectorAll('.company').forEach(card => {
+        let name = card.dataset.name || 'empty';
+        let starsDiv = card.querySelector('.stars');
+        if (starsDiv) renderStars(starsDiv, name);
+    });
+}
+document.addEventListener('DOMContentLoaded', activateAllStars);
 
 // Enhanced filtering and sorting
 function filterCompanies() {
@@ -679,7 +660,7 @@ function createCompanyCard(company) {
             </div>
         </div>
         <div class="stars" data-name="${company.name}"></div>
-        <div class="rating-count" id="count-${company.name}">0 تقييم</div>
+        <div class="rating-info">0 تقييم</div>
         <button onclick="showDetails('${company.name}')" class="view-details-btn">عرض التفاصيل</button>
     `;
 
@@ -849,31 +830,6 @@ function stopAutoSlide() {
 document.getElementById('adSlider').addEventListener('mouseenter', stopAutoSlide);
 document.getElementById('adSlider').addEventListener('mouseleave', startAutoSlide);
 startAutoSlide();
-
-// تفعيل التقييم بالنجوم على كل بطاقة (حتى الفارغة)
-document.querySelectorAll('.company').forEach(card => {
-    let starsDiv = card.querySelector('.stars');
-    if (starsDiv) {
-        starsDiv.innerHTML = '';
-        for (let i = 1; i <= 5; i++) {
-            let s = document.createElement('span');
-            s.textContent = '★';
-            s.classList.add('star');
-            s.style.cursor = 'pointer';
-            s.onclick = function() {
-                let all = starsDiv.querySelectorAll('span');
-                all.forEach((star, idx) => {
-                    star.classList.toggle('selected', idx < i);
-                });
-                localStorage.setItem('rate_' + card.dataset.name, i);
-                let countDiv = card.querySelector('.rating-count');
-                if (countDiv) countDiv.textContent = '1 تقييم';
-                alert('شكراً لتقييمك!');
-            };
-            starsDiv.appendChild(s);
-        }
-    }
-});
 </script>
 </body>
 </html>
