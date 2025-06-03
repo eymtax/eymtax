@@ -267,22 +267,22 @@
 
     <div class="section" id="request-form">
         <h2>نموذج طلب تأسيس شركة</h2>
-        <form style="max-width:500px;margin:auto;" onsubmit="submitRequest(event)">
+        <form style="max-width:500px;margin:auto;" onsubmit="submitToWhatsApp(event)">
             <div class="form-group">
                 <label>الاسم الكامل:</label>
-                <input type="text" required>
+                <input type="text" id="fullName" required>
             </div>
             <div class="form-group">
                 <label>رقم الهاتف:</label>
-                <input type="tel" required>
+                <input type="tel" id="phone" required>
             </div>
             <div class="form-group">
                 <label>البريد الإلكتروني:</label>
-                <input type="email" required>
+                <input type="email" id="email" required>
             </div>
             <div class="form-group">
                 <label>نوع الشركة المطلوبة:</label>
-                <select required>
+                <select id="companyType" required>
                     <option value="">اختر النوع</option>
                     <option>مؤسسة فردية</option>
                     <option>شركة محدودة</option>
@@ -292,24 +292,41 @@
             </div>
             <div class="form-group">
                 <label>ملاحظات إضافية:</label>
-                <textarea rows="3"></textarea>
+                <textarea id="notes" rows="3"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">إرسال الطلب</button>
-            <div id="formSuccess" style="display:none;color:green;margin-top:10px;">تم إرسال طلبك بنجاح! سنعاود التواصل معك قريباً.</div>
         </form>
     </div>
 
     <script>
-        // FAQ Toggle
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.addEventListener('click', function() {
-                this.classList.toggle('active');
-            });
-        });
-        // Form submit
-        function submitRequest(e) {
+        function submitToWhatsApp(e) {
             e.preventDefault();
-            document.getElementById('formSuccess').style.display = 'block';
+            
+            // جمع البيانات من النموذج
+            const fullName = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const companyType = document.getElementById('companyType').value;
+            const notes = document.getElementById('notes').value;
+            
+            // إنشاء رسالة منسقة
+            const message = `طلب تأسيس شركة جديد%0A%0A
+الاسم: ${fullName}%0A
+رقم الهاتف: ${phone}%0A
+البريد الإلكتروني: ${email}%0A
+نوع الشركة: ${companyType}%0A
+ملاحظات إضافية: ${notes}`;
+            
+            // رقم WhatsApp الخاص بك
+            const whatsappNumber = '963938029294';
+            
+            // إنشاء رابط WhatsApp
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+            
+            // فتح WhatsApp في نافذة جديدة
+            window.open(whatsappUrl, '_blank');
+            
+            // إعادة تعيين النموذج
             e.target.reset();
         }
     </script>
