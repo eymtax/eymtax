@@ -16,6 +16,9 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
+    <!-- Force HTTPS -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
     <!-- SEO Meta Tags -->
     <meta name="description" content="Eymta X - أفضل شركة تسويق في سوريا خبراء العالم الرقمي. نقدم خدمات متكاملة في التسويق الإلكتروني، تصوير المنتجات، تصوير الأعراس، وخدمات الطباعة.">
     <meta name="keywords" content="تسويق رقمي, تصوير منتجات, تصوير أعراس, طباعة, سوريا, Eymta X">
@@ -45,12 +48,11 @@
     
     <!-- Preload Critical Resources -->
     <link rel="preload" href="css/style.css" as="style">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style">
     <link rel="preload" href="js/chatbot.js" as="script">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/style.css?v=3">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?v=3" />
+    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?v=5" />
     
     <!-- Schema.org Markup -->
     <script type="application/ld+json">
@@ -74,7 +76,39 @@
     </script>
     
     <title>Eymta X - أفضل شركة تسويق في سوريا خبراء العالم الرقمي</title>
-    <script src="js/chatbot.js?v=3" defer></script>
+    <script src="js/chatbot.js?v=5" defer></script>
+    
+    <!-- Cache Control Script -->
+    <script>
+        // Clear browser cache on page load
+        window.onload = function() {
+            if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+                window.location.reload(true);
+            }
+        };
+
+        // Force HTTPS
+        if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
+            window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.search;
+        }
+
+        // Add version parameter to all resources
+        document.addEventListener('DOMContentLoaded', function() {
+            const timestamp = new Date().getTime();
+            const resources = document.querySelectorAll('link[rel="stylesheet"], script[src], img[src]');
+            resources.forEach(resource => {
+                const url = resource.href || resource.src;
+                if (url && url.indexOf(window.location.origin) === 0) {
+                    const separator = url.indexOf('?') > -1 ? '&' : '?';
+                    if (resource.tagName === 'LINK') {
+                        resource.href = url + separator + 'v=' + timestamp;
+                    } else {
+                        resource.src = url + separator + 'v=' + timestamp;
+                    }
+                }
+            });
+        });
+    </script>
     <style>
         /* Mobile First Base Styles */
         * {

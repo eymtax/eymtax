@@ -10,6 +10,9 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
+    <!-- Force HTTPS -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
     <meta name="description" content="Eymta X - أفضل شركة تسويق في سوريا خبراء العالم الرقمي. خدمات تأسيس الشركات في سوريا - تسجيل الشركات، الاستشارات القانونية، والخدمات المالية. خبرة واسعة في تأسيس الشركات المحلية والأجنبية.">
     
     <!-- Open Graph Meta Tags -->
@@ -28,8 +31,40 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="company-formation.html">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css?v=3">
-    <link rel="stylesheet" href="css/style.css?v=3">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css?v=5">
+    <link rel="stylesheet" href="css/style.css?v=5">
+    
+    <!-- Cache Control Script -->
+    <script>
+        // Clear browser cache on page load
+        window.onload = function() {
+            if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+                window.location.reload(true);
+            }
+        };
+
+        // Force HTTPS
+        if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
+            window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.search;
+        }
+
+        // Add version parameter to all resources
+        document.addEventListener('DOMContentLoaded', function() {
+            const timestamp = new Date().getTime();
+            const resources = document.querySelectorAll('link[rel="stylesheet"], script[src], img[src]');
+            resources.forEach(resource => {
+                const url = resource.href || resource.src;
+                if (url && url.indexOf(window.location.origin) === 0) {
+                    const separator = url.indexOf('?') > -1 ? '&' : '?';
+                    if (resource.tagName === 'LINK') {
+                        resource.href = url + separator + 'v=' + timestamp;
+                    } else {
+                        resource.src = url + separator + 'v=' + timestamp;
+                    }
+                }
+            });
+        });
+    </script>
     <style>
         body { font-family: 'Cairo', Tahoma, Arial, sans-serif; background: #f9f9f9; color: #222; margin: 0; }
         .hero {
