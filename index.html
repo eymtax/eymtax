@@ -49,8 +49,8 @@
     <link rel="preload" href="js/chatbot.js" as="script">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/style.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?v=<?php echo time(); ?>" />
+    <link rel="stylesheet" href="/css/style.css?v=3">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?v=3" />
     
     <!-- Schema.org Markup -->
     <script type="application/ld+json">
@@ -74,7 +74,7 @@
     </script>
     
     <title>Eymta X - خبراء التسويق الرقمي والتصوير والطباعة في سوريا</title>
-    <script src="/js/chatbot.js?v=<?php echo time(); ?>" defer></script>
+    <script src="/js/chatbot.js?v=3" defer></script>
     <style>
         /* Mobile First Base Styles */
         * {
@@ -832,6 +832,27 @@
                     });
             });
         }
+
+        // Auto Refresh Script
+        let lastModified = '';
+        
+        function checkForUpdates() {
+            fetch(window.location.href, { method: 'HEAD' })
+                .then(response => {
+                    const currentModified = response.headers.get('last-modified');
+                    if (lastModified && lastModified !== currentModified) {
+                        window.location.reload(true);
+                    }
+                    lastModified = currentModified;
+                })
+                .catch(error => console.error('Error checking for updates:', error));
+        }
+
+        // Check for updates every 5 minutes
+        setInterval(checkForUpdates, 300000);
+        
+        // Initial check
+        checkForUpdates();
 
         // Lazy Loading Images
         document.addEventListener('DOMContentLoaded', function() {
