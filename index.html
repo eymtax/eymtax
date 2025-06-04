@@ -11,6 +11,11 @@
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
     
+    <!-- Cache Control Meta Tags -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
     <!-- SEO Meta Tags -->
     <meta name="description" content="Eymta X - أفضل شركة تسويق في سوريا خبراء العالم الرقمي. نقدم خدمات متكاملة في التسويق الإلكتروني، تصوير المنتجات، تصوير الأعراس، وخدمات الطباعة.">
     <meta name="keywords" content="تسويق رقمي, تصوير منتجات, تصوير أعراس, طباعة, سوريا, Eymta X">
@@ -44,8 +49,8 @@
     <link rel="preload" href="js/chatbot.js" as="script">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?v=2" />
+    <link rel="stylesheet" href="/css/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?v=<?php echo time(); ?>" />
     
     <!-- Schema.org Markup -->
     <script type="application/ld+json">
@@ -69,7 +74,7 @@
     </script>
     
     <title>Eymta X - خبراء التسويق الرقمي والتصوير والطباعة في سوريا</title>
-    <script src="/js/chatbot.js?v=2" defer></script>
+    <script src="/js/chatbot.js?v=<?php echo time(); ?>" defer></script>
     <style>
         /* Mobile First Base Styles */
         * {
