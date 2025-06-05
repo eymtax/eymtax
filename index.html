@@ -51,7 +51,7 @@
     <link rel="preload" href="js/chatbot.js?v=6" as="script">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/style.css?v=6">
+    <link rel="stylesheet" href="css/style.css" data-cache="auto">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?v=6" />
     
     <!-- Schema.org Markup -->
@@ -76,7 +76,7 @@
     </script>
     
     <title>Eymta X - أفضل شركة تسويق في سوريا خبراء العالم الرقمي</title>
-    <script src="js/chatbot.js?v=6" defer></script>
+    <script src="js/chatbot.js" data-cache="auto" defer></script>
     
     <!-- Cache Control Script -->
     <script>
@@ -125,6 +125,19 @@
             scroll-behavior: smooth;
             height: 100%;
         }
+        <script>
+(function() {
+  const timestamp = new Date().getTime();
+  const tags = document.querySelectorAll('link[data-cache="auto"], script[data-cache="auto"]');
+  tags.forEach(tag => {
+    const srcAttr = tag.tagName === 'LINK' ? 'href' : 'src';
+    const url = new URL(tag.getAttribute(srcAttr), window.location.origin);
+    url.searchParams.set('v', timestamp);
+    tag.setAttribute(srcAttr, url.href);
+  });
+})();
+</script>
+
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
