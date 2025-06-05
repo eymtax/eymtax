@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v1.5'; // غيّر الرقم عند كل تحديث
+const CACHE_VERSION = 'v1.6'; // غيّر الرقم عند كل تحديث
 const CACHE_NAME = 'eymtax-cache-' + CACHE_VERSION;
 
 const urlsToCache = [
@@ -14,7 +14,7 @@ const urlsToCache = [
 ];
 
 // حد أقصى للعناصر داخل الكاش
-const MAX_CACHE_ITEMS = 50;
+const MAX_CACHE_ITEMS = 30;
 
 // دالة لتقليص حجم الكاش عند الامتلاء
 async function limitCacheSize(cacheName, maxItems) {
@@ -58,38 +58,53 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request).then(fetchRes => {
-        // لا نخزن استجابات "opaque" (مثل من CDN بدون CORS)
-        if (fetchRes.type === 'opaque') return fetchRes;
+  const { request } = event;
 
-        const clonedRes = fetchRes.clone();
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, clonedRes);
-          limitCacheSize(CACHE_NAME, MAX_CACHE_ITEMS);
-        });
-
-        return fetchRes;
-      }).catch(err => {
-        console.warn('❌ فشل تحميل:', event.request.url);
-        
-        // عرض SVG بديل إذا كانت صورة
-        if (event.request.destination === 'image') {
-          return new Response(
-            `<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-              <rect fill="#ccc" width="200" height="200"/>
-              <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="16">الصورة غير متوفرة</text>
-            </svg>`, {
-              headers: { 'Content-Type': 'image/svg+xml' }
+  if (request.destination === 'document') {
+    // Network First للصفحات
+    event.respondWith(
+      fetch(request)
+        .then(res => {
+          const resClone = res.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(request, resClone);
+            limitCacheSize(CACHE_NAME, MAX_CACHE_ITEMS);
           });
-        }
+          return res;
+        })
+        .catch(() => caches.match(request))
+    );
+  } else {
+    // Cache First لباقي الملفات (صور، CSS، JS...)
+    event.respondWith(
+      caches.match(request).then(cacheRes => {
+        return cacheRes || fetch(request).then(fetchRes => {
+          if (fetchRes.type === 'opaque') return fetchRes;
 
-        return new Response("الصفحة غير متوفرة حالياً.", {
-          status: 404,
-          statusText: 'Not Found'
+          const clonedRes = fetchRes.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(request, clonedRes);
+            limitCacheSize(CACHE_NAME, MAX_CACHE_ITEMS);
+          });
+
+          return fetchRes;
+        }).catch(() => {
+          if (request.destination === 'image') {
+            return new Response(
+              `<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                <rect fill="#ccc" width="200" height="200"/>
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="16">الصورة غير متوفرة</text>
+              </svg>`, {
+                headers: { 'Content-Type': 'image/svg+xml' }
+            });
+          }
+
+          return new Response("الصفحة غير متوفرة حالياً.", {
+            status: 404,
+            statusText: 'Not Found'
+          });
         });
-      });
-    })
-  );
+      })
+    );
+  }
 });
