@@ -4,7 +4,8 @@ const urlsToCache = [
     '/',
     '/index.html',
     '/css/style.css',
-    '/js/chatbot.js'
+    '/js/chatbot.js',
+'/contact.html',
     // لا تضف ملفات من CDN هنا
 ];
 
