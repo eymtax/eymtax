@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v1.6'; // غيّر الرقم عند كل تحديث
+const CACHE_VERSION = 'v1.7';
 const CACHE_NAME = 'eymtax-cache-' + CACHE_VERSION;
 
 const urlsToCache = [
@@ -13,10 +13,8 @@ const urlsToCache = [
   // لا تضف ملفات من CDN هنا
 ];
 
-// حد أقصى للعناصر داخل الكاش
-const MAX_CACHE_ITEMS = 30;
+const MAX_CACHE_ITEMS = 50;
 
-// دالة لتقليص حجم الكاش عند الامتلاء
 async function limitCacheSize(cacheName, maxItems) {
   const cache = await caches.open(cacheName);
   const keys = await cache.keys();
@@ -27,7 +25,7 @@ async function limitCacheSize(cacheName, maxItems) {
 }
 
 self.addEventListener('install', event => {
-  self.skipWaiting(); // يجعل Service Worker مفعّل فورًا
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(async cache => {
       for (const url of urlsToCache) {
@@ -58,36 +56,43 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  const { request } = event;
+  const request = event.request;
+
+  if (request.method !== 'GET') {
+    // لا نتعامل إلا مع طلبات GET
+    return;
+  }
 
   if (request.destination === 'document') {
-    // Network First للصفحات
+    // Network First للصفحات HTML
     event.respondWith(
       fetch(request)
-        .then(res => {
-          const resClone = res.clone();
+        .then(networkResponse => {
+          const clonedResponse = networkResponse.clone();
           caches.open(CACHE_NAME).then(cache => {
-            cache.put(request, resClone);
+            cache.put(request, clonedResponse);
             limitCacheSize(CACHE_NAME, MAX_CACHE_ITEMS);
           });
-          return res;
+          return networkResponse;
         })
         .catch(() => caches.match(request))
     );
-  } else {
-    // Cache First لباقي الملفات (صور، CSS، JS...)
+  } else if (request.destination === 'image' || request.destination === 'script' || request.destination === 'style') {
+    // Cache First للصور، السكريبت، والستايل
     event.respondWith(
-      caches.match(request).then(cacheRes => {
-        return cacheRes || fetch(request).then(fetchRes => {
-          if (fetchRes.type === 'opaque') return fetchRes;
+      caches.match(request).then(cacheResponse => {
+        if (cacheResponse) return cacheResponse;
 
-          const clonedRes = fetchRes.clone();
+        return fetch(request).then(networkResponse => {
+          // لا نخزن opaque responses (CDN مثلا)
+          if (networkResponse.type === 'opaque') return networkResponse;
+
+          const clonedResponse = networkResponse.clone();
           caches.open(CACHE_NAME).then(cache => {
-            cache.put(request, clonedRes);
+            cache.put(request, clonedResponse);
             limitCacheSize(CACHE_NAME, MAX_CACHE_ITEMS);
           });
-
-          return fetchRes;
+          return networkResponse;
         }).catch(() => {
           if (request.destination === 'image') {
             return new Response(
@@ -98,13 +103,14 @@ self.addEventListener('fetch', event => {
                 headers: { 'Content-Type': 'image/svg+xml' }
             });
           }
-
-          return new Response("الصفحة غير متوفرة حالياً.", {
-            status: 404,
-            statusText: 'Not Found'
-          });
+          return new Response('الصفحة غير متوفرة حالياً.', { status: 404, statusText: 'Not Found' });
         });
       })
+    );
+  } else {
+    // طلبات أخرى: حاول أولاً الشبكة ثم الكاش
+    event.respondWith(
+      fetch(request).catch(() => caches.match(request))
     );
   }
 });
