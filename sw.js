@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v1.2'; // غيّر هذا الرقم يدويًا عند تحديث الملفات
+const CACHE_VERSION = 'v1.3'; // غيّر هذا الرقم يدويًا عند تحديث الملفات
 const CACHE_NAME = 'eymtax-cache-' + CACHE_VERSION;
 
 const urlsToCache = [
