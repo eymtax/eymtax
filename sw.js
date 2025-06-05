@@ -1,13 +1,17 @@
 const CACHE_NAME = 'eymtax-cache-' + Date.now();
 
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/chatbot.js',
-  '/contact.html',
-  // لا تضع روابط خارجية من CDN هنا
+    '/',
+    '/index.html',
+    '/about.html',
+    '/contact.html',
+    '/service.html',
+    '/team.html',
+    '/css/style.css',
+    '/js/chatbot.js',
+    // لا تضف ملفات من CDN هنا
 ];
+
 
 self.addEventListener('install', event => {
   self.skipWaiting(); // يجعل Service Worker مفعّل فورًا
