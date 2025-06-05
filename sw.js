@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v1.9';
+const CACHE_VERSION = 'v2';
 const CACHE_NAME = 'eymtax-cache-' + CACHE_VERSION;
 
 const urlsToCache = [
@@ -10,7 +10,20 @@ const urlsToCache = [
   '/team.html',
   '/css/style.css',
   '/js/chatbot.js',
-  // لا تضف ملفات من CDN هنا
+
+  // صور المشروع من مجلد img
+  '/img/44.jpg',
+  '/img/علان-1.png',
+  '/img/علان-2.png',
+  '/img/علان-3.png',
+  '/img/البنر_الرئيسي.jpg',
+  '/img/التسويق_الإلكتروني.jpg',
+  '/img/تصوير_الأعراس.jpg',
+  '/img/تصوير_المنتجات.jpg',
+  '/img/تواصل_معنا.jpg',
+  '/img/تواصل_معنا.png',
+  '/img/خدمات_الطباعة.jpg',
+  '/img/دليل_الشركات.jpg',
 ];
 
 const MAX_CACHE_ITEMS = 50;
@@ -59,7 +72,7 @@ self.addEventListener('fetch', event => {
   const request = event.request;
 
   if (request.method !== 'GET') {
-    // لا نتعامل إلا مع طلبات GET
+    // نتعامل فقط مع طلبات GET
     return;
   }
 
@@ -77,40 +90,45 @@ self.addEventListener('fetch', event => {
         })
         .catch(() => caches.match(request))
     );
-  } else if (request.destination === 'image' || request.destination === 'script' || request.destination === 'style') {
+  } else if (
+    request.destination === 'image' ||
+    request.destination === 'script' ||
+    request.destination === 'style'
+  ) {
     // Cache First للصور، السكريبت، والستايل
     event.respondWith(
       caches.match(request).then(cacheResponse => {
         if (cacheResponse) return cacheResponse;
 
-        return fetch(request).then(networkResponse => {
-          // لا نخزن opaque responses (CDN مثلا)
-          if (networkResponse.type === 'opaque') return networkResponse;
+        return fetch(request)
+          .then(networkResponse => {
+            // لا نخزن opaque responses (CDN مثلا)
+            if (networkResponse.type === 'opaque') return networkResponse;
 
-          const clonedResponse = networkResponse.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(request, clonedResponse);
-            limitCacheSize(CACHE_NAME, MAX_CACHE_ITEMS);
-          });
-          return networkResponse;
-        }).catch(() => {
-          if (request.destination === 'image') {
-            return new Response(
-              `<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-                <rect fill="#ccc" width="200" height="200"/>
-                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="16">الصورة غير متوفرة</text>
-              </svg>`, {
-                headers: { 'Content-Type': 'image/svg+xml' }
+            const clonedResponse = networkResponse.clone();
+            caches.open(CACHE_NAME).then(cache => {
+              cache.put(request, clonedResponse);
+              limitCacheSize(CACHE_NAME, MAX_CACHE_ITEMS);
             });
-          }
-          return new Response('الصفحة غير متوفرة حالياً.', { status: 404, statusText: 'Not Found' });
-        });
+            return networkResponse;
+          })
+          .catch(() => {
+            if (request.destination === 'image') {
+              return new Response(
+                `<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                  <rect fill="#ccc" width="200" height="200"/>
+                  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="16">الصورة غير متوفرة</text>
+                </svg>`, {
+                  headers: { 'Content-Type': 'image/svg+xml' }
+                }
+              );
+            }
+            return new Response('الصفحة غير متوفرة حالياً.', { status: 404, statusText: 'Not Found' });
+          });
       })
     );
   } else {
     // طلبات أخرى: حاول أولاً الشبكة ثم الكاش
-    event.respondWith(
-      fetch(request).catch(() => caches.match(request))
-    );
+    event.respondWith(fetch(request).catch(() => caches.match(request)));
   }
 });
