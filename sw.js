@@ -1,4 +1,4 @@
-const CACHE_NAME = 'eymtax-cache-v2';
+const CACHE_NAME = 'eymtax-cache-' + Date.now();
 
 const urlsToCache = [
     '/',
