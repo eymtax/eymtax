@@ -40,12 +40,21 @@
         .section.active {
             display: block;
         }
+        body { visibility: hidden; }
     </style>
 </head>
 <body><script>
-if (sessionStorage.getItem("loggedIn") !== "true") {
-    window.location.href = "login.html";
-}
+fetch('/.netlify/functions/auth-verify')
+    .then(res => {
+        if (!res.ok) {
+            window.location.href = "login.html";
+        } else {
+            document.body.style.visibility = "visible";
+        }
+    })
+    .catch(() => {
+        window.location.href = "login.html";
+    });
 </script>
 <aside>
 <h2>لوحة التحكم</h2>
@@ -55,6 +64,7 @@ if (sessionStorage.getItem("loggedIn") !== "true") {
 <a href="#" onclick="showSection('team')">فريق العمل</a>
 <a href="#" onclick="showSection('testimonials')">آراء العملاء</a>
 <a href="#" onclick="showSection('pages')">صفحات عامة</a>
+<a href="#" onclick="logout()">تسجيل الخروج</a>
 </aside>
 <main>
 <div class="section active" id="dashboard">
@@ -123,6 +133,10 @@ if (sessionStorage.getItem("loggedIn") !== "true") {
 </div>
 </main>
 <script>
+function logout() {
+    fetch('/.netlify/functions/auth-logout', { method: 'POST' })
+        .finally(() => { window.location.href = "login.html"; });
+}
 function showSection(id) {
     document.querySelectorAll('.section').forEach(section => {
         section.classList.remove('active');
