@@ -15,9 +15,6 @@
 /syrian-companies.html
   Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
 
-/manage-companies.html
-  Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
-
 /blog.html
   Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
 
